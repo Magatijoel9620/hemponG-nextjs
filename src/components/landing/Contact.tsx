@@ -26,11 +26,11 @@ export function Contact() {
             Stop wasting time and money. Get a professional website today, Happiness guaranteed!
           </p>
         </div>
-        <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-3">
-          <div className="lg:col-span-2">
+        <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-5">
+          <div className="lg:col-span-3">
             <ContactForm />
           </div>
-          <div className="space-y-8">
+          <div className="space-y-8 lg:col-span-2">
             {contactInfo.map((item, index) => (
               <div key={index} className="flex items-start gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">

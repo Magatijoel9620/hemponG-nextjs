@@ -59,7 +59,7 @@ export function Pricing() {
     <section id="pricing" className="py-20 md:py-28 bg-background/70">
       <div className="container">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 text-center lg:text-left">
             <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Pricing Plan</h2>
             <p className="mt-4 text-foreground/80">
               Contact us today and experience the passion, professionalism and reliable support that sets us apart. Let’s create a website that represents your unique vision and helps you achieve your online goals.
@@ -97,8 +97,8 @@ export function Pricing() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="hidden sm:flex" />
-              <CarouselNext className="hidden sm:flex" />
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
             </Carousel>
           </div>
         </div>

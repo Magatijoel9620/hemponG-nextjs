@@ -16,7 +16,7 @@ export function About() {
     <section id="about" className="py-20 md:py-28 bg-background">
       <div className="container">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <div>
+          <div className="lg:order-last">
             <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">
               We help teams build the business of their dreams
             </h2>
@@ -44,12 +44,11 @@ export function About() {
           </div>
           <div className="flex justify-center">
             <Image
-              src="https://placehold.co/600x600.png"
+              src="/images/about-illustration.svg"
               alt="A team of designers and developers collaborating on a web project"
               width={600}
               height={600}
-              className="rounded-lg shadow-xl"
-              data-ai-hint="team web project"
+              className="rounded-lg"
             />
           </div>
         </div>
