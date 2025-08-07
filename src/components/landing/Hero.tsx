@@ -4,13 +4,13 @@ import { ArrowRight } from 'lucide-react';
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden bg-background py-20 md:py-32">
-      <div className="container">
+    <section id="home" className="relative overflow-hidden bg-primary/5 py-20 md:py-32">
+      <div className="container relative z-10">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
           <div className="text-center md:text-left">
-            <h2 className="font-headline text-4xl font-bold tracking-tight text-primary md:text-5xl lg:text-6xl">
+            <h1 className="font-headline text-4xl font-bold tracking-tight text-primary md:text-5xl lg:text-6xl">
               Your Idea Matters!
-            </h2>
+            </h1>
             <p className="mt-6 text-lg text-foreground/80">
               Welcome to HEMPON GROUP – Your Website Creation Partner
             </p>
@@ -27,14 +27,15 @@ export function Hero() {
               </Button>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative flex h-full min-h-[300px] items-center justify-center">
+            <div className="absolute inset-0 z-0 -m-4 rounded-full bg-primary/10 opacity-50 blur-3xl"></div>
             <Image
               src="https://placehold.co/700x500.png"
-              alt="Hero image showing a collaborative web design process"
+              alt="Floating web development components"
               width={700}
               height={500}
-              className="rounded-lg shadow-xl"
-              data-ai-hint="website design collaboration"
+              className="relative z-10 rounded-lg shadow-xl"
+              data-ai-hint="abstract technology"
             />
           </div>
         </div>
