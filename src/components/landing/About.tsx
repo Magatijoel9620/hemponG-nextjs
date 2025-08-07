@@ -44,10 +44,11 @@ export function About() {
           </div>
           <div className="flex justify-center">
             <Image
-              src="/images/about-illustration.svg"
+              src="https://placehold.co/600x600.png"
               alt="A team of designers and developers collaborating on a web project"
               width={600}
               height={600}
+              data-ai-hint="team collaboration"
               className="rounded-lg"
             />
           </div>
