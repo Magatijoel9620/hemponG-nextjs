@@ -20,7 +20,7 @@ export function Hero() {
             <div className="mt-8 flex justify-center gap-4 lg:justify-start">
               <Button size="lg" asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 <a href="#contact">
-                  Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
+                  Take The First Step <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
             </div>
