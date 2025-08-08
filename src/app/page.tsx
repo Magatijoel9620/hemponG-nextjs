@@ -5,6 +5,7 @@ import { About } from '@/components/landing/About';
 import { Pricing } from '@/components/landing/Pricing';
 import { Contact } from '@/components/landing/Contact';
 import { Footer } from '@/components/landing/Footer';
+import { AnimatedSection } from '@/components/landing/AnimatedSection';
 
 export default function Home() {
   return (
@@ -12,9 +13,15 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <Features />
-        <About />
-        <Pricing />
+        <AnimatedSection>
+          <Features />
+        </AnimatedSection>
+        <AnimatedSection>
+          <About />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Pricing />
+        </AnimatedSection>
         <Contact />
       </main>
       <Footer />
