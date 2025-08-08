@@ -4,7 +4,14 @@ import { ArrowRight } from 'lucide-react';
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden bg-primary/5 py-20 md:py-32">
+    <section id="home" className="relative overflow-hidden bg-primary/5 py-20 md:py-32" 
+    style={{
+      backgroundImage: "url('/assets/hero-bg.svg')",
+      backgroundSize: "cover", // or contain, etc.
+      backgroundPosition: "center", // or top, bottom, etc.
+      backgroundRepeat: "no-repeat", // or repeat, repeat-x, etc.
+    }}
+    >
       <div className="container relative z-10" >
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div className="text-center lg:text-left">
