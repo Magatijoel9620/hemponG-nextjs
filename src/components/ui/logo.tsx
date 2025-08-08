@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export const Logo = ({ className }: { className?: string }) => (
   <Image
-    src="/assets/logo.svg"
+    src="/assets/logo/logo.svg"
     alt="HEMPON GROUP Logo"
     width={150}
     height={40}
