@@ -2,11 +2,12 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Instagram, Menu, X } from 'lucide-react';
+import { Instagram, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Logo } from '@/components/ui/logo';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '../ThemeToggle';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -21,7 +22,10 @@ export function Header() {
   const [activeLink, setActiveLink] = React.useState('#home');
 
   React.useEffect(() => {
-    const sections = navItems.map(item => document.getElementById(item.href.substring(1)));
+    const sections = navItems.map(item => {
+        const el = document.getElementById(item.href.substring(1));
+        return el;
+    }).filter(Boolean);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -75,6 +79,7 @@ export function Header() {
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-end gap-2">
+          <ThemeToggle />
           <Button variant="ghost" size="icon" asChild>
             <a href="https://www.instagram.com/hempongroup/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <Instagram className="h-5 w-5 text-foreground/80" />
