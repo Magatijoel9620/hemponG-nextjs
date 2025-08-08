@@ -8,7 +8,7 @@ const contactInfo = [
   },
   {
     icon: Mail,
-    details: ['info@hempongroup.co.ke', 'admin@hempongroup.co.ke'],
+    details: ['info@hempongroup.co.ke', 'admin@hempongroup.co.ke', 'magatijoel@gmail.com'],
   },
   {
     icon: MapPin,

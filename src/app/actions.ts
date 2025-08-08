@@ -14,8 +14,11 @@ export async function submitContactForm(
   }
 
   // Here you would typically integrate with an email service like Resend, SendGrid, etc.
+  // to send an email to 'magatijoel@gmail.com'.
   // For demonstration, we'll just log the data and simulate a successful submission.
   console.log('Received contact form submission:', result.data);
+  console.log('Email should be sent to magatijoel@gmail.com');
+
 
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 1000));
