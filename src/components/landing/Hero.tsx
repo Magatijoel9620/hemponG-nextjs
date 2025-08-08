@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 export function Hero() {
   return (
     <section id="home" className="relative overflow-hidden bg-primary/5 py-20 md:py-32">
-      <div className="container relative z-10">
+      <div className="container relative z-10" >
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div className="text-center lg:text-left">
             <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
@@ -28,7 +28,7 @@ export function Hero() {
           <div className="relative flex h-full min-h-[300px] items-center justify-center">
             <div className="absolute inset-0 z-0 -m-4 rounded-full bg-primary/10 opacity-50 blur-3xl"></div>
             <Image
-              src="https://placehold.co/700x500.png"
+              src="/assets/hero-img.svg"
               alt="Floating web development components"
               width={700}
               height={500}
