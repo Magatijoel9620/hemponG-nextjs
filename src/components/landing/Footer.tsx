@@ -33,7 +33,7 @@ export function Footer() {
           
           <div className="flex flex-col items-center md:items-start">
             <Link href="#home" className="mb-4 inline-block">
-              <Logo />
+              <Logo className="w-40" />
             </Link>
             <p className="max-w-xs text-sm text-foreground/70">
               When you choose HEMPON GROUP, you’re not just hiring a web design service—you’re forming a partnership.

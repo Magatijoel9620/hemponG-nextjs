@@ -1,7 +1,13 @@
 import React from 'react';
+import Image from 'next/image';
 
 export const Logo = ({ className }: { className?: string }) => (
-  <h1 className={`text-2xl font-bold text-primary ${className}`}>
-    HEMPON GROUP
-  </h1>
+  <Image
+    src="/assets/logo.svg"
+    alt="HEMPON GROUP Logo"
+    width={150}
+    height={40}
+    className={`h-auto ${className}`}
+    priority
+  />
 );
