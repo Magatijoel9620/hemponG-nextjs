@@ -3,12 +3,12 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle2 } from 'lucide-react';
 
 const benefits = [
-  { text: 'Shared Goals and Vision', description: 'We align our efforts with your business objectives, ensuring the website reflects your brand.' },
-  { text: 'Knowledge Sharing and Training', description: 'Our team empowers you with the tools to manage and maximize your website’s potential.' },
-  { text: 'Focus on Quality Assurance', description: 'Every project undergoes rigorous testing to guarantee flawless performance and user experience.' },
-  { text: 'Feedback and Recognition', description: 'Your input is our driving force. We actively listen to your feedback and value collaboration.' },
-  { text: 'Customized Solutions', description: 'We tailor every website to your unique needs, combining creativity with functionality.' },
-  { text: 'Timely Delivery and Support', description: 'We respect your timelines and ensure seamless support throughout and after the project.' },
+  { text: 'Collaborative Partnership', description: 'We align our strategy with your business goals, ensuring every pixel serves your vision.' },
+  { text: 'Empowerment & Training', description: 'We equip you with the knowledge to manage your site and maximize its potential.' },
+  { text: 'Commitment to Quality', description: 'Rigorous testing guarantees a flawless, high-performance experience for your users.' },
+  { text: 'Continuous Improvement', description: 'Your feedback is vital. We thrive on collaboration and value your insights for growth.' },
+  { text: 'Tailored Solutions', description: 'We blend creativity with function, crafting bespoke websites that are uniquely yours.' },
+  { text: 'Reliable Delivery & Support', description: 'We honor your timelines and provide ongoing support to ensure your long-term success.' },
 ];
 
 export function About() {
@@ -18,12 +18,12 @@ export function About() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div className="lg:order-last">
             <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">
-              We help teams build the business of their dreams
+              We're More Than a Web Designer—We're Your Partner in Success.
             </h2>
             <p className="mt-4 text-foreground/80">
-              When you choose HEMPON GROUP, you’re not just hiring a web design service—you’re forming a partnership with a team of dedicated professionals who are genuinely invested in your success.
+              Choosing HEMPON GROUP means gaining a dedicated team invested in your digital journey. We believe in building relationships, not just websites.
             </p>
-            <p className="mt-4 text-foreground/70">Here’s what sets us apart:</p>
+            <p className="mt-4 text-foreground/70">Our commitment to you includes:</p>
             <ul className="mt-6 space-y-4">
               {benefits.map((benefit) => (
                 <li key={benefit.text} className="flex items-start">
@@ -36,15 +36,15 @@ export function About() {
               ))}
             </ul>
              <p className="mt-6 text-foreground/70">
-              With HEMPON GROUP, you’re not just getting a website—you’re gaining a partner committed to your growth and success.
+              With HEMPON GROUP, you get more than a website—you get a dedicated partner committed to seeing you thrive.
             </p>
             <Button size="lg" asChild className="mt-8 bg-primary hover:bg-primary/90">
-              <a href="#contact">Get in touch</a>
+              <a href="#contact">Let's Connect</a>
             </Button>
           </div>
           <div className="flex justify-center">
             <Image
-              src="/assets/about-img.svg"
+              src="https://placehold.co/600x600.png"
               alt="A team of designers and developers collaborating on a web project"
               width={600}
               height={600}

@@ -5,51 +5,51 @@ import { Check } from 'lucide-react';
 
 const pricingPlans = [
   {
-    title: 'Basic Design',
+    title: 'Essential Design',
     category: 'Web Design',
     price: 'Kes 20K - 100K',
     features: [
-      'One (1) pager = Kes 15K',
-      'Upto 5 pages = Kes 25K',
-      'Upto 10 Pages = Kes 35K',
-      'Upto 20 pages = Kes 75K',
-      'Blog website = Kes 15K',
-      'Landing Page = Kes 20K',
+      '1-Page Site: Kes 15K',
+      'Up to 5 Pages: Kes 25K',
+      'Up to 10 Pages: Kes 35K',
+      'Up to 20 Pages: Kes 75K',
+      'Blog Setup: Kes 15K',
+      'Landing Page: Kes 20K',
     ],
   },
   {
-    title: 'Ecommerce Web Design',
-    category: 'Ecommerce Web Development',
+    title: 'E-Commerce Pro',
+    category: 'E-Commerce Development',
     price: 'Kes 40K - 250K',
     features: [
-      'Ecommerce Tools',
-      'Order Management System',
-      'Payment Integration',
-      'Technical Support',
+      'Advanced E-commerce Tools',
+      'Full Order Management System',
+      'Secure Payment Integration',
+      'Dedicated Technical Support',
     ],
   },
   {
-    title: 'Custom Design',
-    category: 'Custom Web Development',
+    title: 'Bespoke Solutions',
+    category: 'Custom Development',
     price: 'Ksh 100K+',
     features: [
-      'Carefully crafted components',
-      'Amazing pages',
-      'Changes on the go',
-      'Technical Support',
+      'Pixel-Perfect, Custom Components',
+      'Unique, High-Impact Pages',
+      'On-the-Go Revisions & Changes',
+      'Priority Technical Support',
     ],
   },
   {
-    title: 'Prices Inclusive of:-',
-    category: 'All Plans',
-    price: 'All',
+    title: 'All-Inclusive Value',
+    category: 'All Plans Feature',
+    price: 'Included',
     features: [
-      'Domain Registration',
-      'Website Hosting',
-      'Unlimited business Emails',
+      'Domain Name Registration',
+      'High-Speed Web Hosting',
+      'Unlimited Business Emails',
+      'SSL Security Certificate',
       'Technical Support',
-      'SSL Certificate',
-      'On-page basic SEO',
+      'On-Page SEO Foundation',
     ],
   },
 ];
@@ -60,9 +60,9 @@ export function Pricing() {
       <div className="container">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5 text-center lg:text-left">
-            <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Pricing Plan</h2>
+            <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Transparent Pricing for Every Vision</h2>
             <p className="mt-4 text-foreground/80">
-              Contact us today and experience the passion, professionalism and reliable support that sets us apart. Let’s create a website that represents your unique vision and helps you achieve your online goals.
+              Let's build a website that not only meets your needs but also exceeds your expectations. Explore our plans or contact us for a custom quote.
             </p>
           </div>
           <div className="lg:col-span-7">
@@ -89,7 +89,7 @@ export function Pricing() {
                         </CardContent>
                         <CardFooter>
                           <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-                            <a href="#contact">Get Started</a>
+                            <a href="#contact">Choose Plan</a>
                           </Button>
                         </CardFooter>
                       </Card>

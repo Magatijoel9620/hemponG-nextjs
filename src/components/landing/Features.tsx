@@ -5,33 +5,33 @@ import type { LucideIcon } from 'lucide-react';
 const features = [
   {
     icon: Store,
-    title: 'Local Business',
-    description: 'We understand the unique needs of local businesses. We specialize in creating custom websites that showcase your brand and attract local customers.',
+    title: 'Local Business Websites',
+    description: 'We build custom websites that capture your brand’s essence and connect you with your local community, driving foot traffic and online engagement.',
   },
   {
     icon: ShoppingCart,
-    title: 'Online Store',
-    description: 'Maximize your online sales potential with our robust e-commerce solutions, creating a seamless shopping experience for your customers.',
+    title: 'E-Commerce Solutions',
+    description: 'Launch a powerful online store with our seamless e-commerce platforms, designed to maximize sales and provide an exceptional user experience.',
   },
   {
     icon: PenSquare,
-    title: 'Blogging',
-    description: 'HEMPON GROUP is here to help you create a captivating blog that resonates with your readers and establishes your online presence.',
+    title: 'Engaging Blogs',
+    description: 'Establish your authority and connect with your audience through a captivating blog, expertly designed to boost your online presence.',
   },
   {
     icon: Briefcase,
-    title: 'Portfolio',
-    description: 'Your portfolio reflects your skills. We create stunning portfolio websites that leave a lasting impression on clients and collaborators.',
+    title: 'Professional Portfolios',
+    description: 'Showcase your skills and achievements with a stunning portfolio website that makes a memorable impact on potential clients and employers.',
   },
   {
     icon: ShieldCheck,
-    title: 'Best Security',
-    description: 'Our websites include SSL encryption, secure coding, and regular updates to safeguard your business and customer data from potential threats.',
+    title: 'Uncompromising Security',
+    description: 'Protect your digital assets and customer data with our robust security measures, including SSL encryption and proactive threat monitoring.',
   },
   {
     icon: DraftingCompass,
-    title: 'Web Design',
-    description: 'We create visually appealing, responsive, and fast-loading websites tailored to your brand, optimized for search engines to drive traffic.',
+    title: 'Bespoke Web Design',
+    description: 'Our visually striking, responsive designs are optimized for speed and search engines, ensuring you make a brilliant first impression.',
   },
 ];
 
@@ -62,9 +62,9 @@ export function Features() {
     <section id="feature" className="py-20 md:py-28 bg-background/70">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Why choose HEMPON GROUP?</h2>
+          <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Solutions Tailored for Growth</h2>
           <p className="mt-4 text-foreground/80">
-            Because I understand that your website is more than just a digital address. It’s an extension of your brand, a platform to showcase your products or services, and a gateway to connect with your audience.
+            Your website is your digital storefront. We build more than just pages; we create experiences that resonate with your audience and serve as a powerful engine for your brand’s growth.
           </p>
         </div>
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

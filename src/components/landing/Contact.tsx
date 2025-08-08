@@ -8,7 +8,7 @@ const contactInfo = [
   },
   {
     icon: Mail,
-    details: ['info@hempongroup.co.ke', 'admin@hempongroup.co.ke', 'magatijoel@gmail.com'],
+    details: ['info@hempongroup.co.ke', 'magatijoel@gmail.com'],
   },
   {
     icon: MapPin,
@@ -21,9 +21,9 @@ export function Contact() {
     <section id="contact" className="py-20 md:py-28 bg-background">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Get a professional website today</h2>
+          <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Ready to Build Something Amazing?</h2>
           <p className="mt-4 text-foreground/80">
-            Stop wasting time and money. Get a professional website today, Happiness guaranteed!
+            Reach out today and let's discuss how we can bring your vision to life. Your professional website is just a conversation away.
           </p>
         </div>
         <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-5">
@@ -49,7 +49,7 @@ export function Contact() {
                 </div>
                 <div>
                    <a href="https://maps.app.goo.gl/69WVyjyQaKheYG866" target="_blank" rel="noopener noreferrer" className="text-foreground/90 hover:text-primary transition-colors">
-                      Mombasa, Kenya
+                      Find us on Google Maps
                    </a>
                 </div>
               </div>

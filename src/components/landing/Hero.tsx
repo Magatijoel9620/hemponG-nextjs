@@ -9,20 +9,18 @@ export function Hero() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div className="text-center lg:text-left">
             <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
-              Your Idea Matters!
+              Your Vision, Realized Online.
             </h1>
             <p className="mt-6 text-lg text-foreground/80">
-              Welcome to HEMPON GROUP – Your Website Creation Partner
+              Welcome to HEMPON GROUP – Where Digital Excellence Begins.
             </p>
             <p className="mt-4 text-foreground/70">
-              Are you ready to turn your website ideas into reality? Look no further! As a skilled web designer and
-              developer, I’m here to empower you to create stunning websites that captivate your audience. With my
-              expertise and your vision, we can bring your online presence to life.
+              Ready to transform your ideas into a stunning, high-performance website? At HEMPON GROUP, we combine cutting-edge design with powerful development to build an online presence that captivates your audience and drives results. Let's create something extraordinary together.
             </p>
             <div className="mt-8 flex justify-center gap-4 lg:justify-start">
               <Button size="lg" asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 <a href="#contact">
-                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                  Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
             </div>
@@ -30,7 +28,7 @@ export function Hero() {
           <div className="relative flex h-full min-h-[300px] items-center justify-center">
             <div className="absolute inset-0 z-0 -m-4 rounded-full bg-primary/10 opacity-50 blur-3xl"></div>
             <Image
-              src="/assets/hero-img.svg"
+              src="https://placehold.co/700x500.png"
               alt="Floating web development components"
               width={700}
               height={500}

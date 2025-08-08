@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/ui/logo';
-import { Facebook, Twitter, Instagram, Linkedin, Code } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const socialLinks = [
     { href: "#", 'aria-label': "Facebook", icon: Facebook },
@@ -12,16 +12,16 @@ const socialLinks = [
 const serviceLinks = [
   { href: "#pricing", text: "Web Design" },
   { href: "#pricing", text: "Web Development" },
+  { href: "#pricing", text: "E-Commerce" },
   { href: "#pricing", text: "SEO Optimization" },
-  { href: "#pricing", text: "Blog Writing" },
   { href: "#pricing", text: "Google Scripting" },
 ];
 
 const quickLinks = [
     { href: "#home", text: "Home" },
-    { href: "#about", text: "About" },
-    { href: "#pricing", text: "Service" },
-    { href: "#feature", text: "Feature" },
+    { href: "#about", text: "About Us" },
+    { href: "#feature", text: "Features" },
+    { href: "#pricing", text: "Pricing" },
     { href: "#contact", text: "Contact" }
 ];
 
@@ -36,7 +36,7 @@ export function Footer() {
               <Logo className="w-40" />
             </Link>
             <p className="max-w-xs text-sm text-foreground/70">
-              When you choose HEMPON GROUP, you’re not just hiring a web design service—you’re forming a partnership.
+              Crafting Digital Experiences That Inspire. We're more than a service—we're your partner in digital excellence.
             </p>
             <div className="mt-6 flex space-x-4">
               {socialLinks.map(link => (
@@ -60,7 +60,7 @@ export function Footer() {
             </div>
             
             <div>
-              <h6 className="font-bold text-foreground">Services</h6>
+              <h6 className="font-bold text-foreground">Our Services</h6>
               <ul className="mt-4 space-y-3 text-sm">
                 {serviceLinks.map(link => (
                   <li key={link.text}>

@@ -6,7 +6,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: 'HEMPON GROUP',
-  description: 'Welcome to HEMPON GROUP – Your Website Creation Partner. We help you turn your website ideas into reality.',
+  description: 'HEMPON GROUP: We craft stunning, high-performance websites that elevate your brand and drive results. Your vision, our expertise—let\'s build the future of your business online.',
 };
 
 export default function RootLayout({
