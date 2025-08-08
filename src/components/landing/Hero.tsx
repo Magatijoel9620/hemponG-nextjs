@@ -28,7 +28,7 @@ export function Hero() {
           <div className="relative flex h-full min-h-[300px] items-center justify-center">
             <div className="absolute inset-0 z-0 -m-4 rounded-full bg-primary/10 opacity-50 blur-3xl"></div>
             <Image
-              src="/assets/hero-img.svg"
+              src="https://placehold.co/700x500.png"
               alt="Floating web development components"
               width={700}
               height={500}

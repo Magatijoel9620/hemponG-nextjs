@@ -44,7 +44,7 @@ export function About() {
           </div>
           <div className="flex justify-center">
             <Image
-              src="/assets/about-img.svg"
+              src="https://placehold.co/600x600.png"
               alt="A team of designers and developers collaborating on a web project"
               width={600}
               height={600}
