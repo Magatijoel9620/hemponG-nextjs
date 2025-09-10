@@ -18,10 +18,10 @@ export function Hero() {
             <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
               Your Vision, Realized Online.
             </h1>
-            <p className="mt-6 text-lg text-foreground/80">
+            <p className="mt-6 text-lg text-foreground/80 dark:text-blue-300">
               Welcome to HEMPON GROUP – Where Digital Excellence Begins.
             </p>
-            <p className="mt-4 text-foreground/70">
+            <p className="mt-4 text-foreground/70 dark:text-blue-300">
               Ready to transform your ideas into a stunning, high-performance website? At HEMPON GROUP, we combine cutting-edge design with powerful development to build an online presence that captivates your audience and drives results. Let's create something extraordinary together.
             </p>
             <div className="mt-8 flex justify-center gap-4 lg:justify-start">
