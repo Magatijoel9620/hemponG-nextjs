@@ -7,6 +7,11 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 
 export const metadata: Metadata = {
   title: 'HEMPON GROUP',
+  icons: {
+    icon: "/favicon-v2.ico",
+    shortcut: "/favicon-v2.ico",
+    //apple: "/apple-touch-icon.png", // optional if you add it
+  },
   description: 'HEMPON GROUP: We craft stunning, high-performance websites that elevate your brand and drive results. Your vision, our expertise—let\'s build the future of your business online.',
   openGraph: {
     title: 'HEMPON GROUP',
