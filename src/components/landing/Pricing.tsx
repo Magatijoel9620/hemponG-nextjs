@@ -1,11 +1,11 @@
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card';
+} from "@/components/ui/card";
 
 import {
   Carousel,
@@ -13,193 +13,338 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel';
+} from "@/components/ui/carousel";
 
-import { Button } from '@/components/ui/button';
-import { Check } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
-const pricingPlans = [
+import {
+  ArrowRight,
+  Check,
+  Clock3,
+  MessageCircle,
+  Sparkles,
+} from "lucide-react";
+
+type PricingPlan = {
+  title: string;
+  category: string;
+  bestFor: string;
+  price: string;
+  timeline: string;
+  description: string;
+  featured?: boolean;
+  features: string[];
+};
+
+const pricingPlans: PricingPlan[] = [
   {
-    title: 'Starter Website',
-    category: 'For individuals and small businesses',
-    price: 'From KSh 15,000',
+    title: "Starter Website",
+    category: "Simple online presence",
+    bestFor: "Individuals, startups and small local businesses",
+    price: "From KSh 15,000",
+    timeline: "5–10 working days",
     description:
-        'A professional online presence for businesses that need a simple, modern website.',
+      "A clean, professional website for businesses that need a credible and modern online presence.",
     features: [
-      '1–3 responsive pages',
-      'Mobile-friendly design',
-      'Contact form',
-      'WhatsApp chat button',
-      'Google Maps integration',
-      'Basic search engine setup',
-      '14 days of post-launch support',
+      "1–3 responsive pages",
+      "Mobile-friendly design",
+      "Contact or enquiry form",
+      "WhatsApp chat integration",
+      "Google Maps integration",
+      "Basic search-engine setup",
+      "Social media links",
+      "14 days of post-launch support",
     ],
   },
   {
-    title: 'Business Website',
-    category: 'For growing businesses',
-    price: 'From KSh 25,000',
+    title: "Business Website",
+    category: "Complete company website",
+    bestFor: "Growing businesses and professional organizations",
+    price: "From KSh 25,000",
+    timeline: "2–3 weeks",
     description:
-        'A complete business website with more pages, stronger content structure, and useful integrations.',
+      "A structured business website designed to present your services, build trust and generate enquiries.",
     featured: true,
     features: [
-      'Up to 6 responsive pages',
-      'Services and portfolio sections',
-      'Testimonials and FAQ sections',
-      'Contact and enquiry forms',
-      'Social media integration',
-      'Google Analytics setup',
-      'Basic on-page SEO',
-      '30 days of post-launch support',
+      "Up to 6 responsive pages",
+      "Services and portfolio sections",
+      "Testimonials and FAQ sections",
+      "Contact and enquiry forms",
+      "WhatsApp and social integrations",
+      "Google Analytics setup",
+      "Basic on-page SEO",
+      "Content upload assistance",
+      "30 days of post-launch support",
     ],
   },
   {
-    title: 'Online Store',
-    category: 'For businesses selling online',
-    price: 'From KSh 45,000',
+    title: "Online Store",
+    category: "Sell products online",
+    bestFor: "Retailers, suppliers and product-based businesses",
+    price: "From KSh 45,000",
+    timeline: "3–5 weeks",
     description:
-        'An e-commerce website for showcasing products, accepting orders, and receiving payments.',
+      "An e-commerce website for showcasing products, receiving orders and supporting digital payments.",
     features: [
-      'Product catalogue setup',
-      'Shopping cart and checkout',
-      'Order management',
-      'M-Pesa or card payment integration',
-      'Customer email notifications',
-      'Basic inventory configuration',
-      'Administrator training',
-      '30 days of post-launch support',
+      "Product catalogue setup",
+      "Product categories and search",
+      "Shopping cart and checkout",
+      "Order-management workflow",
+      "M-Pesa or card-payment integration",
+      "Customer email notifications",
+      "Basic inventory configuration",
+      "Administrator training",
+      "30 days of post-launch support",
     ],
   },
   {
-    title: 'Custom Web Solution',
-    category: 'For advanced requirements',
-    price: 'Custom quotation',
+    title: "Custom Web Solution",
+    category: "Advanced digital systems",
+    bestFor: "Organizations with unique workflows or platform requirements",
+    price: "Custom quotation",
+    timeline: "Based on project scope",
     description:
-        'Suitable for portals, dashboards, booking systems, and applications with custom workflows.',
+      "Ideal for portals, dashboards, booking platforms, management systems and applications with custom business logic.",
     features: [
-      'Custom user interface',
-      'Authentication and user roles',
-      'Dashboards and admin panels',
-      'Third-party API integrations',
-      'Database development',
-      'Business workflow automation',
-      'Deployment and documentation',
-      'Ongoing support options',
+      "Custom user interface",
+      "Authentication and user roles",
+      "Dashboards and administration panels",
+      "Third-party API integrations",
+      "Database design and development",
+      "Business workflow automation",
+      "Deployment and documentation",
+      "Administrator or staff training",
+      "Ongoing support options",
     ],
   },
 ];
 
+function buildWhatsAppUrl(planTitle: string) {
+  const message = encodeURIComponent(
+    `Hello Hempon Group, I am interested in the ${planTitle} package. I would like to discuss my project requirements and receive a quotation.`
+  );
+
+  return `https://wa.me/254738219953?text=${message}`;
+}
+
 export function Pricing() {
   return (
-      <section id="pricing" className="bg-background/70 py-20 md:py-28">
-        <div className="container">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
-            <div className="text-center lg:col-span-5 lg:text-left">
-              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-                Website packages
+    <section
+      id="pricing"
+      className="relative overflow-hidden bg-muted/20 py-20 md:py-28"
+    >
+      {/* Decorative background */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+      >
+        <div className="absolute left-0 top-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
+      </div>
+
+      <div className="container">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
+          {/* Introduction */}
+          <div className="text-center lg:sticky lg:top-28 lg:col-span-4 lg:text-left">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              <Sparkles className="h-3.5 w-3.5" />
+              Website Packages
+            </span>
+
+            <h2 className="mt-5 font-headline text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+              Flexible Packages for{" "}
+              <span className="text-primary">Different Business Needs</span>
+            </h2>
+
+            <p className="mt-5 text-base leading-7 text-muted-foreground">
+              Choose a practical starting point based on your goals. Every
+              package can be adjusted to match your pages, content, features,
+              integrations and preferred design direction.
+            </p>
+
+            <div className="mt-6 rounded-2xl border border-border/60 bg-card/60 p-5 text-left">
+              <p className="text-sm font-semibold text-foreground">
+                Important pricing note
               </p>
 
-              <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">
-                Flexible options for different business needs
-              </h2>
-
-              <p className="mt-4 text-foreground/80">
-                Every project is different. These packages provide a helpful
-                starting point, and your final quotation will depend on the
-                required pages, features, content, and integrations.
-              </p>
-
-              <p className="mt-4 text-sm text-foreground/60">
-                Domain registration, hosting, premium plugins, payment-provider
-                fees, and ongoing maintenance are quoted separately where
-                applicable.
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Final pricing depends on the approved scope. Domain
+                registration, hosting, premium software, payment-provider fees,
+                third-party services and ongoing maintenance are quoted
+                separately where applicable.
               </p>
             </div>
 
-            <div className="lg:col-span-7">
-              <Carousel
-                  opts={{ align: 'start', loop: true }}
-                  className="w-full"
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <Button asChild size="lg" className="rounded-xl">
+                <a href="#contact">
+                  Request a Custom Quote
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="rounded-xl"
               >
-                <CarouselContent>
-                  {pricingPlans.map((plan) => (
-                      <CarouselItem
-                          key={plan.title}
-                          className="md:basis-1/2"
+                <a
+                  href="https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%20would%20like%20help%20choosing%20the%20right%20website%20package."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Help Me Choose
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          {/* Pricing carousel */}
+          <div className="lg:col-span-8">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: false,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {pricingPlans.map((plan) => (
+                  <CarouselItem
+                    key={plan.title}
+                    className="pl-4 md:basis-1/2"
+                  >
+                    <div className="h-full py-1">
+                      <Card
+                        className={`group relative flex h-full min-h-[620px] flex-col overflow-hidden border-border/60 bg-card/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                          plan.featured
+                            ? "border-primary/50 shadow-lg shadow-primary/10"
+                            : ""
+                        }`}
                       >
-                        <div className="h-full p-1">
-                          <Card
-                              className={`flex h-full flex-col bg-card/60 shadow-lg ${
-                                  plan.featured
-                                      ? 'border-accent shadow-accent/10'
-                                      : ''
-                              }`}
-                          >
-                            <CardHeader>
-                              {plan.featured && (
-                                  <span className="mb-2 w-fit rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+                        {plan.featured && (
+                          <>
+                            <div className="absolute inset-x-0 top-0 h-1 bg-primary" />
+
+                            <span className="absolute right-5 top-5 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
                               Most Popular
                             </span>
-                              )}
+                          </>
+                        )}
 
-                              <CardDescription className="font-semibold text-accent">
-                                {plan.category}
-                              </CardDescription>
+                        <CardHeader className="space-y-4 p-6">
+                          <div className="pr-24">
+                            <CardDescription className="font-semibold text-primary">
+                              {plan.category}
+                            </CardDescription>
 
-                              <CardTitle className="text-2xl font-bold text-primary">
-                                {plan.title}
-                              </CardTitle>
+                            <CardTitle className="mt-1 font-headline text-2xl font-bold">
+                              {plan.title}
+                            </CardTitle>
+                          </div>
 
-                              <p className="text-3xl font-extrabold text-foreground">
-                                {plan.price}
-                              </p>
+                          <div>
+                            <p className="text-3xl font-extrabold tracking-tight text-foreground">
+                              {plan.price}
+                            </p>
 
-                              <p className="pt-2 text-sm leading-relaxed text-foreground/70">
-                                {plan.description}
-                              </p>
-                            </CardHeader>
+                            <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                              <Clock3 className="h-3.5 w-3.5 text-primary" />
+                              Estimated delivery: {plan.timeline}
+                            </div>
+                          </div>
 
-                            <CardContent className="flex-1">
-                              <ul className="space-y-3">
-                                {plan.features.map((feature) => (
-                                    <li
-                                        key={feature}
-                                        className="flex items-start"
-                                    >
-                                      <Check className="mr-2 mt-0.5 h-5 w-5 shrink-0 text-green-500" />
-                                      <span className="text-foreground/80">
+                          <div className="rounded-xl bg-muted/40 p-3">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                              Best for
+                            </p>
+
+                            <p className="mt-1 text-sm font-medium text-foreground">
+                              {plan.bestFor}
+                            </p>
+                          </div>
+
+                          <p className="text-sm leading-6 text-muted-foreground">
+                            {plan.description}
+                          </p>
+                        </CardHeader>
+
+                        <CardContent className="flex-1 px-6 pb-6">
+                          <p className="mb-4 text-sm font-semibold text-foreground">
+                            What&apos;s included
+                          </p>
+
+                          <ul className="space-y-3">
+                            {plan.features.map((feature) => (
+                              <li
+                                key={feature}
+                                className="flex items-start gap-3"
+                              >
+                                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500">
+                                  <Check className="h-3.5 w-3.5" />
+                                </span>
+
+                                <span className="text-sm leading-6 text-muted-foreground">
                                   {feature}
                                 </span>
-                                    </li>
-                                ))}
-                              </ul>
-                            </CardContent>
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
 
-                            <CardFooter>
-                              <Button
-                                  asChild
-                                  className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
-                              >
-                                <a
-                                    href={`#contact`}
-                                    aria-label={`Request a quote for ${plan.title}`}
-                                >
-                                  Request a Quote
-                                </a>
-                              </Button>
-                            </CardFooter>
-                          </Card>
-                        </div>
-                      </CarouselItem>
-                  ))}
-                </CarouselContent>
+                        <CardFooter className="mt-auto flex flex-col gap-3 border-t border-border/50 p-6">
+                          <Button
+                            asChild
+                            className="w-full rounded-xl"
+                            variant={plan.featured ? "default" : "outline"}
+                          >
+                            <a
+                              href={buildWhatsAppUrl(plan.title)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Discuss the ${plan.title} package on WhatsApp`}
+                            >
+                              <MessageCircle className="mr-2 h-4 w-4" />
+                              Discuss This Package
+                            </a>
+                          </Button>
 
-                <CarouselPrevious className="hidden md:flex" />
-                <CarouselNext className="hidden md:flex" />
-              </Carousel>
+                          <a
+                            href="#contact"
+                            className="text-center text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
+                          >
+                            Or send a detailed project enquiry
+                          </a>
+                        </CardFooter>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+
+              <div className="mt-8 flex items-center justify-center gap-3 lg:justify-end">
+                <CarouselPrevious className="static translate-y-0" />
+                <CarouselNext className="static translate-y-0" />
+              </div>
+            </Carousel>
+
+            {/* Additional note */}
+            <div className="mt-8 rounded-2xl border border-dashed border-primary/30 bg-primary/5 p-5 text-center">
+              <p className="text-sm font-semibold text-foreground">
+                Need something that does not fit these packages?
+              </p>
+
+              <p className="mt-1 text-sm text-muted-foreground">
+                Custom quotations are available for redesigns, client portals,
+                booking systems, mobile applications, automation tools and
+                other digital solutions.
+              </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 }
