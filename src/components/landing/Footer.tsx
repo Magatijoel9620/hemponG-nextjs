@@ -31,7 +31,7 @@ const socialLinks = [
     icon: Instagram,
   },
   {
-    href: "https://www.linkedin.com/joel-magati",
+    href: "https://www.linkedin.com/in/joel-magati",
     label: "LinkedIn",
     icon: Linkedin,
   },
