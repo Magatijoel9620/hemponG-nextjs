@@ -295,19 +295,13 @@ export function Footer() {
               Terms of Service
             </a>
 
-            <button
-              type="button"
-              onClick={() =>
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                })
-              }
-              className="flex items-center gap-1.5 rounded-lg border border-border/60 px-3 py-1.5 transition-all hover:border-primary/40 hover:text-primary"
-            >
-              Back to Top
-              <ArrowUp className="h-3.5 w-3.5" />
-            </button>
+           <a
+  href="#home"
+  className="flex items-center gap-1.5 rounded-lg border border-border/60 px-3 py-1.5 transition-all hover:border-primary/40 hover:text-primary"
+>
+  Back to Top
+  <ArrowUp className="h-3.5 w-3.5" />
+</a>
           </div>
         </div>
       </div>
