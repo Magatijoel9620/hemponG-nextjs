@@ -4,11 +4,11 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 const contactInfo = [
   {
     icon: Phone,
-    details: ['+254711879129', '+254738219953'],
+    details: ['+254738219953' , '+254711879129' ],
   },
   {
     icon: Mail,
-    details: ['info@hempongroup.co.ke', 'magatijoel@gmail.com'],
+    details: ['magatijoel@gmail.com'],
   },
   {
     icon: MapPin,
