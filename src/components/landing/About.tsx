@@ -212,7 +212,7 @@ export function About() {
                 asChild
                 className="rounded-xl"
               >
-                <Link href="/projects">
+                <Link href="https://portfolio-mjs.vercel.app/projects">
                   View Our Work
                 </Link>
               </Button>
