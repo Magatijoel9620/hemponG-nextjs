@@ -131,9 +131,8 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative overflow-hidden bg-muted/20 py-20 md:py-28"
+      className="relative overflow-hidden bg-muted/20 py-16 sm:py-20 md:py-28"
     >
-      {/* Decorative background */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
@@ -151,7 +150,7 @@ export function Pricing() {
               Website Packages
             </span>
 
-            <h2 className="mt-5 font-headline text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+            <h2 className="mt-5 font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
               Flexible Packages for{" "}
               <span className="text-primary">Different Business Needs</span>
             </h2>
@@ -202,57 +201,60 @@ export function Pricing() {
           </div>
 
           {/* Pricing carousel */}
-          <div className="lg:col-span-8">
+          <div className="min-w-0 lg:col-span-8">
             <Carousel
               opts={{
                 align: "start",
                 loop: false,
+                containScroll: "trimSnaps",
               }}
-              className="w-full"
+              className="w-full min-w-0"
             >
               <CarouselContent className="-ml-4">
                 {pricingPlans.map((plan) => (
                   <CarouselItem
                     key={plan.title}
-                    className="pl-4 md:basis-1/2"
+                    className="basis-full pl-4 sm:basis-[85%] md:basis-1/2"
                   >
                     <div className="h-full py-1">
                       <Card
-                        className={`group relative flex h-full min-h-[620px] flex-col overflow-hidden border-border/60 bg-card/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                        className={`group relative flex h-full flex-col overflow-hidden border-border/60 bg-card/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:min-h-[620px] ${
                           plan.featured
                             ? "border-primary/50 shadow-lg shadow-primary/10"
                             : ""
                         }`}
                       >
                         {plan.featured && (
-                          <>
-                            <div className="absolute inset-x-0 top-0 h-1 bg-primary" />
-
-                            <span className="absolute right-5 top-5 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-                              Most Popular
-                            </span>
-                          </>
+                          <div className="absolute inset-x-0 top-0 h-1 bg-primary" />
                         )}
 
-                        <CardHeader className="space-y-4 p-6">
-                          <div className="pr-24">
+                        <CardHeader className="space-y-4 p-5 sm:p-6">
+                          {plan.featured && (
+                            <span className="inline-flex w-fit rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+                              Most Popular
+                            </span>
+                          )}
+
+                          <div>
                             <CardDescription className="font-semibold text-primary">
                               {plan.category}
                             </CardDescription>
 
-                            <CardTitle className="mt-1 font-headline text-2xl font-bold">
+                            <CardTitle className="mt-1 font-headline text-xl font-bold sm:text-2xl">
                               {plan.title}
                             </CardTitle>
                           </div>
 
                           <div>
-                            <p className="text-3xl font-extrabold tracking-tight text-foreground">
+                            <p className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
                               {plan.price}
                             </p>
 
-                            <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
-                              <Clock3 className="h-3.5 w-3.5 text-primary" />
-                              Estimated delivery: {plan.timeline}
+                            <div className="mt-2 flex items-start gap-2 text-xs text-muted-foreground">
+                              <Clock3 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                              <span>
+                                Estimated delivery: {plan.timeline}
+                              </span>
                             </div>
                           </div>
 
@@ -271,7 +273,7 @@ export function Pricing() {
                           </p>
                         </CardHeader>
 
-                        <CardContent className="flex-1 px-6 pb-6">
+                        <CardContent className="flex-1 px-5 pb-5 sm:px-6 sm:pb-6">
                           <p className="mb-4 text-sm font-semibold text-foreground">
                             What&apos;s included
                           </p>
@@ -294,7 +296,7 @@ export function Pricing() {
                           </ul>
                         </CardContent>
 
-                        <CardFooter className="mt-auto flex flex-col gap-3 border-t border-border/50 p-6">
+                        <CardFooter className="mt-auto flex flex-col gap-3 border-t border-border/50 p-5 sm:p-6">
                           <Button
                             asChild
                             className="w-full rounded-xl"
@@ -324,19 +326,18 @@ export function Pricing() {
                 ))}
               </CarouselContent>
 
-              <div className="mt-8 flex items-center justify-center gap-3 lg:justify-end">
+              <div className="mt-6 flex items-center justify-center gap-3 sm:justify-end">
                 <CarouselPrevious className="static translate-y-0" />
                 <CarouselNext className="static translate-y-0" />
               </div>
             </Carousel>
 
-            {/* Additional note */}
             <div className="mt-8 rounded-2xl border border-dashed border-primary/30 bg-primary/5 p-5 text-center">
               <p className="text-sm font-semibold text-foreground">
                 Need something that does not fit these packages?
               </p>
 
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">
                 Custom quotations are available for redesigns, client portals,
                 booking systems, mobile applications, automation tools and
                 other digital solutions.
