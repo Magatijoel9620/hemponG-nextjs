@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: 'HEMPON GROUP',
     images: [
       {
-        url: 'https://placehold.co/1200x630.png',
+        url: '/favicon-v2.ico',
         width: 1200,
         height: 630,
       },
