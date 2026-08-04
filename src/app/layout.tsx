@@ -13,7 +13,23 @@ export const metadata: Metadata = {
     //apple: "/apple-touch-icon.png", // optional if you add it
   },
   description: 'HEMPON GROUP: We craft stunning, high-performance websites that elevate your brand and drive results. Your vision, our expertise—let\'s build the future of your business online.',
- 
+ openGraph: {
+  title: "Hempon Group | Websites, Apps & Business Solutions",
+  description:
+    "Modern websites, applications, automation tools and digital systems built to help businesses grow.",
+  url: "https://hempon-group.vercel.app",
+  siteName: "Hempon Group",
+  images: [
+    {
+      url: "/og-image.png",
+      width: 1200,
+      height: 630,
+      alt: "Hempon Group digital solutions and web development services",
+    },
+  ],
+  locale: "en_US",
+  type: "website",
+},
   
 };
 
