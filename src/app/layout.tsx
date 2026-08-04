@@ -18,22 +18,11 @@ export const metadata: Metadata = {
     description: 'Stunning, high-performance websites that elevate your brand.',
     url: 'https://hempongroup.co.ke',
     siteName: 'HEMPON GROUP',
-    images: [
-      {
-        url: '/favicon-v2.ico',
-        width: 1200,
-        height: 630,
-      },
-    ],
+    
     locale: 'en_US',
     type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'HEMPON GROUP',
-    description: 'Stunning, high-performance websites that elevate your brand.',
-    images: ['https://placehold.co/1200x630.png'],
-  },
+  
 };
 
 export default function RootLayout({
