@@ -90,9 +90,9 @@ Contributions are welcome! If you have any ideas, suggestions, or bug reports, p
 
 This project is licensed under the MIT License. See the `LICENSE` file for more information.
 
-## 📞 Contact
+## 📞 Contact +254738219953
 
 **HEMPON GROUP**
-- **Website**: [hempongroup.co.ke](https://hempongroup.co.ke)
-- **Email**: info@hempongroup.co.ke
+- **Website**: [hempongroup.co.ke]( https://hempon-group.vercel.app/)
+- **Email**: magatijoel@gmail.com
 - **Instagram**: [@hempongroup](https://www.instagram.com/hempongroup/)
