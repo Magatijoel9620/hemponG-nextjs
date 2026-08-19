@@ -2,7 +2,6 @@
 
 This repository contains the source code for the official HEMPON GROUP website, a modern and fully responsive web application built with Next.js and styled with Tailwind CSS.
 
-[![Deploy to Firebase](https://www.gstatic.com/mobilesdk/240507_mobilesdk/firebase-app-hosting-deploy.svg)](https://console.firebase.google.com/project/_/hosting)
 
 ## Overview
 
