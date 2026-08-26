@@ -28,8 +28,8 @@ const contactInfo = [
     label: "Email",
     details: [
       {
-        text: "magatijoel@gmail.com",
-        href: "mailto:magatijoel@gmail.com",
+        text: "hempongroup@gmail.com",
+        href: "mailto:hempongroup@gmail.com",
       },
     ],
   },

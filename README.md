@@ -94,5 +94,5 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 **HEMPON GROUP**
 - **Website**: [hempongroup.co.ke]( https://hempon-group.vercel.app/)
-- **Email**: magatijoel@gmail.com
+- **Email**: hempongroup@gmail.com
 - **Instagram**: [@hempongroup](https://www.instagram.com/hempongroup/)

@@ -91,8 +91,8 @@ const contactDetails = [
   },
   {
     icon: Mail,
-    label: "magatijoel@gmail.com",
-    href: "mailto:magatijoel@gmail.com",
+    label: "hempongroup@gmail.com",
+    href: "mailto:hempongroup@gmail.com",
   },
   {
     icon: MapPin,

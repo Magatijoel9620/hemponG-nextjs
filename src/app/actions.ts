@@ -14,10 +14,10 @@ export async function submitContactForm(
   }
 
   // Here you would typically integrate with an email service like Resend, SendGrid, etc.
-  // to send an email to 'magatijoel@gmail.com'.
+  // to send an email to 'hempongroup@gmail.com'.
   // For demonstration, we'll just log the data and simulate a successful submission.
   console.log('Received contact form submission:', result.data);
-  console.log('Email should be sent to magatijoel@gmail.com');
+  console.log('Email should be sent to hempongroup@gmail.com');
 
 
   // Simulate network delay
