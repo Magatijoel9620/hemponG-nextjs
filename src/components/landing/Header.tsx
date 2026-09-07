@@ -8,7 +8,8 @@ import {
   Menu,
   MessageCircle,
 } from "lucide-react";
-
+import Image from "next/image"
+import { Music2 } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -164,7 +165,28 @@ export function Header() {
                 <Instagram className="h-4.5 w-4.5 text-muted-foreground transition-colors hover:text-primary" />
               </a>
             </Button>
-
+            <Button
+  variant="ghost"
+  size="icon"
+  asChild
+  className="hidden rounded-xl sm:inline-flex"
+>
+  <a
+    href="https://www.tiktok.com/@hempon.digital.so"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Visit Hempon Group on TikTok"
+    title="TikTok"
+  >
+    <Image
+      src="/assets/tiktok.svg"
+      alt=""
+      width={18}
+      height={18}
+      className="opacity-70 transition-all duration-300 hover:scale-110 hover:opacity-100"
+    />
+  </a>
+</Button>
             <Button
               asChild
               size="sm"
