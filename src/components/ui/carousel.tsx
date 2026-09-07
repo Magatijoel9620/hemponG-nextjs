@@ -206,21 +206,32 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "absolute z-20 h-11 w-11 rounded-full",
+        "border-2 border-primary/30",
+        "bg-background/95 text-foreground",
+        "shadow-lg shadow-black/20",
+        "backdrop-blur-md",
+        "transition-all duration-200",
+        "hover:scale-110 hover:border-primary hover:bg-primary hover:text-primary-foreground",
+        "active:scale-95",
+        "disabled:pointer-events-none disabled:opacity-30",
         orientation === "horizontal"
-          ? "-left-12 top-1/2 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+          ? "left-3 top-1/2 -translate-y-1/2"
+          : "-top-14 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
+     <ArrowLeft
+  className="h-6 w-6 stroke-[2.5] animate-[bounceLeft_2s_ease-in-out_infinite]"
+/>
       <span className="sr-only">Previous slide</span>
     </Button>
   )
 })
+
 CarouselPrevious.displayName = "CarouselPrevious"
 
 const CarouselNext = React.forwardRef<
@@ -235,21 +246,32 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "absolute z-20 h-11 w-11 rounded-full",
+        "border-2 border-primary/30",
+        "bg-background/95 text-foreground",
+        "shadow-lg shadow-black/20",
+        "backdrop-blur-md",
+        "transition-all duration-200",
+        "hover:scale-110 hover:border-primary hover:bg-primary hover:text-primary-foreground",
+        "active:scale-95",
+        "disabled:pointer-events-none disabled:opacity-30",
         orientation === "horizontal"
-          ? "-right-12 top-1/2 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+          ? "right-3 top-1/2 -translate-y-1/2"
+          : "-bottom-14 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
+      <ArrowRight
+  className="h-6 w-6 stroke-[2.5] animate-[bounceRight_2s_ease-in-out_infinite]"
+/>
       <span className="sr-only">Next slide</span>
     </Button>
   )
 })
+
 CarouselNext.displayName = "CarouselNext"
 
 export {

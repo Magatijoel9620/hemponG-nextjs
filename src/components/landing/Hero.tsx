@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   ArrowRight,
   CheckCircle2,
@@ -117,25 +116,26 @@ export function Hero() {
               aria-hidden="true"
               className="absolute inset-10 rounded-full bg-primary/15 blur-3xl"
             />
-
             <div className="relative w-full overflow-hidden rounded-[2rem] border border-border/60 bg-card/60 p-4 shadow-2xl shadow-primary/10 backdrop-blur-sm">
               <div className="mb-4 flex items-center gap-2 px-2">
                 <span className="h-3 w-3 rounded-full bg-red-400" />
                 <span className="h-3 w-3 rounded-full bg-amber-400" />
                 <span className="h-3 w-3 rounded-full bg-emerald-400" />
-
                 <div className="ml-3 h-7 flex-1 rounded-lg bg-muted/70" />
               </div>
 
-              <Image
-                src="/assets/hero-img.svg"
-                alt="Website design, development and automation services by Hempon Group"
-                width={700}
-                height={500}
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="h-auto w-full rounded-2xl object-contain"
-              />
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="Hempon Group digital solutions showcase"
+                className="h-auto w-full rounded-2xl object-cover"
+              >
+                <source src="/assets/hero-video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             {/* Floating card */}

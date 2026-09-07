@@ -79,3 +79,70 @@
     filter: invert(0);
   }
 }
+@keyframes bounceLeft {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-5px);
+  }
+}
+
+@keyframes bounceRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+}
+@keyframes scrollUpPulse {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  80% {
+    transform: translateY(-5px) scale(1.05);
+  }
+
+  90% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes arrowUpBounce {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+
+  80% {
+    transform: translateY(-4px);
+  }
+
+  90% {
+    transform: translateY(0);
+  }
+}
+@keyframes arrowNudge {
+  0%,
+  85%,
+  100% {
+    transform: translateY(0);
+  }
+
+  90% {
+    transform: translateY(-3px);
+  }
+
+  95% {
+    transform: translateY(0);
+  }
+}

@@ -10,7 +10,7 @@ import {
   Phone,
   Twitter,
 } from "lucide-react";
-
+import { ChevronUp } from "lucide-react"
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
 
@@ -281,26 +281,27 @@ export function Footer() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="#"
+            <Link
+              href="/privacy-policy"
               className="transition-colors hover:text-foreground"
             >
               Privacy Policy
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              href="/terms"
               className="transition-colors hover:text-foreground"
             >
               Terms of Service
-            </a>
+            </Link>
 
-           <a
+        <a
   href="#home"
-  className="flex items-center gap-1.5 rounded-lg border border-border/60 px-3 py-1.5 transition-all hover:border-primary/40 hover:text-primary"
+  className="group inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/50 px-4 py-2 text-sm font-medium text-muted-foreground shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/5 hover:text-primary hover:shadow-md"
 >
-  Back to Top
-  <ArrowUp className="h-3.5 w-3.5" />
+  <span>Back to Top</span>
+
+  <ChevronUp className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1" />
 </a>
           </div>
         </div>

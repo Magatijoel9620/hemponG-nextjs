@@ -16,7 +16,7 @@ export const Logo = ({ className }: { className?: string }) => {
   if (!mounted) {
     return (
       <Image
-        src="/assets/logo/logo.svg"
+        src="/assets/logo/logo.png"
         alt="HEMPON GROUP Logo"
         width={150}
         height={40}
@@ -28,7 +28,7 @@ export const Logo = ({ className }: { className?: string }) => {
   
   // Use the same logo for both themes for now, can be adjusted later.
   const logoSrc = resolvedTheme === 'dark' 
-    ? "/assets/logo/logo.svg" // Replace with a dark mode logo if you have one
+    ? "/assets/logo/logo.png" // Replace with a dark mode logo if you have one
     : "/assets/logo/logo.svg";
 
   return (

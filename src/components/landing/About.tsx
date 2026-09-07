@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -91,19 +90,23 @@ export function About() {
 
       <div className="container">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-          {/* Image */}
+          {/* Video */}
           <div className="relative mx-auto w-full max-w-xl">
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-primary/15 via-transparent to-accent/15 blur-2xl" />
 
             <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/70 p-3 shadow-xl shadow-black/5">
-              <Image
-                src="/assets/about-img.svg"
-                alt="Hempon Group team planning and developing a digital project"
-                width={700}
-                height={700}
-                sizes="(max-width: 1024px) 100vw, 50vw"
+              <video
+                src="/assets/about-video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="Hempon Group team planning and developing a digital project"
                 className="h-auto w-full rounded-2xl object-cover"
-              />
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             {/* Floating trust card */}
