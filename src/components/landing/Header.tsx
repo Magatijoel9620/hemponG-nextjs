@@ -272,48 +272,64 @@ export function Header() {
                         );
                       })}
                     </nav>
+<div className="mt-auto space-y-3 border-t border-border/50 pt-5">
+  {/* Start a Project */}
+  <Button asChild className="w-full rounded-xl">
+    <a
+      href="#contact"
+      onClick={() => setIsSheetOpen(false)}
+    >
+      Start a Project
+      <ArrowRight className="ml-2 h-4 w-4" />
+    </a>
+  </Button>
 
-                    <div className="mt-auto space-y-3 border-t border-border/50 pt-5">
-                      <Button
-                        asChild
-                        className="w-full rounded-xl"
-                      >
-                        <a
-                          href="#contact"
-                          onClick={() =>
-                            setIsSheetOpen(false)
-                          }
-                        >
-                          Start a Project
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </a>
-                      </Button>
+  {/* WhatsApp */}
+  <Button
+    asChild
+    variant="outline"
+    className="w-full rounded-xl"
+  >
+    <a
+      href="https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <MessageCircle className="mr-2 h-4 w-4" />
+      Chat on WhatsApp
+    </a>
+  </Button>
 
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="w-full rounded-xl"
-                      >
-                        <a
-                          href="https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project."
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <MessageCircle className="mr-2 h-4 w-4" />
-                          Chat on WhatsApp
-                        </a>
-                      </Button>
+  {/* Instagram */}
+  <a
+    href="https://www.instagram.com/hempongroup/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm text-muted-foreground transition-all duration-300 hover:bg-primary/5 hover:text-primary"
+  >
+    <Instagram className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
+    Follow on Instagram
+  </a>
 
-                      <a
-                        href="https://www.instagram.com/hempongroup/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 py-2 text-sm text-muted-foreground transition-colors hover:text-primary"
-                      >
-                        <Instagram className="h-4 w-4" />
-                        Follow on Instagram
-                      </a>
-                    </div>
+  {/* TikTok */}
+  <a
+    href="https://www.tiktok.com/@hempon.digital.so"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Visit Hempon Group on TikTok"
+    title="TikTok"
+    className="group flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm text-muted-foreground transition-all duration-300 hover:bg-primary/5 hover:text-primary"
+  >
+    <Image
+      src="/assets/tiktok.svg"
+      alt=""
+      width={18}
+      height={18}
+      className="opacity-70 transition-all duration-300 group-hover:scale-110 group-hover:opacity-100"
+    />
+    Follow on TikTok
+  </a>
+</div>
                   </div>
                 </div>
               </SheetContent>
