@@ -66,8 +66,12 @@ const quickLinks = [
     text: "Home",
   },
   {
-    href: "#about",
-    text: "About Us",
+    href: "#work",
+    text: "Our Work",
+  },
+  {
+    href: "#process",
+    text: "How We Work",
   },
   {
     href: "#features",
@@ -136,7 +140,7 @@ export function Footer() {
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild className="rounded-xl">
               <a href="#contact">
-                Start a Project
+                Tell Us About Your Project
               </a>
             </Button>
 

@@ -25,6 +25,8 @@ import { ThemeToggle } from "../ThemeToggle";
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "Services", href: "#features" },
+  { name: "Work", href: "#work" },
+  { name: "Process", href: "#process" },
   { name: "About", href: "#about" },
   { name: "Pricing", href: "#pricing" },
   { name: "Contact", href: "#contact" },
@@ -193,7 +195,7 @@ export function Header() {
               className="hidden rounded-xl lg:inline-flex"
             >
               <a href="#contact">
-                Start a Project
+                Tell Us About Your Project
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
@@ -273,13 +275,13 @@ export function Header() {
                       })}
                     </nav>
 <div className="mt-auto space-y-3 border-t border-border/50 pt-5">
-  {/* Start a Project */}
+  {/* Tell Us About Your Project */}
   <Button asChild className="w-full rounded-xl">
     <a
       href="#contact"
       onClick={() => setIsSheetOpen(false)}
     >
-      Start a Project
+      Tell Us About Your Project
       <ArrowRight className="ml-2 h-4 w-4" />
     </a>
   </Button>

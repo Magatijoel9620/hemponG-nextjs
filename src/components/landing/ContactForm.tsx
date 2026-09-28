@@ -101,9 +101,9 @@ export function ContactForm() {
                 name="subject"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Subject</FormLabel>
+                    <FormLabel>What do you need?</FormLabel>
                     <FormControl>
-                      <Input placeholder="Inquiry about..." {...field} />
+                      <Input placeholder="Website, app, system, automation..." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -117,7 +117,7 @@ export function ContactForm() {
                 <FormItem>
                   <FormLabel>Message</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Tell us more about your project..." rows={6} {...field} />
+                    <Textarea placeholder="What are you trying to build, improve or automate?" rows={5} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

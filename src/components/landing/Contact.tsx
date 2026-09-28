@@ -8,7 +8,15 @@ import {
 
 import { ContactForm } from "./ContactForm";
 
-const contactInfo = [
+type ContactDetail = { text: string; href?: string };
+
+type ContactInfo = {
+  icon: typeof Phone;
+  label: string;
+  details: ContactDetail[];
+};
+
+const contactInfo: ContactInfo[] = [
   {
     icon: Phone,
     label: "Call Me",
@@ -85,9 +93,8 @@ export function Contact() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
-            Tell me about your website, mobile app, automation, or business
-            system. I’ll help you turn the idea into a practical, polished
-            digital solution.
+            Tell us what you are trying to improve, build or automate. We’ll help
+            you choose a practical digital solution and the right place to start.
           </p>
         </div>
 

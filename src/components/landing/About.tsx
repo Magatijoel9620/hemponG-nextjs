@@ -22,37 +22,37 @@ interface Benefit {
 const benefits: Benefit[] = [
   {
     icon: Users,
-    title: "Collaborative Partnership",
+    title: "Business First",
     description:
       "We take time to understand your organization, audience, goals, and challenges before recommending a solution.",
   },
   {
     icon: Lightbulb,
-    title: "Solutions Built Around You",
+    title: "Built to Evolve",
     description:
       "Every website and digital product is shaped around your brand, workflow, priorities, and long-term growth.",
   },
   {
     icon: Code2,
-    title: "Modern, Maintainable Technology",
+    title: "Modern Technology",
     description:
       "We build responsive, scalable, and easy-to-maintain solutions using reliable modern technologies.",
   },
   {
     icon: ShieldCheck,
-    title: "Quality and Reliability",
+    title: "Reliable Delivery",
     description:
       "Each project is carefully tested for performance, responsiveness, usability, accessibility, and security.",
   },
   {
     icon: Clock3,
-    title: "Clear and Reliable Delivery",
+    title: "Clear Process",
     description:
       "You receive transparent milestones, regular progress updates, and realistic timelines throughout the project.",
   },
   {
     icon: Headphones,
-    title: "Training and Ongoing Support",
+    title: "Long-Term Support",
     description:
       "We help you understand your website and remain available for maintenance, improvements, and future growth.",
   },

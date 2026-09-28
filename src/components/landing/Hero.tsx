@@ -39,27 +39,22 @@ export function Hero() {
           {/* Hero content */}
           <div className="text-center lg:text-left">
             <span className="inline-flex rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-              Websites • Apps • Automation
+              DIGITAL PRODUCTS • SYSTEMS • AUTOMATION
             </span>
 
             <h1 className="mt-6 font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-              Digital Solutions That Help Your{" "}
-              <span className="text-primary">
-                Business Move Forward
-              </span>
+              Your Business. Digitally <span className="text-primary">Engineered.</span>
             </h1>
 
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground lg:mx-0">
-              Hempon Group designs and develops modern websites, business
-              systems, automation tools, and digital experiences built around
-              your goals.
+              Websites, applications and automation built around the way your
+              business actually works.
             </p>
 
             <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-muted-foreground lg:mx-0">
-              From your first idea to launch and ongoing support, we combine
-              thoughtful design with reliable technology to create solutions
-              that look professional, perform smoothly, and deliver practical
-              value.
+              We turn business ideas and complex workflows into clear digital
+              experiences that look professional, work reliably and can evolve
+              with you.
             </p>
 
             {/* Highlights */}
@@ -83,7 +78,7 @@ export function Hero() {
                 className="rounded-xl"
               >
                 <a href="#contact">
-                  Start Your Project
+                  Tell Us About Your Project
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
@@ -106,7 +101,7 @@ export function Hero() {
             </div>
 
             <p className="mt-5 text-sm text-muted-foreground">
-              Based in Mombasa, Kenya • Serving clients locally and remotely
+              Kenya-based • Working with businesses locally and remotely
             </p>
           </div>
 

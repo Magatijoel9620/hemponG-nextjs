@@ -3,16 +3,17 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { ScrollUp } from '@/components/landing/ScrollUp';
 import { Analytics } from '@vercel/analytics/react';
+import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
 export const metadata: Metadata = {
-  title: 'HEMPON GROUP',
+  title: 'Hempon Group | Websites, Apps & Digital Business Systems in Kenya',
   icons: {
     icon: "/favicon-v2.ico",
     shortcut: "/favicon-v2.ico",
     //apple: "/apple-touch-icon.png", // optional if you add it
   },
-  description: 'HEMPON GROUP: We craft stunning, high-performance websites that elevate your brand and drive results. Your vision, our expertise—let\'s build the future of your business online.',
+  description: 'Hempon Group designs and develops websites, mobile applications, business systems and automation solutions for businesses in Kenya and beyond.',
  openGraph: {
   title: "Hempon Group | Websites, Apps & Business Solutions",
   description:
@@ -27,9 +28,21 @@ export const metadata: Metadata = {
       alt: "Hempon Group digital solutions and web development services",
     },
   ],
-  locale: "en_US",
+  locale: "en_KE",
   type: "website",
 },
+robots: {
+  index: true,
+  follow: true,
+},
+keywords: [
+  "web development Kenya",
+  "websites Mombasa",
+  "mobile app development Kenya",
+  "business systems",
+  "automation Kenya",
+  "Hempon Group",
+],
   
 };
 
@@ -43,16 +56,40 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
           {children}
+          <Script
+            id="hempon-organization-schema"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Hempon Group",
+                url: "https://hempon-group.vercel.app",
+                email: "hempongroup@gmail.com",
+                telephone: "+254738219953",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Mombasa",
+                  addressCountry: "KE",
+                },
+                sameAs: [
+                  "https://www.instagram.com/hempongroup/",
+                  "https://x.com/hempon_group",
+                  "https://www.linkedin.com/in/joel-magati",
+                ],
+              }),
+            }}
+          />
           <Toaster />
           <ScrollUp />
           <Analytics />

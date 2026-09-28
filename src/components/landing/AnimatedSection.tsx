@@ -15,7 +15,7 @@ export function AnimatedSection({ children, className, delay = 0 }: AnimatedSect
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.08,
   });
 
   useEffect(() => {
@@ -29,12 +29,12 @@ export function AnimatedSection({ children, className, delay = 0 }: AnimatedSect
       ref={ref}
       className={cn(className)}
       variants={{
-        hidden: { opacity: 0, y: 50 },
+        hidden: { opacity: 0, y: 24 },
         visible: {
           opacity: 1,
           y: 0,
           transition: {
-            duration: 0.8,
+            duration: 0.6,
             delay,
             ease: [0.6, 0.05, 0.01, 0.9],
           },
