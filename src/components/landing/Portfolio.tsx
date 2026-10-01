@@ -68,7 +68,7 @@ export function Portfolio() {
             </p>
           </div>
 
-          <Button asChild variant="outline" className="w-fit rounded-xl">
+          <Button asChild variant="outline" data-magnetic className="w-fit rounded-xl">
             <a href="https://portfolio-mjs.vercel.app/projects" target="_blank" rel="noopener noreferrer">
               Explore portfolio
               <ExternalLink className="ml-2 h-4 w-4" />
@@ -80,6 +80,7 @@ export function Portfolio() {
           {projects.map(({ title, category, description, tags, icon: Icon, image, visual }) => (
             <article
               key={title}
+              data-reflect
               className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/70 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10"
             >
               <div className={`relative h-52 overflow-hidden bg-gradient-to-br ${visual}`}>

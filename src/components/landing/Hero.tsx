@@ -75,7 +75,7 @@ export function Hero() {
               <Button
                 size="lg"
                 asChild
-                className="rounded-xl"
+                data-magnetic className="rounded-xl"
               >
                 <a href="#contact">
                   Tell Us About Your Project
@@ -87,6 +87,7 @@ export function Hero() {
                 size="lg"
                 variant="outline"
                 asChild
+                data-magnetic
                 className="rounded-xl"
               >
                 <a
@@ -111,7 +112,7 @@ export function Hero() {
               aria-hidden="true"
               className="absolute inset-10 rounded-full bg-primary/15 blur-3xl"
             />
-            <div className="relative w-full overflow-hidden rounded-[2rem] border border-border/60 bg-card/60 p-4 shadow-2xl shadow-primary/10 backdrop-blur-sm">
+            <div data-reflect className="hero-media-shell group relative w-full overflow-hidden rounded-[2rem] border border-border/60 bg-card/60 p-4 shadow-2xl shadow-primary/10 backdrop-blur-sm">
               <div className="mb-4 flex items-center gap-2 px-2">
                 <span className="h-3 w-3 rounded-full bg-red-400" />
                 <span className="h-3 w-3 rounded-full bg-amber-400" />
@@ -126,7 +127,7 @@ export function Hero() {
                 playsInline
                 preload="metadata"
                 aria-label="Hempon Group digital solutions showcase"
-                className="h-auto w-full rounded-2xl object-cover"
+                data-hero-video className="h-auto w-full rounded-2xl object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
               >
                 <source src="/assets/hero-video.mp4" type="video/mp4" />
                 Your browser does not support the video tag.

@@ -164,3 +164,73 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Hempon interaction layer: subtle pointer reflection, not a floating cursor object. */
+.pointer-reflection {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  left: 0;
+  width: 22rem;
+  height: 22rem;
+  margin-left: -11rem;
+  margin-top: -11rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(var(--pointer-x, 50vw), var(--pointer-y, 50vh), 0);
+  transition: opacity 280ms ease;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.075) 0%, hsl(var(--primary) / 0.025) 28%, transparent 68%);
+  mix-blend-mode: screen;
+  filter: blur(8px);
+}
+.pointer-reflection-active .pointer-reflection { opacity: 1; }
+
+[data-magnetic] {
+  transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) scale(var(--mag-scale, 1));
+  transition: transform 180ms cubic-bezier(.2,.75,.25,1), box-shadow 240ms ease, border-color 240ms ease;
+}
+
+.hero-media-shell {
+  transform-style: preserve-3d;
+  transform: translate3d(0, clamp(-18px, calc(var(--page-scroll, 0px) * -0.035), 0px), 0);
+  will-change: transform;
+}
+.hero-media-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--pointer-x, 50%) var(--pointer-y, 50%), hsl(var(--primary) / 0.12), transparent 68%);
+  opacity: .55;
+  mix-blend-mode: screen;
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .pointer-reflection { display: none; }
+  [data-magnetic] { transform: none !important; }
+  .hero-media-shell::after { display: none; }
+}
+
+
+[data-reflect] {
+  position: relative;
+  overflow: hidden;
+}
+[data-reflect]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  background: radial-gradient(180px circle at var(--spot-x, 50%) var(--spot-y, 50%), hsl(var(--primary) / 0.09), transparent 68%);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+[data-reflect-active]::before { opacity: 1; }
+[data-reflect] > * { position: relative; z-index: 1; }
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  [data-reflect]::before { display: none; }
+  .hero-media-shell { transform: none; }
+}

@@ -10,10 +10,12 @@ import { Contact } from '@/components/landing/Contact';
 import { Footer } from '@/components/landing/Footer';
 import { AnimatedSection } from '@/components/landing/AnimatedSection';
 import { MobileWhatsApp } from '@/components/landing/MobileWhatsApp';
+import { InteractionLayer } from '@/components/landing/InteractionLayer';
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <InteractionLayer />
       <Header />
       <main className="flex-1">
         <Hero />

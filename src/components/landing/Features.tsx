@@ -66,7 +66,7 @@ function FeatureCard({
   description,
 }: FeatureCardProps) {
   return (
-    <Card className="group relative h-full overflow-hidden border-border/60 bg-card/70 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
+    <Card data-reflect className="group relative h-full overflow-hidden border-border/60 bg-card/70 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"

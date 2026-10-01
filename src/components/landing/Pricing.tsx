@@ -175,7 +175,7 @@ export function Pricing() {
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
-              <Button asChild size="lg" className="rounded-xl">
+              <Button asChild size="lg" data-magnetic className="rounded-xl">
                 <a href="#contact">
                   Request a Custom Quote
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -186,6 +186,7 @@ export function Pricing() {
                 asChild
                 size="lg"
                 variant="outline"
+                data-magnetic
                 className="rounded-xl"
               >
                 <a
@@ -299,7 +300,7 @@ export function Pricing() {
                         <CardFooter className="mt-auto flex flex-col gap-3 border-t border-border/50 p-5 sm:p-6">
                           <Button
                             asChild
-                            className="w-full rounded-xl"
+                            data-magnetic className="w-full rounded-xl"
                             variant={plan.featured ? "default" : "outline"}
                           >
                             <a
