@@ -138,7 +138,14 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function SocialIcon({ label }: { label: string }) {
   if (label === "Instagram") {
     return (
-      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[17px] w-[17px]" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-[17px] w-[17px]"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      >
         <rect x="3" y="3" width="18" height="18" rx="5" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none" />
@@ -147,20 +154,35 @@ function SocialIcon({ label }: { label: string }) {
   }
   if (label === "LinkedIn") {
     return (
-      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[17px] w-[17px]" fill="currentColor">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-[17px] w-[17px]"
+        fill="currentColor"
+      >
         <path d="M5.2 3.5a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4ZM3.3 9.4h3.8v11.3H3.3zM9.4 9.4H13v1.5h.1a4 4 0 0 1 3.6-1.9c3.8 0 4.5 2.5 4.5 5.7v6h-3.8v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9v5.4H9.4z" />
       </svg>
     );
   }
   if (label === "X") {
     return (
-      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[16px] w-[16px]" fill="currentColor">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-[16px] w-[16px]"
+        fill="currentColor"
+      >
         <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.8 22H2.7l7.3-8.4L2.2 2h6.5l4.4 6.9L18.9 2Zm-1.1 17.8h1.7L7.7 4.1H5.9l11.9 15.7Z" />
       </svg>
     );
   }
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[17px] w-[17px]" fill="currentColor">
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-[17px] w-[17px]"
+      fill="currentColor"
+    >
       <path d="M19.6 8.1a6.1 6.1 0 0 1-4.2-2V15a5.2 5.2 0 1 1-5.2-5.2c.4 0 .8 0 1.1.1v3a2.3 2.3 0 1 0 1.1 2V2h3.1a5.1 5.1 0 0 0 4.1 4.9v1.2Z" />
     </svg>
   );
@@ -209,7 +231,11 @@ function Nav() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <div className="hidden items-center gap-1 sm:flex" role="group" aria-label="Social media">
+            <div
+              className="hidden items-center gap-1 sm:flex"
+              role="group"
+              aria-label="Social media"
+            >
               {socials.map(([label, url]) => (
                 <a
                   key={label}
@@ -298,7 +324,7 @@ function HeroBrand() {
       </div>
       <div className="hero-card hero-card-b">
         <Image
-          src="/assets/ie_landscape.jpg"
+          src="/assets/LL_landscape.jpg"
           alt="InvoiceEasy product interface"
           fill
           sizes="180px"
@@ -317,7 +343,7 @@ function HeroBrand() {
       </div>
       <div className="hero-card hero-card-d">
         <Image
-          src="/assets/LL_landscape.jpg"
+          src="/assets/ie_landscape.jpg"
           alt="Landlord Ledger product interface"
           fill
           sizes="150px"
@@ -341,7 +367,7 @@ function HeroBrand() {
       </motion.div>
       <div className="absolute bottom-5 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full border border-white/[.1] bg-[#090d13]/80 px-4 py-2 backdrop-blur-xl">
         <span className="mono text-[9px] uppercase tracking-[.24em] text-white/45">
-          Responsive • Fast • Easy to Manage
+          Innovation • Technology • Growth
         </span>
       </div>
     </div>
@@ -372,7 +398,10 @@ function Hero() {
             className="relative z-10 max-w-4xl pt-6 lg:pt-0"
           >
             <div className="mono flex items-center gap-3 text-[9px] uppercase tracking-[.28em] text-white/38 sm:text-[10px]">
-              <span aria-hidden="true" className="status-ripple h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />{" "}
+              <span
+                aria-hidden="true"
+                className="status-ripple h-1.5 w-1.5 rounded-full bg-[var(--accent)]"
+              />{" "}
               DIGITAL PRODUCTS • SYSTEMS • AUTOMATION
             </div>
             <h1 className="display mt-6 text-[clamp(3.9rem,10vw,9.7rem)] leading-[.79]">
@@ -397,7 +426,7 @@ function Hero() {
           </motion.div>
           <motion.div
             style={{ opacity }}
-            className="relative order-first -mt-4 lg:order-last lg:mt-0"
+            className="relative order-last -mt-4 lg:order-last lg:mt-0"
           >
             <HeroBrand />
           </motion.div>
@@ -595,13 +624,15 @@ function About() {
           </div>
           <div>
             <p className="max-w-3xl text-xl leading-[1.35] text-white/72 sm:text-2xl md:text-3xl">
-              We help businesses and organizations turn ideas into modern websites, applications
-              automation tools, and digital systems that solve real operational problems.
+              We help businesses and organizations turn ideas into modern
+              websites, applications automation tools, and digital systems that
+              solve real operational problems.
             </p>
             <p className="mt-7 max-w-2xl text-sm leading-7 text-white/40 md:text-base">
-              We combine thoughtful design, reliable technology, and practical business 
-              understanding to create solutions that are not only visually impressive, but useful,
-              manageable, and ready to grow with you.
+              We combine thoughtful design, reliable technology, and practical
+              business understanding to create solutions that are not only
+              visually impressive, but useful, manageable, and ready to grow
+              with you.
             </p>
             <div className="mt-9 flex flex-wrap gap-2">
               {[
