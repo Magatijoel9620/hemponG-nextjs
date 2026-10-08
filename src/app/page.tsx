@@ -656,6 +656,127 @@ function About() {
   );
 }
 
+
+const testimonials = [
+  {
+    quote: "Hempon Group took our website from an idea to something that finally feels professional, clear and true to who we are. They listened to what we needed and turned it into a site our clients can actually use.",
+    name: "Eva",
+    organization: "Kanyi J. & Company Advocates",
+    project: "Website design & development",
+  },
+  {
+    quote: "What stood out was how practical the whole solution was. The spreadsheet, scripts and Google Forms work together in a way that makes our day-to-day work much easier. It feels built for the way we actually operate.",
+    name: "Michael",
+    organization: "CRSML",
+    project: "App script, spreadsheet & Google Forms",
+  },
+  {
+    quote: "Hempon Group understood the direction we wanted and translated the case study into a clean, convincing design. The mockup made the idea much easier to present and communicate.",
+    name: "Rajesh",
+    organization: "Clarity Solution",
+    project: "Case study design mockup",
+  },
+  {
+    quote: "The card design came out polished and professional, while still feeling like our own brand. The process was straightforward and the result was exactly the kind of finish we were looking for.",
+    name: "Margaret",
+    organization: "Everhealthy Multidynamic Int'l Ltd",
+    project: "Card design",
+  },
+  {
+    quote: "We wanted an RSVP card that felt warm, clear and appropriate for our Mothers Union event. Hempon Group gave us a design that was easy to share and looked genuinely well put together.",
+    name: "Dorothy",
+    organization: "ACK St Philip Likoni Mothers Union",
+    project: "RSVP card design",
+  },
+  {
+    quote: "From the logo and letterhead to setting up the office tools, Hempon Group helped us get the pieces working together. It was a practical service that made our day-to-day presentation much more professional.",
+    name: "Jully",
+    organization: "Adoyo J. & Co. Advocates",
+    project: "Logo, letterhead & office tools setup",
+  },
+  {
+    quote: "The company profile gave us a much better way to present what Eco Fume does. The design was clear, professional and made the information easier for people to understand at a glance.",
+    name: "Eco_Fumes_Ke",
+    organization: "Eco Fume",
+    project: "Company profile design",
+  },
+  {
+    quote: "We needed a simple identity that our youth group could confidently use across our documents. Hempon Group gave us a logo and letterhead that made everything feel more organised and official.",
+    name: "SYG",
+    organization: "Shakers Youth Group",
+    project: "Logo & letterhead design",
+  },
+];
+
+function Testimonials() {
+  return (
+    <section
+      id="testimonials"
+      className="relative overflow-hidden border-y border-white/[.07] py-24 sm:py-28 md:py-36"
+    >
+      <div className="section-shell">
+        <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <SectionLabel>Client words</SectionLabel>
+            <h2 className="display mt-6 text-5xl leading-[.94] sm:text-6xl md:text-7xl">
+              Built with people.
+              <br />
+              <span className="text-white/25">Not just for them.</span>
+            </h2>
+            <p className="mt-7 max-w-md text-sm leading-7 text-white/42 md:text-base">
+              A few words from people and organisations we have had the chance
+              to build with — across websites, design and practical digital
+              systems.
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {testimonials.map((testimonial, i) => (
+              <motion.article
+                key={`${testimonial.organization}-${testimonial.name}`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.16 }}
+                transition={{ duration: 0.65, delay: i * 0.045 }}
+                whileHover={{ y: -3 }}
+                className="group flex min-h-[300px] flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition-colors hover:border-white/[.16] hover:bg-white/[.04] sm:p-7"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span className="mono text-[10px] text-[var(--accent)]">
+                    0{i + 1}
+                  </span>
+                  <span className="text-2xl leading-none text-white/15 transition group-hover:text-white/25">
+                    “
+                  </span>
+                </div>
+                <blockquote className="mt-7 text-[15px] leading-7 text-white/62">
+                  “{testimonial.quote}”
+                </blockquote>
+                <div className="mt-auto pt-8">
+                  <div className="h-px w-full bg-white/[.08]" />
+                  <div className="mt-5 flex items-end justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-semibold text-white/78">
+                        {testimonial.name}
+                      </p>
+                      <p className="mt-1 text-xs leading-5 text-white/38">
+                        {testimonial.organization}
+                      </p>
+                    </div>
+                    <span className="max-w-[130px] text-right text-[9px] uppercase leading-4 tracking-[.16em] text-white/25">
+                      {testimonial.project}
+                    </span>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Pricing() {
   return (
     <section
@@ -993,6 +1114,9 @@ export default function Home() {
       </Reveal>
       <Reveal>
         <About />
+      </Reveal>
+      <Reveal>
+        <Testimonials />
       </Reveal>
       <Reveal>
         <Pricing />
