@@ -3,6 +3,7 @@
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef, useState } from "react";
 import Image from "next/image";
+import posthog from "posthog-js";
 import Reveal from "@/components/Reveal";
 import MagneticButton from "@/components/MagneticButton";
 
@@ -50,22 +51,26 @@ const projects = [
     name: "Farmora",
     type: "Operations platform",
     image: "/assets/famora_landscape.jpg",
+    href: "https://downloads.hempongroup.co.ke/",
     number: "01",
   },
   {
     name: "InvoiceEasy",
     type: "Business software",
     image: "/assets/ie_landscape.jpg",
+    href: "https://downloads.hempongroup.co.ke/",
     number: "02",
   },
   {
     name: "Landlord Ledger",
     type: "Property platform",
     image: "/assets/LL_landscape.jpg",
+    href: "https://downloads.hempongroup.co.ke/",
     number: "03",
   },
   {
     name: "Digital Experiences",
+    href: "https://portfolio.hempongroup.co.ke/",
     type: "Web & product design",
     image: "/assets/digital_exp.png",
     number: "04",
@@ -472,6 +477,17 @@ function Services() {
               <motion.a
                 href="#contact"
                 key={num}
+                onClick={() => {
+                  if (!posthog.__loaded) return;
+
+                  posthog.capture("service_inquiry_started", {
+                    service: title,
+                  });
+                  posthog.logger.info("service inquiry started", {
+                    interaction: "service_card",
+                    service: title,
+                  });
+                }}
                 whileHover={{ y: -3 }}
                 className="group relative min-h-[230px] bg-[#0b0f15] p-6 transition-colors hover:bg-[#10161e] sm:p-8"
               >
@@ -522,8 +538,22 @@ function Work() {
         <div className="mt-14 grid gap-5 md:mt-16 md:grid-cols-2">
           {projects.map((p, i) => (
             <motion.a
-              href="https://portfolio.hempongroup.co.ke/"
+              href={p.href}
               key={p.name}
+              onClick={() => {
+                if (!posthog.__loaded) return;
+
+                posthog.capture("portfolio_viewed", {
+                  project: p.name,
+                  destination: p.href,
+                });
+
+                posthog.logger.info("portfolio case study opened", {
+                  interaction: "portfolio_card",
+                  project: p.name,
+                  destination: p.href,
+                });
+              }}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -656,52 +686,60 @@ function About() {
   );
 }
 
-
 const testimonials = [
   {
-    quote: "Hempon Group took our website from an idea to something that finally feels professional, clear and true to who we are. They listened to what we needed and turned it into a site our clients can actually use.",
+    quote:
+      "Hempon Group took our website from an idea to something that finally feels professional, clear and true to who we are. They listened to what we needed and turned it into a site our clients can actually use.",
     name: "Eva",
     organization: "Kanyi J. & Company Advocates",
+    website: "https://kanyij-advocates.co.ke/",
     project: "Website design & development",
   },
   {
-    quote: "What stood out was how practical the whole solution was. The spreadsheet, scripts and Google Forms work together in a way that makes our day-to-day work much easier. It feels built for the way we actually operate.",
+    quote:
+      "What stood out was how practical the whole solution was. The spreadsheet, scripts and Google Forms work together in a way that makes our day-to-day work much easier. It feels built for the way we actually operate.",
     name: "Michael",
     organization: "CRSML",
     project: "App script, spreadsheet & Google Forms",
   },
   {
-    quote: "Hempon Group understood the direction we wanted and translated the case study into a clean, convincing design. The mockup made the idea much easier to present and communicate.",
+    quote:
+      "Hempon Group understood the direction we wanted and translated the case study into a clean, convincing design. The mockup made the idea much easier to present and communicate.",
     name: "Rajesh",
     organization: "Clarity Solution",
     project: "Case study design mockup",
   },
   {
-    quote: "The card design came out polished and professional, while still feeling like our own brand. The process was straightforward and the result was exactly the kind of finish we were looking for.",
+    quote:
+      "The card design came out polished and professional, while still feeling like our own brand. The process was straightforward and the result was exactly the kind of finish we were looking for.",
     name: "Margaret",
     organization: "Everhealthy Multidynamic Int'l Ltd",
     project: "Card design",
   },
   {
-    quote: "We wanted an RSVP card that felt warm, clear and appropriate for our Mothers Union event. Hempon Group gave us a design that was easy to share and looked genuinely well put together.",
+    quote:
+      "We wanted an RSVP card that felt warm, clear and appropriate for our Mothers Union event. Hempon Group gave us a design that was easy to share and looked genuinely well put together.",
     name: "Dorothy",
     organization: "ACK St Philip Likoni Mothers Union",
     project: "RSVP card design",
   },
   {
-    quote: "From the logo and letterhead to setting up the office tools, Hempon Group helped us get the pieces working together. It was a practical service that made our day-to-day presentation much more professional.",
+    quote:
+      "From the logo and letterhead to setting up the office tools, Hempon Group helped us get the pieces working together. It was a practical service that made our day-to-day presentation much more professional.",
     name: "Jully",
     organization: "Adoyo J. & Co. Advocates",
     project: "Logo, letterhead & office tools setup",
   },
   {
-    quote: "The company profile gave us a much better way to present what Eco Fume does. The design was clear, professional and made the information easier for people to understand at a glance.",
+    quote:
+      "The company profile gave us a much better way to present what Eco Fume does. The design was clear, professional and made the information easier for people to understand at a glance.",
     name: "Eco_Fumes_Ke",
     organization: "Eco Fume",
     project: "Company profile design",
   },
   {
-    quote: "We needed a simple identity that our youth group could confidently use across our documents. Hempon Group gave us a logo and letterhead that made everything feel more organised and official.",
+    quote:
+      "We needed a simple identity that our youth group could confidently use across our documents. Hempon Group gave us a logo and letterhead that made everything feel more organised and official.",
     name: "SYG",
     organization: "Shakers Youth Group",
     project: "Logo & letterhead design",
@@ -759,9 +797,20 @@ function Testimonials() {
                       <p className="text-sm font-semibold text-white/78">
                         {testimonial.name}
                       </p>
-                      <p className="mt-1 text-xs leading-5 text-white/38">
-                        {testimonial.organization}
-                      </p>
+                      {testimonial.website ? (
+                        <a
+                          href={testimonial.website}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-1 inline-block text-xs leading-5 text-white/38 transition hover:text-white/75"
+                        >
+                          {testimonial.organization} ↗
+                        </a>
+                      ) : (
+                        <p className="mt-1 text-xs leading-5 text-white/38">
+                          {testimonial.organization}
+                        </p>
+                      )}
                     </div>
                     <span className="max-w-[130px] text-right text-[9px] uppercase leading-4 tracking-[.16em] text-white/25">
                       {testimonial.project}
@@ -835,6 +884,17 @@ function Pricing() {
                   </div>
                   <a
                     href={`https://wa.me/254738219953?text=${encodeURIComponent(p.whatsappMessage)}`}
+                    onClick={() => {
+                      if (!posthog.__loaded) return;
+
+                      posthog.capture("pricing_plan_inquiry_started", {
+                        plan: p.name,
+                      });
+                      posthog.logger.info("pricing plan inquiry started", {
+                        interaction: "pricing_whatsapp_cta",
+                        plan: p.name,
+                      });
+                    }}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#20bd5a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
@@ -895,6 +955,13 @@ function Contact() {
             <div>
               <a
                 href="mailto:hempongroup@gmail.com?subject=Project%20enquiry"
+                onClick={() => {
+                  if (!posthog.__loaded) return;
+
+                  posthog.capture("contact_email_opened", {
+                    location: "contact_section",
+                  });
+                }}
                 className="contact-link group block rounded-[24px] border border-white/10 bg-white/[.035] p-5 transition hover:border-white/25 hover:bg-white/[.055]"
               >
                 <div className="mono text-[10px] uppercase tracking-[.2em] text-white/32">
@@ -912,6 +979,13 @@ function Contact() {
               </a>
               <a
                 href="https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                onClick={() => {
+                  if (!posthog.__loaded) return;
+
+                  posthog.capture("contact_whatsapp_opened", {
+                    location: "contact_section",
+                  });
+                }}
                 target="_blank"
                 rel="noreferrer"
                 className="contact-link group mt-3 block rounded-[24px] border border-[#25D366] bg-[#25D366] p-5 font-bold text-black transition hover:border-[#20bd5a] hover:bg-[#20bd5a]"
@@ -941,7 +1015,7 @@ function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-white/[.08] pt-16 sm:pt-20">
       <div className="section-shell">
-        <div className="grid gap-12 pb-14 lg:grid-cols-[1.35fr_.65fr_.65fr_.7fr]">
+        <div className="grid gap-12 pb-14 lg:grid-cols-[1.2fr_.65fr_.65fr_.75fr_.75fr]">
           <div>
             <a href="#top" className="inline-flex items-center gap-3">
               <Image
@@ -1005,6 +1079,45 @@ function Footer() {
           </div>
           <div>
             <div className="mono text-[9px] uppercase tracking-[.24em] text-white/25">
+              Quick links
+            </div>
+            <div className="mt-5 grid gap-3 text-sm text-white/45">
+              <a
+                href="https://portfolio.hempongroup.co.ke/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white"
+              >
+                Portfolio ↗
+              </a>
+              <a
+                href="https://ledger.hempongroup.co.ke/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white"
+              >
+                Ledger ↗
+              </a>
+              <a
+                href="https://farmora.hempongroup.co.ke/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white"
+              >
+                Farmora ↗
+              </a>
+              <a
+                href="https://downloads.hempongroup.co.ke/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white"
+              >
+                Downloads ↗
+              </a>
+            </div>
+          </div>
+          <div>
+            <div className="mono text-[9px] uppercase tracking-[.24em] text-white/25">
               Based in
             </div>
             <p className="mt-5 text-sm leading-6 text-white/45">
@@ -1059,6 +1172,13 @@ function MobileWhatsAppButton() {
   return (
     <a
       href="https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%27d%20like%20to%20discuss%20a%20project."
+      onClick={() => {
+        if (!posthog.__loaded) return;
+
+        posthog.capture("contact_whatsapp_opened", {
+          location: "mobile_cta",
+        });
+      }}
       target="_blank"
       rel="noreferrer"
       aria-label="Chat with Hempon Group on WhatsApp"
