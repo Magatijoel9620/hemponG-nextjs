@@ -64,9 +64,9 @@ export default function InteractiveHero() {
           <span className="mono text-[9px] uppercase tracking-[.25em] text-white/25">
             Scroll to enter
           </span>
-          <span className="mono text-[9px] uppercase tracking-[.25em] text-white/25">
+          {/* <span className="mono text-[9px] uppercase tracking-[.25em] text-white/25">
             01 — 07
-          </span>
+          </span> */}
         </div>
       </div>
     </section>

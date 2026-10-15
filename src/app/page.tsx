@@ -441,9 +441,9 @@ function Hero() {
         <span className="mono text-[9px] uppercase tracking-[.25em] text-white/25">
           Journey Along...
         </span>
-        <span className="mono text-[9px] uppercase tracking-[.25em] text-white/25">
+        {/* <span className="mono text-[9px] uppercase tracking-[.25em] text-white/25">
           01 — 07
-        </span>
+        </span> */}
       </div>
     </section>
   );
