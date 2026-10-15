@@ -566,6 +566,7 @@ function Work() {
                   alt={p.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  loading={p.image === "/assets/LL_landscape.jpg" ? "eager" : "lazy"}
                   className="object-cover transition duration-1000 group-hover:scale-[1.045]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-black/5" />
