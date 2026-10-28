@@ -69,14 +69,34 @@ const projects = [
     number: "03",
   },
   {
-    name: "Digital Experiences",
-    href: "https://portfolio.hempongroup.co.ke/",
-    type: "Web & product design",
-    image: "/assets/digital_exp.png",
+    name: "DevPilot",
+    type: "AI-powered development assistant",
+    image: "/assets/devpilot_landscape.png",
+    href: "https://downloads.hempongroup.co.ke/devpilot/",
     number: "04",
   },
+  {
+    name: "FinAI",
+    type: "Financial intelligence platform",
+    image: "/assets/finai_landscape.png",
+    href: "https://downloads.hempongroup.co.ke/finai/",
+    number: "05",
+  },
+  {
+    name: "Website Creation",
+    type: "Business websites & digital presence",
+    image: "/assets/digital_exp.png",
+    href: "https://downloads.hempongroup.co.ke/website-creation/",
+    number: "06",
+  },
+  {
+    name: "Digital Experiences",
+    type: "Web & product design",
+    image: "/assets/digital_exp.png",
+    href: "https://portfolio.hempongroup.co.ke/projects",
+    number: "07",
+  },
 ];
-
 const process = [
   ["01", "Discover", "Understand the business, users and the real problem."],
   ["02", "Shape", "Turn the problem into a focused product direction."],
@@ -124,12 +144,15 @@ const plans = [
   },
 ];
 
+
 const socials = [
   ["Instagram", "https://www.instagram.com/hempongroup/"],
   ["LinkedIn", "https://www.linkedin.com/in/joel-magati"],
   ["X", "https://x.com/hempon_group"],
   ["TikTok", "https://www.tiktok.com/@hempon.digital.so"],
+  ["Facebook", "https://www.facebook.com/share/1CYpdPrizj/"],
 ];
+
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -178,6 +201,18 @@ function SocialIcon({ label }: { label: string }) {
         fill="currentColor"
       >
         <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.8 22H2.7l7.3-8.4L2.2 2h6.5l4.4 6.9L18.9 2Zm-1.1 17.8h1.7L7.7 4.1H5.9l11.9 15.7Z" />
+      </svg>
+    );
+  }
+  if (label === "Facebook") {
+    return (
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-[17px] w-[17px]"
+        fill="currentColor"
+      >
+        <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.3-1.6 1.6-1.6h1.7V3.6c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v1.9H7v3.1h2.8v8h3.7Z" />
       </svg>
     );
   }
@@ -1082,40 +1117,82 @@ function Footer() {
             <div className="mono text-[9px] uppercase tracking-[.24em] text-white/25">
               Quick links
             </div>
-            <div className="mt-5 grid gap-3 text-sm text-white/45">
-              <a
-                href="https://portfolio.hempongroup.co.ke/"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-white"
-              >
-                Portfolio ↗
-              </a>
-              <a
-                href="https://ledger.hempongroup.co.ke/"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-white"
-              >
-                Ledger ↗
-              </a>
-              <a
-                href="https://farmora.hempongroup.co.ke/"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-white"
-              >
-                Farmora ↗
-              </a>
-              <a
-                href="https://downloads.hempongroup.co.ke/"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-white"
-              >
-                Downloads ↗
-              </a>
-            </div>
+           
+<div className="mt-5 grid gap-3 text-sm text-white/45">
+  <a
+    href="https://portfolio.hempongroup.co.ke/"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    Portfolio ↗
+  </a>
+
+  <a
+    href="https://ledger.hempongroup.co.ke/"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    Landlord Ledger ↗
+  </a>
+
+  <a
+    href="https://farmora.hempongroup.co.ke/"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    Farmora ↗
+  </a>
+
+  <a
+    href="https://downloads.hempongroup.co.ke/invoice-easy/"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    InvoiceEasy ↗
+  </a>
+
+  <a
+    href="https://downloads.hempongroup.co.ke/devpilot/"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    DevPilot ↗
+  </a>
+
+  <a
+    href="https://downloads.hempongroup.co.ke/finai/"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    FinAI ↗
+  </a>
+
+  <a
+    href="https://downloads.hempongroup.co.ke/website-creation/"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    Website Creation ↗
+  </a>
+
+  <a
+    href="https://downloads.hempongroup.co.ke/"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    Downloads ↗
+  </a>
+
+</div>
+
           </div>
           <div>
             <div className="mono text-[9px] uppercase tracking-[.24em] text-white/25">
