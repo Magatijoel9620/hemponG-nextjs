@@ -7,13 +7,33 @@ import CursorGlow from "@/components/CursorGlow";
 
 const siteUrl = "https://www.hempongroup.co.ke";
 const description =
-  "Hempon Group helps businesses in Kenya grow with conversion-focused websites, custom software, mobile apps, e-commerce and workflow automation. Get a project quote.";
+  "Hempon Group builds professional websites, custom business software, mobile applications, e-commerce experiences and workflow automation for businesses in Kenya and beyond.";
+
+const organizationId = `${siteUrl}/#organization`;
+const websiteId = `${siteUrl}/#website`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
+  applicationName: "Hempon Group",
+  authors: [{ name: "Hempon Group", url: siteUrl }],
+  creator: "Hempon Group",
+  publisher: "Hempon Group",
+  category: "Technology",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    telephone: false,
+    date: false,
+    address: false,
+    email: false,
+  },
+
   icons: {
-    icon: "/favicon-v2.ico",
+    icon: [
+      { url: "/favicon-v2.ico" },
+      { url: "/assets/logo/logo_round.png", type: "image/png" },
+    ],
+    apple: [{ url: "/assets/logo/logo_round.png", type: "image/png" }],
   },
 
   title: {
@@ -23,57 +43,61 @@ export const metadata: Metadata = {
 
   description,
 
+  // Next.js emits this metadata for crawlers; Google does not use meta keywords
+  // as a ranking signal. The same topics are also reflected in visible page copy.
   keywords: [
     "Hempon Group",
     "web design Kenya",
     "website development Kenya",
-    "custom software development Kenya",
+    "software development company Kenya",
+    "custom software development",
     "mobile app development Kenya",
-    "e-commerce websites Kenya",
-    "business automation Kenya",
+    "business software Kenya",
+    "e-commerce website development",
+    "business process automation",
   ],
 
   alternates: {
     canonical: "/",
+    languages: {
+      "en-KE": "/",
+    },
   },
 
   openGraph: {
     title: "Web Design & Software Development in Kenya | Hempon Group",
-
     description,
-
     url: siteUrl,
-
     siteName: "Hempon Group",
-
     type: "website",
-
     locale: "en_KE",
-
     images: [
       {
         url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Hempon Group — Digital Systems, Websites & Experiences",
+        width: 1729,
+        height: 910,
+        type: "image/png",
+        alt: "Hempon Group — Websites, Software and Digital Products",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-
     title: "Web Design & Software Development in Kenya | Hempon Group",
-
     description,
-
     images: ["/og-image.png"],
   },
 
   robots: {
+  index: true,
+  follow: true,
+  googleBot: {
     index: true,
     follow: true,
+    "max-video-preview": -1,
   },
+},
 };
 
 export const viewport: Viewport = {
@@ -91,30 +115,70 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": `${siteUrl}/#organization`,
+        "@id": organizationId,
         name: "Hempon Group",
         url: siteUrl,
-        logo: `${siteUrl}/assets/logo/logo.svg`,
+        logo: {
+          "@type": "ImageObject",
+          url: `${siteUrl}/assets/logo/logo_round.png`,
+        },
+        image: `${siteUrl}/og-image.png`,
         description,
         email: "hempongroup@gmail.com",
         telephone: "+254738219953",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Mombasa",
+          addressCountry: "KE",
+        },
         areaServed: {
           "@type": "Country",
           name: "Kenya",
         },
+        knowsAbout: [
+          "Website design and development",
+          "Custom software development",
+          "Mobile application development",
+          "E-commerce development",
+          "Business process automation",
+          "Digital product development",
+        ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+254738219953",
+          contactType: "sales",
+          areaServed: "KE",
+                  },
         sameAs: [
           "https://www.instagram.com/hempongroup/",
+          "https://www.linkedin.com/in/joel-magati",
           "https://x.com/hempon_group",
           "https://www.tiktok.com/@hempon.digital.so",
+          "https://www.facebook.com/share/1CYpdPrizj/",
         ],
       },
       {
         "@type": "WebSite",
-        "@id": `${siteUrl}/#website`,
+        "@id": websiteId,
         url: siteUrl,
         name: "Hempon Group",
+        description,
         publisher: {
-          "@id": `${siteUrl}/#organization`,
+          "@id": organizationId,
+        },
+        inLanguage: "en-KE",
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${siteUrl}/#webpage`,
+        url: siteUrl,
+        name: "Web Design & Software Development in Kenya | Hempon Group",
+        description,
+        isPartOf: {
+          "@id": websiteId,
+        },
+        about: {
+          "@id": organizationId,
         },
         inLanguage: "en-KE",
       },
@@ -122,7 +186,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-KE" suppressHydrationWarning>
       <body>
         <script
           type="application/ld+json"

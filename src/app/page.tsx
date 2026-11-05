@@ -365,7 +365,7 @@ function HeroBrand() {
       <div className="hero-card hero-card-b">
         <Image
           src="/assets/LL_landscape.jpg"
-          alt="InvoiceEasy product interface"
+          alt="Landlord Ledger property management product interface"
           fill
           sizes="180px"
           loading="eager"
@@ -384,7 +384,7 @@ function HeroBrand() {
       <div className="hero-card hero-card-d">
         <Image
           src="/assets/ie_landscape.jpg"
-          alt="Landlord Ledger product interface"
+          alt="InvoiceEasy invoicing product interface"
           fill
           sizes="150px"
           className="object-cover"

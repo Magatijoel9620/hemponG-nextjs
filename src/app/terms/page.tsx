@@ -7,6 +7,19 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/terms",
   },
+  openGraph: {
+    title: "Terms of Use | Hempon Group",
+    description: "Review the terms that apply to using the Hempon Group website and product catalogue.",
+    url: "https://www.hempongroup.co.ke/terms",
+    siteName: "Hempon Group",
+    type: "website",
+    locale: "en_KE",
+  },
+  twitter: {
+    card: "summary",
+    title: "Terms of Use | Hempon Group",
+    description: "Review the terms that apply to using the Hempon Group website and product catalogue.",
+  },
 };
 
 export default function TermsPage() {
