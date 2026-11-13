@@ -614,7 +614,7 @@ function Services() {
   return (
     <section
       id="capabilities"
-      className="relative border-y border-white/[.07] py-24 sm:py-28 md:py-36"
+      className="relative border-y border-white/[.07] py-24 sm:py-28 md:py-36 section-grid-bg"
     >
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[.75fr_1.25fr]">
@@ -650,8 +650,7 @@ function Services() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.18 }}
                     transition={{ duration: 0.6, delay: i * 0.07 }}
-                    whileHover={{ y: -3 }}
-                    className={`group relative min-h-[210px] text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--accent)] ${isActive ? "bg-[#131b23]" : "bg-[#0b0f15] hover:bg-[#10161e]"} p-6 sm:p-8`}
+                    className={`magnetic-card group relative min-h-[210px] text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--accent)] ${isActive ? "bg-[#131b23]" : "bg-[#0b0f15] hover:bg-[#10161e]"} p-6 sm:p-8`}
                   >
                     <div className="flex items-center justify-between">
                       <span className="mono text-[10px] text-white/22">{num}</span>
@@ -659,13 +658,13 @@ function Services() {
                         {tech}
                       </span>
                     </div>
-                    <div className="mt-12">
+                    <div className="mt-10">
                       <h3 className="display text-2xl tracking-[-.045em]">{title}</h3>
-                      <p className="mt-3 max-w-sm text-sm leading-6 text-white/40">{desc}</p>
+                      <span className="mt-3 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.16em] text-[var(--accent)] transition-all group-hover:gap-3">
+                        {isActive ? "Selected ✓" : "Explore ↗"}
+                      </span>
+                      <p className="mt-3 max-w-sm text-sm leading-6 text-white/48">{desc}</p>
                     </div>
-                    <span className="absolute bottom-7 right-7 text-white/35 transition-all group-hover:translate-x-1 group-hover:text-[var(--accent)]">
-                      {isActive ? "Selected ✓" : "Explore ↗"}
-                    </span>
                   </motion.button>
                 );
               })}
@@ -773,7 +772,7 @@ function Services() {
 
 function Work() {
   return (
-    <section id="work" className="relative py-24 sm:py-28 md:py-40">
+    <section id="work" className="relative py-24 sm:py-28 md:py-40 section-grid-bg">
       <div className="section-shell">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
@@ -812,7 +811,7 @@ function Work() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: i * 0.06 }}
-              className="group relative overflow-hidden rounded-[28px] border border-white/[.08] bg-[#0b0f15]"
+              className="magnetic-card group relative overflow-hidden rounded-[28px] border border-white/[.08] bg-[#0b0f15]"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
@@ -856,7 +855,7 @@ function Process() {
   return (
     <section
       id="process"
-      className="overflow-hidden border-y border-white/[.07] py-20 sm:py-28 md:py-36"
+      className="overflow-hidden border-y border-white/[.07] py-20 sm:py-28 md:py-36 section-grid-bg"
     >
       <div className="section-shell">
         <div className="max-w-3xl">
@@ -879,7 +878,7 @@ function Process() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: i * 0.08 }}
-              className="flex h-full flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-5 sm:p-7"
+              className="magnetic-card flex h-full flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-5 sm:p-7"
             >
               <span className="mono text-[10px] text-[var(--accent)]">{n}</span>
               <h3 className="display mt-8 text-2xl sm:mt-10 2xl:mt-14">{t}</h3>
@@ -897,7 +896,7 @@ function Process() {
 
 function About() {
   return (
-    <section id="about" className="relative py-24 sm:py-28 md:py-40">
+    <section id="about" className="relative py-24 sm:py-28 md:py-40 section-grid-bg">
       <div className="section-shell">
         <div className="grid gap-14 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
           <div>
@@ -930,7 +929,7 @@ function About() {
               rel="noreferrer"
               className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] transition hover:text-white"
             >
-              Explore Magati.dev — selected work & digital products <span aria-hidden="true">↗</span>
+              Explore Hempon Portfolio — selected work & digital products <span aria-hidden="true">↗</span>
             </a>
             <div className="mt-9 flex flex-wrap gap-2">
               {[
@@ -958,7 +957,7 @@ const testimonials = [
   {
     quote:
       "Hempon Group took our website from an idea to something that finally feels professional, clear and true to who we are. They listened to what we needed and turned it into a site our clients can actually use.",
-    name: "Eva",
+    name: "Eve",
     organization: "Kanyi J. & Company Advocates",
     website: "https://kanyij-advocates.co.ke/",
     project: "Website design & development",
@@ -1018,7 +1017,7 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden border-y border-white/[.07] py-24 sm:py-28 md:py-36"
+      className="relative overflow-hidden border-y border-white/[.07] py-24 sm:py-28 md:py-36 section-grid-bg"
     >
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
@@ -1044,8 +1043,7 @@ function Testimonials() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.16 }}
                 transition={{ duration: 0.65, delay: i * 0.045 }}
-                whileHover={{ y: -3 }}
-                className="group flex min-h-[300px] flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition-colors hover:border-white/[.16] hover:bg-white/[.04] sm:p-7"
+                className="magnetic-card group flex min-h-[300px] flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition-colors hover:border-white/[.16] hover:bg-white/[.04] sm:p-7"
               >
                 <div className="flex items-center justify-between gap-4">
                   <span className="mono text-[10px] text-[var(--accent)]">
@@ -1098,7 +1096,7 @@ function Pricing() {
   return (
     <section
       id="pricing"
-      className="border-y border-white/[.07] bg-[#090c11] py-24 sm:py-28 md:py-36"
+      className="border-y border-white/[.07] bg-[#090c11] py-24 sm:py-28 md:py-36 section-grid-bg"
     >
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
@@ -1126,8 +1124,7 @@ function Pricing() {
             {plans.map((p, i) => (
               <motion.div
                 key={p.name}
-                whileHover={{ x: 5 }}
-                className="group grid gap-6 rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition hover:border-white/20 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7"
+                className="magnetic-card group grid gap-6 rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition hover:border-white/20 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7"
               >
                 <div>
                   <div className="mono text-[9px] uppercase tracking-[.2em] text-[var(--accent)]">
@@ -1244,7 +1241,7 @@ const supportTiers = [
 
 function Support() {
   return (
-    <section id="support" className="relative border-y border-white/[.07] py-24 sm:py-28 md:py-36">
+    <section id="support" className="relative border-y border-white/[.07] py-24 sm:py-28 md:py-36 section-grid-bg">
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
@@ -1274,7 +1271,7 @@ function Support() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.55, delay: index * 0.07 }}
-                className="flex flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-5 sm:p-6"
+                className="magnetic-card flex flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-5 sm:p-6"
               >
                 <span className="mono text-[10px] text-[var(--accent)]">0{index + 1} / SUPPORT</span>
                 <h3 className="display mt-6 text-3xl">{tier.name}</h3>
@@ -1356,7 +1353,7 @@ const faqItems = [
 
 function FAQ() {
   return (
-    <section id="faq" className="relative border-y border-white/[.07] bg-[#090c11] py-24 sm:py-28 md:py-36">
+    <section id="faq" className="relative border-y border-white/[.07] bg-[#090c11] py-24 sm:py-28 md:py-36 section-grid-bg">
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
@@ -1417,7 +1414,7 @@ function Contact() {
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
               <a href="mailto:hempongroup@gmail.com?subject=Project%20enquiry"
                 onClick={() => { if (posthog.__loaded) posthog.capture("contact_email_opened", { location: "contact_section" }); }}
-                className="contact-link group block rounded-[22px] border border-white/10 bg-white/[.035] p-5 transition hover:border-white/25 hover:bg-white/[.055]">
+                className="magnetic-card contact-link group block rounded-[22px] border border-white/10 bg-white/[.035] p-5 transition hover:border-white/25 hover:bg-white/[.055]">
                 <div className="mono text-[10px] uppercase tracking-[.2em] text-white/32">Prefer email?</div>
                 <div className="mt-3 break-all text-base font-semibold sm:text-lg">hempongroup@gmail.com</div>
                 <div className="mt-5 flex items-center justify-between text-sm text-white/35"><span>Open email draft</span><span className="text-xl transition group-hover:translate-x-1 group-hover:text-white">↗</span></div>
@@ -1425,7 +1422,7 @@ function Contact() {
               <a href="https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%27d%20like%20to%20discuss%20a%20project."
                 onClick={() => { if (posthog.__loaded) posthog.capture("contact_whatsapp_opened", { location: "contact_section" }); }}
                 target="_blank" rel="noreferrer"
-                className="contact-link group block rounded-[22px] border border-[#25D366] bg-[#25D366] p-5 font-bold text-black transition hover:border-[#20bd5a] hover:bg-[#20bd5a]">
+                className="magnetic-card contact-link group block rounded-[22px] border border-[#25D366] bg-[#25D366] p-5 font-bold text-black transition hover:border-[#20bd5a] hover:bg-[#20bd5a]">
                 <div className="mono text-[10px] uppercase tracking-[.2em] text-black">WhatsApp</div>
                 <div className="mt-3 text-base font-bold sm:text-lg">+254 738 219 953</div>
                 <div className="mt-5 flex items-center justify-between text-sm text-black"><span>Message Hempon Group</span><span className="text-xl transition group-hover:translate-x-1">↗</span></div>
@@ -1440,188 +1437,112 @@ function Contact() {
 }
 
 function Footer() {
+  const footerGroups = [
+    {
+      title: "Explore",
+      links: [
+        ["Work", "#work"], ["Capabilities", "#capabilities"], ["Process", "#process"],
+        ["About", "#about"], ["Starting points", "#pricing"], ["Maintenance & support", "#support"], ["FAQs", "#faq"],
+      ],
+    },
+    {
+      title: "Connect",
+      links: [
+        ["Start a project", "#contact"], ["Email us", "mailto:hempongroup@gmail.com"],
+        ["WhatsApp", "https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%27d%20like%20to%20discuss%20a%20project."],
+      ],
+    },
+    {
+      title: "Quick links",
+      links: [
+        ["Hempon Portfolio", "https://portfolio.hempongroup.co.ke/"],
+        ["Landlord Ledger", "https://ledger.hempongroup.co.ke/"],
+        ["Farmora", "https://farmora.hempongroup.co.ke/"],
+        ["InvoiceEasy", "https://downloads.hempongroup.co.ke/invoice-easy/"],
+        ["DevPilot", "https://downloads.hempongroup.co.ke/devpilot/"],
+        ["FinAI", "https://downloads.hempongroup.co.ke/finai/"],
+        ["Website Creation", "https://downloads.hempongroup.co.ke/website-creation/"],
+        ["Downloads", "https://downloads.hempongroup.co.ke/"],
+      ],
+    },
+  ];
+  const socialOrder = ["Facebook", "TikTok", "Instagram", "LinkedIn", "X"];
+  const socialLinks = socialOrder.map((label) => socials.find(([name]) => name === label)).filter(Boolean) as string[][];
+
   return (
-    <footer className="relative overflow-hidden border-t border-white/[.08] pt-16 sm:pt-20">
-      <div className="section-shell">
-        <div className="grid gap-12 pb-14 lg:grid-cols-[1.2fr_.65fr_.65fr_.75fr_.75fr]">
-          <div>
+    <footer className="footer-premium relative isolate overflow-hidden border-t border-white/[.08] pt-20 sm:pt-24">
+      <div aria-hidden="true" className="footer-glow pointer-events-none absolute inset-0" />
+      <div aria-hidden="true" className="grid-bg pointer-events-none absolute inset-0 opacity-35" />
+      <div className="section-shell relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.75 }}
+          className="mb-16 border-b border-white/[.09] pb-12 sm:mb-20 sm:pb-16"
+        >
+          <div className="mono text-[10px] font-bold uppercase tracking-[.28em] text-[var(--accent)]">A good place to begin</div>
+          <div className="mt-5 flex flex-col justify-between gap-7 lg:flex-row lg:items-end">
+            <h2 className="display max-w-4xl text-5xl leading-[.94] sm:text-6xl md:text-7xl">
+              Have something<br /><span className="text-gradient">worth building?</span>
+            </h2>
+            <div className="max-w-sm">
+              <p className="text-sm leading-7 text-white/55">Tell us what your business needs. We’ll help you find a practical way forward.</p>
+              <a href="#contact" className="magnetic-control quiet-cta mt-6 inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-sm font-bold transition-all">
+                Start a project <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="grid gap-12 pb-14 sm:grid-cols-2 lg:grid-cols-[1.2fr_.75fr_.8fr_1fr_1fr] lg:gap-10">
+          <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.06 }}>
             <a href="#top" className="inline-flex items-center gap-3">
-              <Image
-                src="/assets/logo.svg"
-                alt="Hempon Group"
-                width={170}
-                height={56}
-                className="h-auto w-[145px] invert sm:w-[170px]"
-              />
+              <Image src="/assets/logo.svg" alt="Hempon Group" width={170} height={56} className="h-auto w-[145px] invert sm:w-[170px]" />
             </a>
-            <p className="mt-6 max-w-sm text-sm leading-7 text-white/38">
-              Digital engineering for businesses that want their technology to
-              do more.
-            </p>
-            <a
-              href="mailto:hempongroup@gmail.com"
-              className="mt-5 inline-block text-sm font-semibold text-white/65 transition hover:text-white"
-            >
-              hempongroup@gmail.com
+            <p className="mt-6 max-w-sm text-sm leading-7 text-white/55">Digital engineering for businesses that want their technology to do more.</p>
+            <a href="mailto:hempongroup@gmail.com" className="mt-5 inline-block text-sm font-semibold text-white/85 transition hover:text-[var(--accent)]">hempongroup@gmail.com</a>
+            <a href="https://github.com/Magatijoel9620" target="_blank" rel="noreferrer" className="magnetic-control mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/[.12] bg-white/[.025] px-4 py-2.5 text-xs font-semibold text-white/75 transition hover:border-[var(--accent)]/40 hover:text-[var(--accent)]">
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="size-4" fill="currentColor"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.68-3.75-1.32-3.75-1.32-.5-1.3-1.24-1.65-1.24-1.65-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.04 3.23 1.55.1-.72.39-1.2.7-1.48-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.62 5.24-5.11 5.51.4.35.75 1.02.75 2.06V22c0 .29.2.64.76.53A11.1 11.1 0 0 0 12 .9Z"/></svg>
+              Find us on GitHub <span aria-hidden="true">↗</span>
             </a>
-          </div>
-          <div>
-            <div className="mono text-[9px] uppercase tracking-[.24em] text-white/25">
-              Explore
-            </div>
-            <div className="mt-5 grid gap-3 text-sm text-white/45">
-              <a href="#work" className="hover:text-white">
-                Work
-              </a>
-              <a href="#capabilities" className="hover:text-white">
-                Capabilities
-              </a>
-              <a href="#process" className="hover:text-white">
-                Process
-              </a>
-              <a href="#about" className="hover:text-white">
-                About
-              </a>
-              <a href="#pricing" className="hover:text-white">
-                Starting points
-              </a>
-              <a href="#support" className="hover:text-white">
-                Maintenance & support
-              </a>
-              <a href="#faq" className="hover:text-white">
-                FAQs
-              </a>
-            </div>
-          </div>
-          <div>
-            <div className="mono text-[9px] uppercase tracking-[.24em] text-white/25">
-              Connect
-            </div>
-            <div className="mt-5 grid gap-3 text-sm text-white/45">
-              {socials.map(([label, url]) => (
-                <a
-                  key={label}
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-white"
-                >
-                  {label} ↗
+          </motion.div>
+
+          {footerGroups.map((group, index) => (
+            <motion.div key={group.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.12 + index * 0.1 }}>
+              <h3 className="text-sm font-bold tracking-wide text-white">{group.title}</h3>
+              <div className="mt-6 grid gap-3.5 text-sm font-medium text-white/58">
+                {group.links.map(([label, href]) => (
+                  <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined} className="w-fit transition-colors hover:text-[var(--accent)]">{label}{href.startsWith("http") ? " ↗" : ""}</a>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+
+          <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.42 }}>
+            <h3 className="text-sm font-bold tracking-wide text-white">Follow Hempon</h3>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {socialLinks.map(([label, url]) => (
+                <a key={label} href={url} target="_blank" rel="noreferrer" aria-label={`Hempon Group on ${label}`} title={label} className="magnetic-control inline-flex size-11 items-center justify-center rounded-full border border-white/[.13] bg-white/[.035] text-white/75 transition-all hover:border-[var(--accent)]/55 hover:bg-[var(--accent)]/10 hover:text-[var(--accent)]">
+                  <SocialIcon label={label} />
                 </a>
               ))}
             </div>
-          </div>
-          <div>
-            <div className="mono text-[9px] uppercase tracking-[.24em] text-white/25">
-              Quick links
+            <div className="mt-8 border-t border-white/[.09] pt-5">
+              <div className="text-xs font-bold uppercase tracking-[.18em] text-white/85">Based in</div>
+              <p className="mt-3 text-sm leading-6 text-white/55">Mombasa, Kenya<br />Working beyond borders.</p>
+              <a href="#contact" className="mt-4 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white">Let’s talk ↗</a>
             </div>
-           
-<div className="mt-5 grid gap-3 text-sm text-white/45">
-  <a
-    href="https://portfolio.hempongroup.co.ke/"
-    target="_blank"
-    rel="noreferrer"
-    className="hover:text-white"
-  >
-    Magati.dev portfolio ↗
-  </a>
-
-  <a
-    href="https://ledger.hempongroup.co.ke/"
-    target="_blank"
-    rel="noreferrer"
-    className="hover:text-white"
-  >
-    Landlord Ledger ↗
-  </a>
-
-  <a
-    href="https://farmora.hempongroup.co.ke/"
-    target="_blank"
-    rel="noreferrer"
-    className="hover:text-white"
-  >
-    Farmora ↗
-  </a>
-
-  <a
-    href="https://downloads.hempongroup.co.ke/invoice-easy/"
-    target="_blank"
-    rel="noreferrer"
-    className="hover:text-white"
-  >
-    InvoiceEasy ↗
-  </a>
-
-  <a
-    href="https://downloads.hempongroup.co.ke/devpilot/"
-    target="_blank"
-    rel="noreferrer"
-    className="hover:text-white"
-  >
-    DevPilot ↗
-  </a>
-
-  <a
-    href="https://downloads.hempongroup.co.ke/finai/"
-    target="_blank"
-    rel="noreferrer"
-    className="hover:text-white"
-  >
-    FinAI ↗
-  </a>
-
-  <a
-    href="https://downloads.hempongroup.co.ke/website-creation/"
-    target="_blank"
-    rel="noreferrer"
-    className="hover:text-white"
-  >
-    Website Creation ↗
-  </a>
-
-  <a
-    href="https://downloads.hempongroup.co.ke/"
-    target="_blank"
-    rel="noreferrer"
-    className="hover:text-white"
-  >
-    Downloads ↗
-  </a>
-
-</div>
-
-          </div>
-          <div>
-            <div className="mono text-[9px] uppercase tracking-[.24em] text-white/25">
-              Based in
-            </div>
-            <p className="mt-5 text-sm leading-6 text-white/45">
-              Mombasa, Kenya
-              <br />
-              Working beyond borders.
-            </p>
-            <a
-              href="#contact"
-              className="mt-5 inline-flex rounded-full border border-white/[.12] px-4 py-2 text-xs font-semibold text-white/70 transition hover:border-white/25 hover:text-white"
-            >
-              Start a project ↗
-            </a>
-          </div>
+          </motion.div>
         </div>
-        <div className="border-t border-white/[.08] py-5">
-          <div className="flex flex-col justify-between gap-3 text-[9px] uppercase tracking-[.18em] text-white/25 sm:flex-row">
-            <span>
-              © {new Date().getFullYear()} Hempon Group. All rights reserved.
-            </span>
-            <div className="flex gap-5">
-              <a href="/privacy-policy" className="hover:text-white/60">
-                Privacy
-              </a>
-              <a href="/terms" className="hover:text-white/60">
-                Terms
-              </a>
-              <span>Digital Engineering · Kenya</span>
+
+        <div className="border-t border-white/[.1] py-6">
+          <div className="flex flex-col justify-between gap-4 text-[10px] font-semibold uppercase tracking-[.16em] text-white/42 sm:flex-row sm:items-center">
+            <span>© {new Date().getFullYear()} Hempon Group. All rights reserved.</span>
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              <a href="/privacy-policy" className="transition hover:text-white">Privacy</a>
+              <a href="/terms" className="transition hover:text-white">Terms</a>
+              <span className="text-white/30">Digital Engineering · Kenya</span>
             </div>
           </div>
         </div>
@@ -1678,13 +1599,44 @@ function MobileWhatsAppButton() {
           fill="currentColor"
         />
       </svg>
-      <span className="truncate">Chat on WhatsApp</span>
+      <span className="truncate">WhatsApp</span>
     </a>
   );
 }
 
 export default function Home() {
   const workRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const onPointerMove = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      const target = (event.target as HTMLElement | null)?.closest<HTMLElement>(".magnetic-card, .magnetic-control, a, button");
+      if (!target) return;
+      if (!target.classList.contains("magnetic-card") && !target.classList.contains("magnetic-control")) {
+        const radius = Number.parseFloat(window.getComputedStyle(target).borderTopLeftRadius);
+        if (!Number.isFinite(radius) || radius < 12) return;
+        target.classList.add("magnetic-control");
+      }
+      const rect = target.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      const strength = target.classList.contains("magnetic-card") ? 5 : 3;
+      target.style.setProperty("--mag-x", `${x * strength}px`);
+      target.style.setProperty("--mag-y", `${y * strength}px`);
+    };
+    const onPointerOut = (event: PointerEvent) => {
+      const target = (event.target as HTMLElement | null)?.closest<HTMLElement>(".magnetic-card, .magnetic-control, a, button");
+      if (target && !target.contains(event.relatedTarget as Node | null)) {
+        target.style.setProperty("--mag-x", "0px");
+        target.style.setProperty("--mag-y", "0px");
+      }
+    };
+    document.addEventListener("pointermove", onPointerMove, { passive: true });
+    document.addEventListener("pointerout", onPointerOut, { passive: true });
+    return () => {
+      document.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointerout", onPointerOut);
+    };
+  }, []);
   const { scrollYProgress } = useScroll({
     target: workRef,
     offset: ["start end", "end start"],
