@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Image from "next/image";
+import Link from "next/link";
 
 function InlineMarkdown({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
@@ -111,7 +112,7 @@ export default function LegalDocument({
     <main className="min-h-screen bg-[var(--bg)] px-4 pb-20 pt-6 sm:px-6 sm:pt-8">
       <div className="section-shell">
         <header className="flex items-center justify-between border-b border-white/[.08] pb-5">
-          <a href="/" aria-label="Hempon Group home">
+          <Link href="/" aria-label="Hempon Group home">
             <Image
               src="/assets/logo.svg"
               alt="Hempon Group"
@@ -120,28 +121,28 @@ export default function LegalDocument({
               className="h-auto w-[135px] invert sm:w-[155px]"
               priority
             />
-          </a>
+          </Link>
           <nav className="flex gap-4 text-xs text-white/55 sm:gap-6">
-            <a className="transition hover:text-white" href="/privacy-policy">
+            <Link className="transition hover:text-white" href="/privacy-policy">
               Privacy
-            </a>
-            <a className="transition hover:text-white" href="/terms">
+            </Link>
+            <Link className="transition hover:text-white" href="/terms">
               Terms
-            </a>
-            <a className="transition hover:text-white" href="/">
+            </Link>
+            <Link className="transition hover:text-white" href="/">
               Home
-            </a>
+            </Link>
           </nav>
         </header>
 
         <article className="mx-auto max-w-3xl py-12 sm:py-16">
           <MarkdownContent markdown={markdown} />
-          <a
+          <Link
             href="/"
             className="mt-12 inline-flex text-sm text-[var(--accent)] transition hover:text-white"
           >
             ← Back to Hempon Group
-          </a>
+          </Link>
         </article>
       </div>
     </main>

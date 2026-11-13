@@ -234,7 +234,7 @@ function Nav() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const sectionIds = ["work", "capabilities", "process", "about", "contact"];
+    const sectionIds = ["work", "capabilities", "process", "about", "support", "faq", "contact"];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section));
@@ -257,6 +257,8 @@ function Nav() {
     ["Capabilities", "#capabilities"],
     ["Process", "#process"],
     ["About", "#about"],
+    ["Support", "#support"],
+    ["FAQs", "#faq"],
     ["Contact", "#contact"],
   ];
   return (
@@ -911,12 +913,25 @@ function About() {
               websites, applications automation tools, and digital systems that
               solve real operational problems.
             </p>
-            <p className="mt-7 max-w-2xl text-sm leading-7 text-white/40 md:text-base">
-              We combine thoughtful design, reliable technology, and practical
-              business understanding to create solutions that are not only
-              visually impressive, but useful, manageable, and ready to grow
-              with you.
+            <p className="mt-7 max-w-2xl text-sm leading-7 text-white/48 md:text-base">
+              We bring design, engineering and practical business understanding
+              together to create digital experiences that are useful in the real
+              world — from a clear first website to software shaped around the
+              way an organisation operates.
             </p>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/40 md:text-base">
+              We start by understanding the challenge, agree on a sensible
+              direction, and build with room for the solution to evolve as your
+              needs change.
+            </p>
+            <a
+              href="https://portfolio.hempongroup.co.ke/"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] transition hover:text-white"
+            >
+              Explore Magati.dev — selected work & digital products <span aria-hidden="true">↗</span>
+            </a>
             <div className="mt-9 flex flex-wrap gap-2">
               {[
                 "Business first",
@@ -1096,11 +1111,15 @@ function Pricing() {
               Clear starting points for common projects. Custom software and
               larger systems are scoped around the actual problem.
             </p>
+            <p className="mt-5 max-w-md text-xs leading-6 text-white/32">
+              Prices shown are starting points. The final quotation depends on
+              the agreed scope, content, features and integrations.
+            </p>
             <a
               href="#contact"
               className="mt-8 inline-flex text-sm font-semibold text-white/72 underline decoration-white/20 underline-offset-8 transition hover:text-white"
             >
-              Let's scope something different ↗
+              Let&apos;s scope something different ↗
             </a>
           </div>
           <div className="grid gap-3">
@@ -1174,6 +1193,202 @@ function Pricing() {
                   </a>
                 </div>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+const supportTiers = [
+  {
+    name: "Basic",
+    fit: "For occasional technical assistance and routine website care.",
+    items: [
+      "Minor website content updates",
+      "Basic troubleshooting and bug fixes",
+      "Routine functionality checks",
+      "Deployment issue assistance",
+      "Basic security and software updates",
+      "General technical guidance",
+    ],
+  },
+  {
+    name: "Standard",
+    fit: "For businesses that depend on their website or application every day.",
+    items: [
+      "Everything in Basic",
+      "Regular website and application maintenance",
+      "Database health checks and troubleshooting",
+      "Performance and speed optimisation",
+      "Backup monitoring and recovery assistance",
+      "More comprehensive bug fixing and minor improvements",
+    ],
+  },
+  {
+    name: "Premium",
+    fit: "For more demanding software, integrations and infrastructure needs.",
+    items: [
+      "Everything in Standard",
+      "Priority technical support",
+      "Advanced troubleshooting and system maintenance",
+      "Database optimisation and monitoring",
+      "Security reviews and updates",
+      "Deployment, cloud and integration assistance",
+      "Agreed feature enhancements and consultations",
+    ],
+  },
+];
+
+function Support() {
+  return (
+    <section id="support" className="relative border-y border-white/[.07] py-24 sm:py-28 md:py-36">
+      <div className="section-shell">
+        <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <SectionLabel>Ongoing care</SectionLabel>
+            <h2 className="display mt-6 text-5xl leading-[.94] sm:text-6xl md:text-7xl">
+              Built to work. <span className="text-white/25">Supported to last.</span>
+            </h2>
+            <p className="mt-7 max-w-md text-sm leading-7 text-white/42 md:text-base">
+              Launch is not always the end of the work. We provide maintenance
+              and technical support to help keep websites and digital systems
+              functional, secure and up to date.
+            </p>
+            <p className="mt-4 max-w-md text-xs leading-6 text-white/30">
+              Support can be arranged monthly or as a one-time engagement.
+              Scope and fees depend on the system, complexity and support
+              frequency.
+            </p>
+            <a href="#contact" className="mt-8 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white">
+              Discuss a support arrangement ↗
+            </a>
+          </div>
+          <div className="grid gap-3 md:grid-cols-3">
+            {supportTiers.map((tier, index) => (
+              <motion.article
+                key={tier.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.55, delay: index * 0.07 }}
+                className="flex flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-5 sm:p-6"
+              >
+                <span className="mono text-[10px] text-[var(--accent)]">0{index + 1} / SUPPORT</span>
+                <h3 className="display mt-6 text-3xl">{tier.name}</h3>
+                <p className="mt-3 min-h-[68px] text-sm leading-6 text-white/42">{tier.fit}</p>
+                <div className="my-5 h-px bg-white/[.08]" />
+                <ul className="grid gap-3">
+                  {tier.items.map((item) => (
+                    <li key={item} className="flex gap-2 text-xs leading-5 text-white/58">
+                      <span aria-hidden="true" className="text-[var(--accent)]">—</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#contact"
+                  onClick={() => { if (posthog.__loaded) posthog.capture("support_tier_inquiry_started", { tier: tier.name }); }}
+                  className="mt-7 inline-flex items-center justify-between border-t border-white/[.08] pt-4 text-xs font-semibold text-white/70 transition hover:text-[var(--accent)]"
+                >
+                  Ask about {tier.name} <span aria-hidden="true">↗</span>
+                </a>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+        <div className="mt-4 rounded-[22px] border border-white/[.07] bg-white/[.02] p-5 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:p-6">
+          <div>
+            <h3 className="text-sm font-semibold text-white/78">Need something more specific?</h3>
+            <p className="mt-1 text-xs leading-5 text-white/38">Custom maintenance arrangements can be shaped around your system and support requirements.</p>
+          </div>
+          <a href="#contact" className="mt-4 inline-flex shrink-0 items-center gap-2 text-xs font-semibold text-[var(--accent)] sm:mt-0">Discuss a custom arrangement <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const faqItems = [
+  {
+    question: "What digital services does Hempon Group offer?",
+    answer: "We work across website design and development, custom software, business systems, mobile and web applications, software customisation, automation, maintenance and technical support. The right approach depends on the business problem and the people who will use the solution.",
+  },
+  {
+    question: "What types of websites can you build?",
+    answer: "Our website work includes business and corporate websites, e-commerce experiences, professional portfolio websites and custom web applications such as dashboards, customer portals and administrative systems. Scope is shaped around your goals, brand, required functionality and budget.",
+  },
+  {
+    question: "Can you improve a website or application we already have?",
+    answer: "Yes. We can assess an existing website or application and discuss improvements such as design and usability updates, performance, bug fixes, new functionality, integrations, security and maintenance. The first step is understanding the current system and the changes you need.",
+  },
+  {
+    question: "What should I share when requesting a custom project?",
+    answer: "A useful starting point is the project type, what your business does, the problem you want to solve, the main features you have in mind, preferred platform, approximate budget and expected timeline. You do not need every detail figured out before contacting us — we can help refine the idea.",
+  },
+  {
+    question: "How do quotations and project timelines work?",
+    answer: "We first understand your requirements, identify the likely features and integrations, assess scope and complexity, then prepare a quotation. Timelines depend on the agreed scope and are discussed before work begins. Final deliverables, pricing and timelines are agreed after discovery.",
+  },
+  {
+    question: "Do you provide ongoing maintenance and technical support?",
+    answer: "Yes. Basic support covers occasional updates, routine checks and basic troubleshooting. Standard adds regular maintenance, database health checks, performance work and backup monitoring. Premium adds priority support, advanced troubleshooting, security reviews, infrastructure and integration assistance, plus agreed enhancements. Custom and one-time arrangements are also available.",
+  },
+  {
+    question: "Can you help with domains, hosting, email and deployment?",
+    answer: "We can assist with hosting and deployment, domain registration and DNS configuration, SSL certificates, business email setup, website migration, backups and ongoing hosting support. The exact work depends on your current provider and requirements.",
+  },
+  {
+    question: "How much do your software products and custom projects cost?",
+    answer: "Software pricing depends on the product, features, subscription or licensing arrangement and support required. Custom development is quoted according to complexity, platforms, features, database and integration requirements, implementation effort and ongoing maintenance. Contact us for current product pricing or a project quotation; we do not publish unverified prices here.",
+  },
+  {
+    question: "How can I pay for services in Kenya?",
+    answer: "M-Pesa is our primary payment method for customers in Kenya. For custom projects, payment milestones and terms are agreed before development begins. Always confirm payment instructions through official Hempon Group communication channels.",
+  },
+  {
+    question: "Who do you work with, and where?",
+    answer: "We work with entrepreneurs, startups, small and medium-sized businesses, established organisations and individuals across different industries. Hempon Group is based in Mombasa, Kenya, and works beyond borders.",
+  },
+];
+
+function FAQ() {
+  return (
+    <section id="faq" className="relative border-y border-white/[.07] bg-[#090c11] py-24 sm:py-28 md:py-36">
+      <div className="section-shell">
+        <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <SectionLabel>Good to know</SectionLabel>
+            <h2 className="display mt-6 text-5xl leading-[.94] sm:text-6xl md:text-7xl">
+              A few useful <span className="text-white/25">answers.</span>
+            </h2>
+            <p className="mt-7 max-w-md text-sm leading-7 text-white/42 md:text-base">
+              A starting point for common questions about working with Hempon
+              Group, our services and ongoing support.
+            </p>
+            <a href="#contact" className="mt-8 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white">
+              Still have a question? Talk to us ↗
+            </a>
+          </div>
+          <div className="divide-y divide-white/[.09] border-y border-white/[.09]">
+            {faqItems.map((item, index) => (
+              <details
+                key={item.question}
+                className="group py-5 sm:py-6"
+                onToggle={(event) => {
+                  if (event.currentTarget.open && posthog.__loaded) {
+                    posthog.capture("faq_item_opened", { question: item.question, index: index + 1 });
+                  }
+                }}
+              >
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-5 text-left text-sm font-semibold leading-6 text-white/78 marker:hidden transition hover:text-white sm:text-base [&::-webkit-details-marker]:hidden">
+                  <span><span className="mono mr-3 text-[10px] text-[var(--accent)]">{String(index + 1).padStart(2, "0")}</span>{item.question}</span>
+                  <span aria-hidden="true" className="mt-0.5 shrink-0 text-xl font-normal text-white/35 transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="max-w-3xl pl-8 pr-8 pt-4 text-sm leading-7 text-white/45">{item.answer}</p>
+              </details>
             ))}
           </div>
         </div>
@@ -1268,7 +1483,13 @@ function Footer() {
                 About
               </a>
               <a href="#pricing" className="hover:text-white">
-                Pricing
+                Starting points
+              </a>
+              <a href="#support" className="hover:text-white">
+                Maintenance & support
+              </a>
+              <a href="#faq" className="hover:text-white">
+                FAQs
               </a>
             </div>
           </div>
@@ -1302,7 +1523,7 @@ function Footer() {
     rel="noreferrer"
     className="hover:text-white"
   >
-    Portfolio ↗
+    Magati.dev portfolio ↗
   </a>
 
   <a
@@ -1501,6 +1722,12 @@ export default function Home() {
       </Reveal>
       <Reveal>
         <Pricing />
+      </Reveal>
+      <Reveal>
+        <Support />
+      </Reveal>
+      <Reveal>
+        <FAQ />
       </Reveal>
       <Reveal>
         <Contact />
