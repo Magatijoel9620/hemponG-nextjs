@@ -1,11 +1,12 @@
 "use client";
 
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import posthog from "posthog-js";
 import Reveal from "@/components/Reveal";
 import MagneticButton from "@/components/MagneticButton";
+import ProjectEnquiryForm from "@/components/ProjectEnquiryForm";
 
 const services = [
   [
@@ -230,6 +231,27 @@ function SocialIcon({ label }: { label: string }) {
 
 function Nav() {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const sectionIds = ["work", "capabilities", "process", "about", "contact"];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35, 0.6] },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
   const links = [
     ["Work", "#work"],
     ["Capabilities", "#capabilities"],
@@ -264,7 +286,8 @@ function Nav() {
               <a
                 key={label}
                 href={href}
-                className="nav-link rounded-full px-3.5 py-2 text-[11px] font-medium text-white/52 transition hover:bg-white/[.055] hover:text-blue"
+                aria-current={activeSection === href.slice(1) ? "location" : undefined}
+                className={`nav-link rounded-full px-3.5 py-2 text-[11px] font-medium transition hover:bg-white/[.055] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.07] text-[var(--accent)]" : "text-white/52"}`}
               >
                 {label}
               </a>
@@ -327,7 +350,8 @@ function Nav() {
                 key={label}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="rounded-2xl px-4 py-3 text-sm text-white/65 transition hover:bg-white/[.05] hover:text-white"
+                aria-current={activeSection === href.slice(1) ? "location" : undefined}
+                className={`rounded-2xl px-4 py-3 text-sm transition hover:bg-white/[.05] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.06] text-[var(--accent)]" : "text-white/65"}`}
               >
                 {label}
                 <span className="float-right text-white/25">↗</span>
@@ -432,29 +456,68 @@ function Hero() {
       <div className="hero-light hero-light-a" />
       <div className="hero-light hero-light-b" />
       <div className="section-shell relative flex min-h-[calc(100svh-7rem)] items-center pb-10 lg:pb-14">
-        <div className="grid w-full items-center gap-4 lg:grid-cols-[1.02fr_.98fr]">
+        <div className="grid w-full items-center gap-4 lg:grid-cols-[1.3fr_.7fr]">
           <motion.div
             style={{ y, opacity }}
-            className="relative z-10 max-w-4xl pt-6 lg:pt-0"
+            className="relative z-10 min-w-0 max-w-none pt-6 lg:pt-0"
           >
-            <div className="mono flex items-center gap-3 text-[9px] uppercase tracking-[.28em] text-white/38 sm:text-[10px]">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.12 }}
+              className="mono flex items-center gap-3 text-[9px] uppercase tracking-[.28em] text-white/38 sm:text-[10px]"
+            >
               <span
                 aria-hidden="true"
                 className="status-ripple h-1.5 w-1.5 rounded-full bg-[var(--accent)]"
               />{" "}
               DIGITAL PRODUCTS • SYSTEMS • AUTOMATION
-            </div>
-            <h1 className="display mt-6 text-[clamp(3.9rem,10vw,9.7rem)] leading-[.79]">
-              WE BUILD
-              <br />
-              <span className="text-white/25">WHAT</span>{" "}
-              <span className="text-gradient">MATTERS.</span>
+            </motion.div>
+            <h1 className="display mt-6 w-max max-w-none pr-[.16em] text-[clamp(3.4rem,7vw,6.5rem)] leading-[.82] xl:text-[clamp(4.2rem,7.3vw,7.2rem)]">
+              <span className="block overflow-hidden pb-[.08em]">
+                <motion.span
+                  initial={{ y: "110%" }}
+                  animate={{ y: "0%" }}
+                  transition={{ duration: 0.85, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                  className="block"
+                >
+                  WE BUILD
+                </motion.span>
+              </span>
+              <span className="flex w-max max-w-none whitespace-nowrap overflow-hidden pb-[.08em] pr-[.16em]">
+                <motion.span
+                  initial={{ y: "110%" }}
+                  animate={{ y: "0%" }}
+                  transition={{ duration: 0.85, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
+                  className="block text-white/25"
+                >
+                  WHAT
+                </motion.span>
+                <motion.span
+                  initial={{ y: "110%" }}
+                  animate={{ y: "0%" }}
+                  transition={{ duration: 0.85, delay: 0.43, ease: [0.22, 1, 0.36, 1] }}
+                  className="ml-[.18em] block text-gradient"
+                >
+                  MATTERS.
+                </motion.span>
+              </span>
             </h1>
-            <p className="mt-8 max-w-xl text-[15px] leading-7 text-white/46 sm:text-base md:text-lg">
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.42 }}
+              className="mt-8 max-w-xl text-[15px] leading-7 text-white/46 sm:text-base md:text-lg"
+            >
               Websites, mobile applications, business software and automation —
               engineered around the way your business actually works.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.56 }}
+              className="mt-8 flex flex-wrap items-center gap-3"
+            >
               <MagneticButton href="#work">Explore the work</MagneticButton>
               <a
                 href="#contact"
@@ -462,7 +525,7 @@ function Hero() {
               >
                 Tell us the problem ↗
               </a>
-            </div>
+            </motion.div>
           </motion.div>
           <motion.div
             style={{ opacity }}
@@ -485,6 +548,67 @@ function Hero() {
 }
 
 function Services() {
+  const [activeService, setActiveService] = useState("Websites");
+  const [businessNeed, setBusinessNeed] = useState("presence");
+
+  const serviceDetails: Record<string, { fit: string; outcomes: string[]; deliverables: string[] }> = {
+    Websites: {
+      fit: "Your business needs a clearer, more credible online presence or a better way for customers to discover and contact you.",
+      outcomes: ["Explain your offer clearly", "Build trust before the first conversation", "Turn visits into enquiries or orders"],
+      deliverables: ["Business and corporate websites", "E-commerce and catalogue experiences", "Portfolio and campaign websites", "Responsive layouts, contact paths and SEO foundations"],
+    },
+    "Business Systems": {
+      fit: "Your team is coordinating work across spreadsheets, messages or disconnected tools and needs one practical place to manage operations.",
+      outcomes: ["Make day-to-day work easier to track", "Give teams a clearer operational view", "Reduce manual coordination and duplicate entry"],
+      deliverables: ["Dashboards and admin portals", "Workflow-specific business applications", "Data management and reporting interfaces", "Role-aware operational workflows where required"],
+    },
+    "Mobile Apps": {
+      fit: "Customers or field teams need a focused mobile experience, including workflows that may need to work reliably on the move.",
+      outcomes: ["Put key workflows in users’ hands", "Support field and customer interactions", "Connect mobile experiences to business data"],
+      deliverables: ["Android and iOS applications", "Customer and staff-facing experiences", "API and backend integrations", "Offline-aware workflows where the use case requires them"],
+    },
+    Automation: {
+      fit: "Repeated admin, handovers, notifications or reporting are taking time that could be spent running the business.",
+      outcomes: ["Reduce repetitive manual steps", "Connect existing tools and processes", "Make routine information easier to act on"],
+      deliverables: ["Workflow automation", "System integrations and notifications", "Reporting and data handovers", "Process review and implementation"],
+    },
+    "AI Experiences": {
+      fit: "There is a specific customer or team task where AI could make information easier to find, understand or act on.",
+      outcomes: ["Help users navigate information", "Support faster first-line responses", "Add useful intelligence to an existing workflow"],
+      deliverables: ["Website assistant experiences", "Knowledge-guided question and answer flows", "AI features connected to relevant business context", "Human handoff paths for requests needing support"],
+    },
+    "Digital Products": {
+      fit: "You have a product idea or an existing digital service that needs to be shaped, built or improved as a complete experience.",
+      outcomes: ["Turn an idea into a usable product", "Bring customer and operational journeys together", "Create a foundation that can evolve"],
+      deliverables: ["Product discovery and experience design", "Web and mobile product development", "Application architecture and integrations", "Iteration, refinement and ongoing improvements"],
+    },
+  };
+
+  const needRecommendations: Record<string, string> = {
+    presence: "Websites",
+    operations: "Business Systems",
+    mobile: "Mobile Apps",
+    repetitive: "Automation",
+    answers: "AI Experiences",
+    idea: "Digital Products",
+  };
+  const needOptions = [
+    ["presence", "I need customers to find and understand my business"],
+    ["operations", "I want to organise how my business or team works"],
+    ["mobile", "I need a mobile experience for customers or staff"],
+    ["repetitive", "I want to reduce repetitive manual work"],
+    ["answers", "I want to make information or support easier to access"],
+    ["idea", "I have a digital product idea to develop"],
+  ];
+  const recommendedService = needRecommendations[businessNeed];
+  const selectedDetails = serviceDetails[activeService];
+
+  const trackService = (title: string, interaction: string) => {
+    if (!posthog.__loaded) return;
+    posthog.capture("service_inquiry_started", { service: title, interaction });
+    posthog.logger.info("service inquiry started", { interaction, service: title });
+  };
+
   return (
     <section
       id="capabilities"
@@ -507,44 +631,137 @@ function Services() {
               Design × Engineering × Operations
             </div>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-[28px] border border-white/[.08] bg-white/[.08] sm:grid-cols-2">
-            {services.map(([num, title, desc, tech]) => (
-              <motion.a
-                href="#contact"
-                key={num}
-                onClick={() => {
-                  if (!posthog.__loaded) return;
+          <div>
+            <div className="grid gap-px overflow-hidden rounded-[28px] border border-white/[.08] bg-white/[.08] sm:grid-cols-2">
+              {services.map(([num, title, desc, tech], i) => {
+                const isActive = activeService === title;
+                return (
+                  <motion.button
+                    type="button"
+                    key={num}
+                    aria-pressed={isActive}
+                    onClick={() => {
+                      setActiveService(title);
+                      trackService(title, "service_explorer");
+                    }}
+                    initial={{ opacity: 0, y: 22 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.18 }}
+                    transition={{ duration: 0.6, delay: i * 0.07 }}
+                    whileHover={{ y: -3 }}
+                    className={`group relative min-h-[210px] text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--accent)] ${isActive ? "bg-[#131b23]" : "bg-[#0b0f15] hover:bg-[#10161e]"} p-6 sm:p-8`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="mono text-[10px] text-white/22">{num}</span>
+                      <span className="mono text-[9px] uppercase tracking-[.18em] text-[var(--accent)] opacity-75">
+                        {tech}
+                      </span>
+                    </div>
+                    <div className="mt-12">
+                      <h3 className="display text-2xl tracking-[-.045em]">{title}</h3>
+                      <p className="mt-3 max-w-sm text-sm leading-6 text-white/40">{desc}</p>
+                    </div>
+                    <span className="absolute bottom-7 right-7 text-white/35 transition-all group-hover:translate-x-1 group-hover:text-[var(--accent)]">
+                      {isActive ? "Selected ✓" : "Explore ↗"}
+                    </span>
+                  </motion.button>
+                );
+              })}
+            </div>
 
-                  posthog.capture("service_inquiry_started", {
-                    service: title,
-                  });
-                  posthog.logger.info("service inquiry started", {
-                    interaction: "service_card",
-                    service: title,
-                  });
-                }}
-                whileHover={{ y: -3 }}
-                className="group relative min-h-[230px] bg-[#0b0f15] p-6 transition-colors hover:bg-[#10161e] sm:p-8"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="mono text-[10px] text-white/22">{num}</span>
-                  <span className="mono text-[9px] uppercase tracking-[.18em] text-[var(--accent)] opacity-65 group-hover:opacity-100">
-                    {tech}
-                  </span>
+            <motion.div
+              key={activeService}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-4 rounded-[28px] border border-[var(--accent)]/20 bg-[#0c1218] p-6 sm:p-8"
+              aria-live="polite"
+            >
+              <div className="mono text-[9px] uppercase tracking-[.22em] text-[var(--accent)]">Explore the service</div>
+              <div className="mt-3 grid gap-7 lg:grid-cols-[.9fr_1.1fr]">
+                <div>
+                  <h3 className="display text-3xl tracking-[-.04em]">{activeService}</h3>
+                  <p className="mt-3 text-sm leading-7 text-white/52">{selectedDetails.fit}</p>
+                  <a
+                    href="#contact"
+                    onClick={() => {
+                      window.dispatchEvent(new CustomEvent("hempon:select-enquiry-service", { detail: activeService }));
+                      trackService(activeService, "service_detail_cta");
+                    }}
+                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-xs font-bold text-[#10140d] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+                  >
+                    Discuss this direction <span aria-hidden="true">↗</span>
+                  </a>
                 </div>
-                <div className="mt-14">
-                  <h3 className="display text-2xl tracking-[-.045em]">
-                    {title}
-                  </h3>
-                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/40">
-                    {desc}
-                  </p>
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <h4 className="mono text-[9px] uppercase tracking-[.18em] text-white/35">What it helps with</h4>
+                    <ul className="mt-3 space-y-2">
+                      {selectedDetails.outcomes.map((item) => <li key={item} className="flex gap-2 text-sm leading-6 text-white/65"><span className="text-[var(--accent)]">—</span>{item}</li>)}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="mono text-[9px] uppercase tracking-[.18em] text-white/35">Possible deliverables</h4>
+                    <ul className="mt-3 space-y-2">
+                      {selectedDetails.deliverables.map((item) => <li key={item} className="flex gap-2 text-sm leading-6 text-white/65"><span className="text-[var(--accent)]">—</span>{item}</li>)}
+                    </ul>
+                  </div>
                 </div>
-                <span className="absolute bottom-7 right-7 text-white/20 transition-all group-hover:translate-x-1 group-hover:text-[var(--accent)]">
-                  ↗
-                </span>
-              </motion.a>
-            ))}
+              </div>
+            </motion.div>
+
+            <div className="mt-12 rounded-[28px] border border-white/[.09] bg-white/[.025] p-6 sm:p-8">
+              <SectionLabel>Find a starting point</SectionLabel>
+              <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_.8fr]">
+                <div>
+                  <h3 className="display max-w-xl text-3xl leading-tight sm:text-4xl">What are you trying to improve?</h3>
+                  <p className="mt-3 max-w-lg text-sm leading-6 text-white/42">Choose the closest match. We’ll suggest a useful place to start — the right solution can be refined together.</p>
+                  <div className="mt-6 grid gap-2">
+                    {needOptions.map(([value, label]) => (
+                      <button
+                        type="button"
+                        key={value}
+                        aria-pressed={businessNeed === value}
+                        onClick={() => setBusinessNeed(value)}
+                        className={`flex items-center justify-between gap-4 rounded-2xl border px-4 py-3 text-left text-sm transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${businessNeed === value ? "border-[var(--accent)]/55 bg-[var(--accent)]/[.08] text-white" : "border-white/[.08] bg-black/10 text-white/55 hover:border-white/20 hover:text-white/85"}`}
+                      >
+                        <span>{label}</span><span className={businessNeed === value ? "text-[var(--accent)]" : "text-white/25"}>{businessNeed === value ? "●" : "○"}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col justify-between rounded-[22px] border border-white/[.08] bg-[#090d12] p-5 sm:p-6">
+                  <div>
+                    <div className="mono text-[9px] uppercase tracking-[.2em] text-[var(--accent)]">A place to begin</div>
+                    <h4 className="display mt-4 text-3xl">{recommendedService}</h4>
+                    <p className="mt-3 text-sm leading-6 text-white/45">{serviceDetails[recommendedService].fit}</p>
+                  </div>
+                  <div className="mt-7 flex flex-wrap gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveService(recommendedService);
+                        trackService(recommendedService, "service_finder_recommendation");
+                        document.getElementById("capabilities")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
+                      className="rounded-full border border-white/15 px-4 py-2.5 text-xs font-semibold text-white/75 transition hover:border-white/35 hover:text-white"
+                    >
+                      Explore recommendation
+                    </button>
+                    <a
+                      href="#contact"
+                      onClick={() => {
+                        window.dispatchEvent(new CustomEvent("hempon:select-enquiry-service", { detail: recommendedService }));
+                        trackService(recommendedService, "service_finder_contact");
+                      }}
+                      className="rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold text-[#10140d] transition hover:brightness-110"
+                    >
+                      Talk to Hempon ↗
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -606,7 +823,7 @@ function Work() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-black/5" />
                 <div className="absolute left-5 top-5 mono text-[10px] text-white/55">
-                  {p.number} / 04
+                  {p.number} / {String(projects.length).padStart(2, "0")}
                 </div>
                 <div className="absolute right-5 top-5 rounded-full border border-white/15 bg-black/25 px-3 py-1 text-[10px] text-white/60 backdrop-blur">
                   View case ↗
@@ -890,8 +1107,8 @@ function Pricing() {
             {plans.map((p, i) => (
               <motion.div
                 key={p.name}
-                whileHover={{ x: 4 }}
-                className="grid gap-6 rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition hover:border-white/20 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7"
+                whileHover={{ x: 5 }}
+                className="group grid gap-6 rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition hover:border-white/20 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7"
               >
                 <div>
                   <div className="mono text-[9px] uppercase tracking-[.2em] text-[var(--accent)]">
@@ -967,78 +1184,38 @@ function Pricing() {
 
 function Contact() {
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden py-24 sm:py-28 md:py-40"
-    >
+    <section id="contact" className="relative overflow-hidden py-24 sm:py-28 md:py-40">
       <div className="absolute inset-0 grid-bg opacity-50" />
       <div className="section-shell relative">
-        <div className="rounded-[32px] border border-white/[.09] bg-[#0a0e14]/82 p-6 sm:p-9 md:p-12 lg:p-16">
-          <div className="grid gap-12 lg:grid-cols-[1fr_.7fr] lg:items-end">
-            <div>
-              <SectionLabel>Start a conversation</SectionLabel>
-              <h2 className="display mt-6 max-w-4xl text-5xl leading-[.9] sm:text-6xl md:text-8xl">
-                Have a problem
-                <br />
-                <span className="text-gradient">worth building?</span>
-              </h2>
-              <p className="mt-7 max-w-xl text-sm leading-7 text-white/42 md:text-base">
-                Tell us what you are trying to improve. We’ll help you figure
-                out whether that means a website, app, automation, business
-                system — or something else.
-              </p>
-            </div>
-            <div>
-              <a
-                href="mailto:hempongroup@gmail.com?subject=Project%20enquiry"
-                onClick={() => {
-                  if (!posthog.__loaded) return;
-
-                  posthog.capture("contact_email_opened", {
-                    location: "contact_section",
-                  });
-                }}
-                className="contact-link group block rounded-[24px] border border-white/10 bg-white/[.035] p-5 transition hover:border-white/25 hover:bg-white/[.055]"
-              >
-                <div className="mono text-[10px] uppercase tracking-[.2em] text-white/32">
-                  Email
-                </div>
-                <div className="mt-3 text-base font-semibold sm:text-lg">
-                  hempongroup@gmail.com
-                </div>
-                <div className="mt-6 flex items-center justify-between text-sm text-white/30">
-                  <span>Open email draft</span>
-                  <span className="text-xl transition group-hover:translate-x-1 group-hover:text-white">
-                    ↗
-                  </span>
-                </div>
+        <div className="rounded-[32px] border border-white/[.09] bg-[#0a0e14]/82 p-5 sm:p-8 md:p-12 lg:p-14">
+          <div className="max-w-4xl">
+            <SectionLabel>Start a conversation</SectionLabel>
+            <h2 className="display mt-6 max-w-4xl text-5xl leading-[.9] sm:text-6xl md:text-8xl">
+              Have a problem<br /><span className="text-gradient">worth building?</span>
+            </h2>
+            <p className="mt-7 max-w-2xl text-sm leading-7 text-white/42 md:text-base">
+              Share what you are trying to improve. A few details will help us understand the challenge and prepare for a useful first conversation. Final scope, pricing and timelines are agreed after discovery.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-5 xl:grid-cols-[1.35fr_.65fr] xl:items-start">
+            <ProjectEnquiryForm />
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+              <a href="mailto:hempongroup@gmail.com?subject=Project%20enquiry"
+                onClick={() => { if (posthog.__loaded) posthog.capture("contact_email_opened", { location: "contact_section" }); }}
+                className="contact-link group block rounded-[22px] border border-white/10 bg-white/[.035] p-5 transition hover:border-white/25 hover:bg-white/[.055]">
+                <div className="mono text-[10px] uppercase tracking-[.2em] text-white/32">Prefer email?</div>
+                <div className="mt-3 break-all text-base font-semibold sm:text-lg">hempongroup@gmail.com</div>
+                <div className="mt-5 flex items-center justify-between text-sm text-white/35"><span>Open email draft</span><span className="text-xl transition group-hover:translate-x-1 group-hover:text-white">↗</span></div>
               </a>
-              <a
-                href="https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%27d%20like%20to%20discuss%20a%20project."
-                onClick={() => {
-                  if (!posthog.__loaded) return;
-
-                  posthog.capture("contact_whatsapp_opened", {
-                    location: "contact_section",
-                  });
-                }}
-                target="_blank"
-                rel="noreferrer"
-                className="contact-link group mt-3 block rounded-[24px] border border-[#25D366] bg-[#25D366] p-5 font-bold text-black transition hover:border-[#20bd5a] hover:bg-[#20bd5a]"
-              >
-                <div className="mono text-[10px] uppercase tracking-[.2em] text-black">
-                  WhatsApp
-                </div>
-                <div className="mt-3 text-base font-bold sm:text-lg">
-                  +254 738 219 953
-                </div>
-                <div className="mt-6 flex items-center justify-between text-sm text-black">
-                  <span>Message Hempon Group</span>
-                  <span className="text-xl transition group-hover:translate-x-1 group-hover:text-black">
-                    ↗
-                  </span>
-                </div>
+              <a href="https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                onClick={() => { if (posthog.__loaded) posthog.capture("contact_whatsapp_opened", { location: "contact_section" }); }}
+                target="_blank" rel="noreferrer"
+                className="contact-link group block rounded-[22px] border border-[#25D366] bg-[#25D366] p-5 font-bold text-black transition hover:border-[#20bd5a] hover:bg-[#20bd5a]">
+                <div className="mono text-[10px] uppercase tracking-[.2em] text-black">WhatsApp</div>
+                <div className="mt-3 text-base font-bold sm:text-lg">+254 738 219 953</div>
+                <div className="mt-5 flex items-center justify-between text-sm text-black"><span>Message Hempon Group</span><span className="text-xl transition group-hover:translate-x-1">↗</span></div>
               </a>
+              <p className="px-1 text-xs leading-5 text-white/30 sm:col-span-2 xl:col-span-1">No commitment at this stage. We will review your enquiry and follow up using the contact details you provide.</p>
             </div>
           </div>
         </div>
@@ -1295,8 +1472,14 @@ export default function Home() {
     useTransform(scrollYProgress, [0, 0.5, 1], [0.98, 1, 0.98]),
     { stiffness: 80, damping: 20 },
   );
+  const { scrollYProgress: pageProgress } = useScroll();
   return (
     <div id="top" className="noise relative min-h-screen bg-[var(--bg)]">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-[2px] origin-left bg-[var(--accent)]"
+        style={{ scaleX: pageProgress }}
+      />
       <Nav />
       <Hero />
       <Reveal>

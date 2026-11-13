@@ -14,7 +14,25 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: auto; background: var(--bg); }
+html {
+  scroll-behavior: auto;
+  scroll-padding-top: 7rem;
+  background: var(--bg);
+}
+
+:where(section[id], main[id], footer[id]) {
+  scroll-margin-top: 7rem;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 640px) {
+  html { scroll-padding-top: 6rem; }
+  :where(section[id], main[id], footer[id]) { scroll-margin-top: 6rem; }
+}
 body { margin: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: #d8e8bd; color: #071006; }
@@ -84,3 +102,28 @@ a { color: inherit; text-decoration: none; }
 @media (max-width:420px){.hero-brand{height:340px;}.hero-card-a{width:96px;height:60px;}.hero-card-b{width:88px;height:55px;}.hero-card-c{width:96px;height:60px;bottom:16%;}.hero-card-d{width:82px;height:52px;bottom:16%;}.hero-monogram{width:190px;}.hero-monogram-inner span{font-size:5.5rem;}}
 
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+
+/* Phase 2: restrained interaction and motion polish */
+.nav-shell { transition: border-color .3s ease, background-color .3s ease, box-shadow .3s ease; }
+.nav-link { position: relative; }
+.nav-link[aria-current="location"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 12px;
+  height: 1px;
+  border-radius: 99px;
+  background: var(--accent);
+  transform: translateX(-50%);
+}
+.quiet-cta, .quiet-outline, .magnetic-cta { transition: transform .25s ease, border-color .25s ease, background-color .25s ease, color .25s ease, box-shadow .25s ease; }
+.quiet-cta:hover, .magnetic-cta:hover { box-shadow: 0 8px 28px rgba(169,200,117,.12); }
+.welcome-dialog { animation: welcome-dialog-in .38s cubic-bezier(.22,1,.36,1) both; }
+@keyframes welcome-dialog-in {
+  from { opacity: 0; transform: translate3d(0,18px,0) scale(.985); }
+  to { opacity: 1; transform: translate3d(0,0,0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcome-dialog { animation: none; }
+}

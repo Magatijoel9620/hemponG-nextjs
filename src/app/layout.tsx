@@ -4,6 +4,8 @@ import "./globals.css";
 
 import SmoothScroll from "@/components/SmoothScroll";
 import CursorGlow from "@/components/CursorGlow";
+import WelcomeBanner from "@/components/WelcomeBanner";
+import { MotionConfig } from "motion/react";
 
 const siteUrl = "https://www.hempongroup.co.ke";
 const description =
@@ -188,6 +190,7 @@ export default function RootLayout({
   return (
     <html lang="en-KE" suppressHydrationWarning>
       <body>
+        <MotionConfig reducedMotion="user">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -196,7 +199,9 @@ export default function RootLayout({
         />
         <SmoothScroll />
         <CursorGlow />
+        <WelcomeBanner />
         {children}
+        </MotionConfig>
       </body>
     </html>
   );
