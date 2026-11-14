@@ -285,7 +285,7 @@ function Nav() {
                 className="h-full w-full object-cover"
               />
             </span>
-            <span className="hidden truncate text-xs font-bold tracking-[.18em] sm:inline">
+            <span className="truncate text-[10px] font-bold tracking-[.12em] sm:text-xs sm:tracking-[.18em]">
               HEMPON GROUP
             </span>
           </a>
@@ -325,9 +325,22 @@ function Nav() {
             </div>
             <a
               href="#contact"
-              className="quiet-cta hidden rounded-full border border-white/[.14] bg-white/[.92] px-4 py-2.5 text-[11px] font-bold text-[#000000] transition hover:bg-white sm:inline-flex"
+              className="quiet-cta inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/[.14] bg-white/[.92] text-[11px] font-bold text-[#000000] transition hover:bg-white sm:h-auto sm:w-auto sm:px-4 sm:py-2.5"
             >
-              Start a project <span className="ml-1.5">↗</span>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-4 w-4 sm:hidden"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              >
+                <path d="M3 6.5 12 13l9-6.5" />
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+              </svg>
+              <span className="sr-only sm:hidden">Contact</span>
+              <span className="hidden sm:inline">Start a project</span>
+              <span className="ml-1.5 hidden sm:inline">↗</span>
             </a>
             <button
               aria-label="Toggle navigation"
