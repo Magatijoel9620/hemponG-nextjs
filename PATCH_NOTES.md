@@ -20,3 +20,10 @@ This archive is the complete source snapshot with the requested minor UI refinem
 ## Validation
 - ZIP integrity checked after packaging.
 - `npm ci` was attempted in the build environment but timed out, so lint, TypeScript and production build could not be executed here. Please run the project's normal checks after applying this source snapshot.
+
+## Footer project enquiry modal (additive follow-up)
+- Added one reusable `ProjectEnquiryModal` component in the homepage module and wired both footer `Start a project` CTAs (closing banner and Connect group) to open it.
+- The modal reuses the existing `ProjectEnquiryForm`, including its three-step fields, validation, `/api/enquiries` submission, Resend notifications and PostHog submission event. No duplicate form or API was introduced.
+- The original inline enquiry form in the Contact section remains in place and unchanged.
+- Added Escape/backdrop/close-button dismissal, body scroll locking, initial focus, focus restoration and a basic Tab focus loop. The modal adapts to a bottom-sheet layout on small screens.
+- Closing the modal unmounts its form instance; any incomplete modal-only entries are not persisted. The inline Contact form remains independent.
