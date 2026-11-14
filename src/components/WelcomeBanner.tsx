@@ -1,31 +1,41 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const STORAGE_KEY = "hempon:first-visit-welcome-dismissed:v2";
 
-const pathways = [
+const destinations = [
   {
     number: "01",
-    title: "Explore our digital solutions",
-    description: "Websites, business systems, mobile apps and automation.",
+    eyebrow: "Design · Engineering · Operations",
+    title: "Digital Solutions",
+    description:
+      "Websites, business software, mobile experiences and practical digital systems built around the way businesses work.",
     href: "#capabilities",
-    symbol: "✳",
+    icon: "✳",
+    action: "Explore what we do",
   },
   {
     number: "02",
-    title: "See products and selected work",
-    description: "Explore platforms and digital experiences built by Hempon.",
+    eyebrow: "Platforms · Products · Selected work",
+    title: "Our Products",
+    description:
+      "Take a look at the useful platforms and digital experiences we've created to solve real-world business needs.",
     href: "#work",
-    symbol: "↗",
+    icon: "◈",
+    action: "See what we've built",
   },
   {
     number: "03",
-    title: "Start a project conversation",
-    description: "Tell us what your business needs help solving.",
+    eyebrow: "Your idea · Our next build",
+    title: "Start a Project",
+    description:
+      "Have an idea or a business challenge? We'd love to hear about it and explore how we can help.",
     href: "#contact",
-    symbol: "＋",
+    icon: "↗",
+    action: "Let's talk about it",
   },
 ];
 
@@ -45,6 +55,7 @@ export default function WelcomeBanner() {
     } catch {
       // The welcome experience remains available when storage is restricted.
     }
+
     const timeout = window.setTimeout(() => setVisible(true), 450);
     return () => window.clearTimeout(timeout);
   }, []);
@@ -56,6 +67,7 @@ export default function WelcomeBanner() {
     } catch {
       // Dismissal still applies to the current render.
     }
+
     setVisible(false);
   }, []);
 
@@ -63,6 +75,7 @@ export default function WelcomeBanner() {
     if (!visible) return;
 
     previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
@@ -72,23 +85,29 @@ export default function WelcomeBanner() {
         dismiss();
         return;
       }
+
       if (event.key !== "Tab") return;
 
       const dialog = document.getElementById("hempon-welcome-dialog");
       if (!dialog) return;
+
       if (!dialog.contains(document.activeElement)) {
         event.preventDefault();
         closeButtonRef.current?.focus();
         return;
       }
+
       const focusable = Array.from(
         dialog.querySelectorAll<HTMLElement>(
           'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
         ),
       );
+
       if (!focusable.length) return;
+
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
+
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
@@ -99,6 +118,7 @@ export default function WelcomeBanner() {
     }
 
     document.addEventListener("keydown", onKeyDown);
+
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKeyDown);
@@ -110,7 +130,17 @@ export default function WelcomeBanner() {
 
   return (
     <div
-      className="fixed inset-0 z-[130] flex items-end justify-center bg-[#020408]/75 p-3 backdrop-blur-md sm:items-center sm:p-6"
+      className="
+        fixed inset-0 z-[130]
+        flex items-start justify-center
+        overflow-y-auto overscroll-contain
+        bg-[#020408]/80
+        px-3
+        pt-[max(0.75rem,env(safe-area-inset-top))]
+        pb-[max(0.75rem,env(safe-area-inset-bottom))]
+        backdrop-blur-md
+        sm:items-center sm:p-6
+      "
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) dismiss();
       }}
@@ -121,90 +151,274 @@ export default function WelcomeBanner() {
         aria-modal="true"
         aria-labelledby="hempon-welcome-title"
         aria-describedby="hempon-welcome-description"
-        className="welcome-dialog relative flex max-h-[min(78dvh,680px)] w-full max-w-2xl flex-col overflow-hidden rounded-[26px] border border-white/[.13] bg-[#0b1017] shadow-[0_30px_120px_rgba(0,0,0,.65)] sm:max-h-[min(88dvh,780px)] sm:rounded-[32px]"
+        className="
+          welcome-dialog relative my-auto
+          flex w-full max-w-5xl flex-col
+          max-h-[calc(100dvh-1.5rem)]
+          overflow-hidden
+          rounded-[20px]
+          border border-white/[.13]
+          bg-[#0b1017]
+          shadow-[0_30px_120px_rgba(0,0,0,.68)]
+          sm:max-h-[calc(100dvh-3rem)]
+          sm:rounded-[30px]
+        "
       >
-        <div className="shrink-0 border-b border-white/[.08] bg-[radial-gradient(ellipse_at_top_left,rgba(169,200,117,.11),transparent_65%)] px-5 pb-5 pt-6 sm:px-8 sm:pb-7 sm:pt-8">
+        {/* Header */}
+        <div
+          className="
+            relative shrink-0
+            border-b border-white/[.08]
+            bg-[radial-gradient(ellipse_at_top_left,rgba(169,200,117,.13),transparent_58%)]
+            px-4 pb-4 pt-4
+            sm:px-8 sm:pb-7 sm:pt-7
+            lg:px-10
+          "
+        >
           <button
             ref={closeButtonRef}
             type="button"
             onClick={dismiss}
             aria-label="Close welcome message"
-            className="absolute right-4 top-4 grid size-9 place-items-center rounded-full border border-white/[.12] bg-white/[.035] text-white/55 transition hover:border-white/25 hover:bg-white/[.09] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:right-6 sm:top-6"
+            className="
+              absolute right-3 top-3 z-10
+              grid size-9 place-items-center
+              rounded-full border border-white/[.12]
+              bg-white/[.035] text-white/60
+              transition duration-200
+              hover:rotate-90 hover:border-white/25
+              hover:bg-white/[.09] hover:text-white
+              focus-visible:outline-2 focus-visible:outline-offset-2
+              focus-visible:outline-[var(--accent)]
+              sm:right-6 sm:top-6 sm:size-10
+            "
           >
-            <span aria-hidden="true" className="text-xl leading-none">×</span>
+            <span aria-hidden="true" className="text-xl leading-none">
+              ×
+            </span>
           </button>
-        <div className="mb-4 flex items-center gap-3 pr-10 sm:mb-5">
-  <Image
-    src="/assets/logo/logo_round.png"
-    alt="Hempon Group"
-    width={64}
-    height={64}
-    priority
-    className="size-11 shrink-0 rounded-xl border border-white/10 object-cover shadow-lg sm:size-14 sm:rounded-2xl"
-  />
 
-  <p className="mono text-[9px] font-semibold uppercase tracking-[.2em] text-[var(--accent)] sm:text-[10px]">
-    Hempon Group · Practical digital solutions
-  </p>
-</div>
-          <h2
-            id="hempon-welcome-title"
-            className="display max-w-xl text-[clamp(1.8rem,5vw,3.15rem)] leading-[.98] tracking-[-.06em]"
-          >
-            Welcome. What are you looking to build?
-          </h2>
-          <p
-            id="hempon-welcome-description"
-            className="mt-3 max-w-xl text-xs leading-6 text-white/52 sm:mt-4 sm:text-sm sm:leading-7"
-          >
-            We help businesses turn real operational challenges into useful
-            websites, software and digital experiences. Choose a starting point
-            or simply continue exploring.
-          </p>
+          <div className="flex items-center gap-3 pr-11 sm:gap-4 sm:pr-12">
+            <Image
+              src="/assets/logo/logo_round.png"
+              alt="Hempon Group"
+              width={64}
+              height={64}
+              priority
+              className="
+                size-10 shrink-0 rounded-xl
+                border border-white/10 object-cover shadow-lg
+                sm:size-14 sm:rounded-2xl
+              "
+            />
+
+            <div>
+              <p className="mono text-[9px] font-semibold uppercase tracking-[.2em] text-[var(--accent)] sm:text-[10px]">
+                Hempon Group
+              </p>
+              <p className="mt-1 text-[10px] text-white/45 sm:text-xs">
+                Practical digital solutions
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-4 grid gap-2 sm:mt-7 sm:grid-cols-[1fr_auto] sm:items-end sm:gap-6">
+            <div>
+              <p className="mono mb-2 text-[8px] font-semibold uppercase tracking-[.2em] text-white/40 sm:mb-3 sm:text-[10px]">
+                We&apos;re glad you're here
+              </p>
+
+              <h2
+                id="hempon-welcome-title"
+                className="
+                  display max-w-3xl
+                  text-[clamp(1.9rem,5vw,3.7rem)]
+                  leading-[.98] tracking-[-.06em]
+                "
+              >
+                Welcome.{" "}
+                <span className="text-[var(--accent)]">
+                  Let's make things happen.
+                </span>
+              </h2>
+            </div>
+
+            <p
+              id="hempon-welcome-description"
+              className="max-w-md text-[11px] leading-5 text-white/55 sm:text-sm sm:leading-7"
+            >
+              Whether you're exploring our work, looking for a digital solution,
+              or have an idea to share, you're in the right place.
+            </p>
+          </div>
         </div>
 
-        <div className="min-h-0 flex-1 overflow-y-auto px-3 py-3 sm:px-6 sm:py-5">
-          <p className="mono mb-2 px-2 text-[9px] font-semibold uppercase tracking-[.18em] text-white/32 sm:mb-3 sm:text-[10px]">
-            Find your way around
-          </p>
-          <nav aria-label="Welcome quick links" className="grid gap-2">
-            {pathways.map((pathway) => (
+        {/* Scrollable destination area */}
+        <div
+          className="
+            min-h-0 flex-1
+            overflow-y-auto overscroll-contain
+            px-4 py-4
+            sm:px-6 sm:py-6
+            lg:px-8 lg:py-7
+          "
+        >
+          <div className="mb-3 flex items-center justify-between px-1 sm:mb-4">
+            <p className="mono text-[9px] font-semibold uppercase tracking-[.19em] text-white/40 sm:text-[10px]">
+              What would you like to explore?
+            </p>
+            <span className="mono text-[9px] text-white/30">01 — 03</span>
+          </div>
+
+          <nav
+            aria-label="Welcome destinations"
+            className="grid grid-cols-1 gap-2.5 md:grid-cols-2 md:gap-3 xl:grid-cols-3"
+          >
+            {destinations.map((destination, index) => (
               <a
-                key={pathway.number}
-                href={pathway.href}
+                key={destination.number}
+                href={destination.href}
                 onClick={dismiss}
-                className="group flex min-h-[66px] items-center gap-3 rounded-2xl border border-white/[.09] bg-white/[.025] px-3 py-3 transition duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)]/35 hover:bg-white/[.055] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:min-h-[78px] sm:gap-4 sm:px-4"
+                className={`
+                  group relative flex min-h-[145px] flex-col
+                  overflow-hidden rounded-[18px]
+                  border border-white/[.10]
+                  bg-[#101720] p-4
+                  outline-none transition duration-300
+                  hover:-translate-y-1
+                  hover:border-[var(--accent)]/45
+                  hover:bg-[#141e28]
+                  focus-visible:ring-2
+                  focus-visible:ring-[var(--accent)]
+                  focus-visible:ring-offset-2
+                  focus-visible:ring-offset-[#0b1017]
+                  motion-reduce:transform-none
+                  motion-reduce:transition-none
+                  sm:min-h-[205px] sm:rounded-[20px] sm:p-6
+                  md:[&:last-child]:col-span-2
+                  xl:[&:last-child]:col-span-1
+                `}
+                style={{ animationDelay: `${index * 75}ms` }}
               >
-                <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-[var(--accent)]/20 bg-[var(--accent)]/[.08] text-base text-[var(--accent)] sm:size-11">
-                  {pathway.symbol}
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block text-[13px] font-semibold text-white/88 sm:text-sm">
-                    {pathway.title}
+                <span
+                  aria-hidden="true"
+                  className="
+                    pointer-events-none absolute -right-8 -top-10
+                    size-36 rounded-full
+                    border border-[var(--accent)]/[.10]
+                    transition duration-500
+                    group-hover:scale-125
+                    group-hover:border-[var(--accent)]/[.22]
+                  "
+                />
+
+                <span
+                  aria-hidden="true"
+                  className="
+                    pointer-events-none absolute -right-2 -top-4
+                    size-24 rounded-full border border-white/[.06]
+                    transition duration-500
+                    group-hover:translate-x-1
+                    group-hover:translate-y-1
+                  "
+                />
+
+                <span className="relative flex items-center justify-between">
+                  <span className="mono text-[10px] tracking-[.16em] text-white/40">
+                    / {destination.number}
                   </span>
-                  <span className="mt-1 block text-[11px] leading-4 text-white/42 sm:text-xs sm:leading-5">
-                    {pathway.description}
+
+                  <span
+                    className="
+                      grid size-9 place-items-center rounded-xl
+                      border border-[var(--accent)]/25
+                      bg-[var(--accent)]/[.08]
+                      text-lg text-[var(--accent)]
+                      transition duration-300
+                      group-hover:rotate-6 group-hover:scale-105
+                      sm:size-10
+                    "
+                  >
+                    {destination.icon}
                   </span>
                 </span>
-                <span className="mono hidden text-[9px] text-white/25 sm:block">
-                  {pathway.number}
+
+                <span className="relative mt-4 block sm:mt-8">
+                  <span className="mono block text-[8px] uppercase tracking-[.15em] text-[var(--accent)]/80 sm:text-[9px]">
+                    {destination.eyebrow}
+                  </span>
+
+                  <span className="display mt-2 block text-[1.4rem] leading-none tracking-[-.05em] text-white/90 sm:text-[1.8rem]">
+                    {destination.title}
+                  </span>
+
+                  <span className="mt-2 block max-w-sm text-[10px] leading-[1.6] text-white/50 sm:mt-3 sm:text-xs sm:leading-5">
+                    {destination.description}
+                  </span>
                 </span>
-                <span aria-hidden="true" className="text-sm text-white/30 transition group-hover:translate-x-1 group-hover:text-[var(--accent)]">↗</span>
+
+                <span className="relative mt-auto flex items-center justify-between pt-3 sm:pt-5">
+                  <span className="text-[9px] font-bold uppercase tracking-[.13em] text-white/70 transition-colors group-hover:text-[var(--accent)] sm:text-[10px]">
+                    {destination.action}
+                  </span>
+
+                  <span
+                    aria-hidden="true"
+                    className="
+                      grid size-8 place-items-center rounded-full
+                      border border-white/[.12]
+                      text-sm text-white/60
+                      transition duration-300
+                      group-hover:translate-x-1
+                      group-hover:border-[var(--accent)]/40
+                      group-hover:bg-[var(--accent)]
+                      group-hover:text-[#0b1017]
+                    "
+                  >
+                    ↗
+                  </span>
+                </span>
               </a>
             ))}
           </nav>
         </div>
 
-        <div className="shrink-0 border-t border-white/[.08] bg-[#090d13] px-5 py-3.5 sm:flex sm:items-center sm:justify-between sm:px-8 sm:py-4">
-          <p className="hidden text-[11px] text-white/32 sm:block">
-            You can explore the website at any time.
+        {/* Persistent footer */}
+        <div
+          className="
+            flex shrink-0 flex-col gap-2
+            border-t border-white/[.08]
+            bg-[#090d13]
+            px-4 py-3
+            sm:flex-row sm:items-center
+            sm:justify-between sm:gap-3
+            sm:px-8 sm:py-4
+          "
+        >
+          <p className="text-[9px] leading-4 text-white/40 sm:text-[11px] sm:leading-5">
+            Not sure where to start? Feel free to browse the website.
           </p>
+
           <button
             type="button"
             onClick={dismiss}
-            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-xs font-bold text-[#080b10] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:w-auto sm:min-w-48"
+            className="
+              inline-flex min-h-10 w-full shrink-0
+              items-center justify-center gap-2
+              rounded-full bg-[var(--accent)]
+              px-6 py-2.5
+              text-[9px] font-bold uppercase tracking-[.12em]
+              text-[#080b10]
+              transition duration-200
+              hover:-translate-y-0.5 hover:brightness-110
+              focus-visible:outline-2 focus-visible:outline-offset-2
+              focus-visible:outline-[var(--accent)]
+              motion-reduce:transform-none
+              sm:min-h-11 sm:w-auto sm:py-3 sm:text-[10px]
+            "
           >
-            Continue to website <span aria-hidden="true">↗</span>
+            Continue to website{" "}
+            <span aria-hidden="true">↗</span>
           </button>
         </div>
       </section>
