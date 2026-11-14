@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const STORAGE_KEY = "hempon:first-visit-welcome-dismissed:v2";
 
@@ -132,9 +133,20 @@ export default function WelcomeBanner() {
           >
             <span aria-hidden="true" className="text-xl leading-none">×</span>
           </button>
-          <p className="mono mb-3 pr-12 text-[9px] font-semibold uppercase tracking-[.2em] text-[var(--accent)] sm:text-[10px]">
-            Hempon Group · Practical digital solutions
-          </p>
+        <div className="mb-4 flex items-center gap-3 pr-10 sm:mb-5">
+  <Image
+    src="/assets/logo/logo_round.png"
+    alt="Hempon Group"
+    width={64}
+    height={64}
+    priority
+    className="size-11 shrink-0 rounded-xl border border-white/10 object-cover shadow-lg sm:size-14 sm:rounded-2xl"
+  />
+
+  <p className="mono text-[9px] font-semibold uppercase tracking-[.2em] text-[var(--accent)] sm:text-[10px]">
+    Hempon Group · Practical digital solutions
+  </p>
+</div>
           <h2
             id="hempon-welcome-title"
             className="display max-w-xl text-[clamp(1.8rem,5vw,3.15rem)] leading-[.98] tracking-[-.06em]"
