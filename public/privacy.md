@@ -3,7 +3,7 @@
 **Hempon Group**\
 **Website:** https://hempongroup.co.ke\
 **Effective date:** 28 October 2026\
-**Last updated:** 28 October 2026
+**Last updated:** 12 November 2026
 
 ## 1. About this policy
 
@@ -77,7 +77,10 @@ WhatsApp under its own terms and privacy policy.
 
 We may use third-party providers for website hosting, infrastructure,
 analytics, email, file delivery, customer communication, payment
-processing, or product functionality. Those providers may process
+processing, or product functionality. For example, project enquiries
+submitted through this website are sent to Hempon Group by email using
+Resend; the email address and enquiry details you provide are processed
+for delivery and acknowledgement. Those providers may process
 information on our behalf or independently under their own terms.
 
 Our websites may link to external websites, applications, social
