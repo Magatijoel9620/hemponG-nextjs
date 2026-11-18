@@ -3,44 +3,43 @@
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import posthog from "posthog-js";
 import Reveal from "@/components/Reveal";
 import MagneticButton from "@/components/MagneticButton";
 import ProjectEnquiryForm from "@/components/ProjectEnquiryForm";
+import ProjectEnquiryCTA from "@/components/ProjectEnquiryCTA";
+import ProjectEnquiryModal from "@/components/ProjectEnquiryModal";
+import BackToTop from "@/components/BackToTop";
+import MarketingPageAnalytics from "@/components/MarketingPageAnalytics";
 
 const services = [
   [
-    "01",
     "Websites",
     "High-performance websites that make complex businesses feel simple.",
     "Next.js / React",
   ],
   [
-    "02",
     "Business Systems",
     "Dashboards, portals and internal tools built around the way your team actually works.",
     "Flutter / Supabase",
   ],
   [
-    "03",
     "Mobile Apps",
     "Focused mobile experiences for customers, teams and field operations.",
     "Flutter / API",
   ],
   [
-    "04",
     "Automation",
     "Remove repetitive work with connected workflows, reporting and intelligent processes.",
     "Automation / AI",
   ],
   [
-    "05",
     "AI Experiences",
     "Useful AI integrated where it creates leverage — not added just for the headline.",
     "AI / Data",
   ],
   [
-    "06",
     "Digital Products",
     "From first interaction to production system, we turn ideas into usable products.",
     "Design / Engineering",
@@ -50,52 +49,93 @@ const services = [
 const projects = [
   {
     name: "Farmora",
-    type: "Operations platform",
+    caseStudySlug: "farmora",
+    type: "Farm operations platform",
+    summary:
+      "Bring livestock, inventory, sales, expenses and farm records into one practical workspace, with reporting for everyday farm decisions.",
     image: "/assets/famora_landscape.jpg",
-    href: "https://downloads.hempongroup.co.ke/farmora/",
-    number: "01",
-  },
-  {
-    name: "InvoiceEasy",
-    type: "Business software",
-    image: "/assets/ie_landscape.jpg",
-    href: "https://downloads.hempongroup.co.ke/invoice-easy/",
-    number: "02",
+    href: "https://farmora.hempongroup.co.ke/",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/farmora",
   },
   {
     name: "Landlord Ledger",
-    type: "Property platform",
+    caseStudySlug: "landlord-ledger",
+    type: "Property operations",
+    summary:
+      "Manage properties, rental units, tenants, rent, payments, arrears, maintenance and reporting, with a connected property marketplace.",
     image: "/assets/LL_landscape.jpg",
-    href: "https://downloads.hempongroup.co.ke/landlord-ledger/",
-    number: "03",
+    href: "https://ledger.hempongroup.co.ke/",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/landlord-ledger",
   },
   {
-    name: "DevPilot",
-    type: "AI-powered development assistant",
-    image: "/assets/devpilot_landscape.png",
-    href: "https://downloads.hempongroup.co.ke/devpilot/",
-    number: "04",
+    name: "InvoiceEasy",
+    caseStudySlug: "invoiceeasy",
+    type: "Business invoicing",
+    summary:
+      "Create professional invoices, organise customer and product records, track full and partial payments, and share PDF receipts and reports.",
+    image: "/assets/ie_landscape.jpg",
+    href: "https://downloads.hempongroup.co.ke/invoice-easy/",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/flutter-invoice-app",
   },
   {
     name: "FinAI",
-    type: "Financial intelligence platform",
+    caseStudySlug: "finai",
+    type: "Business finance & inventory",
+    summary:
+      "Follow income, expenses, sales, stock, invoices, customer balances and business performance with AI-powered financial insights.",
     image: "/assets/finai_landscape.png",
-    href: "https://downloads.hempongroup.co.ke/finai/",
-    number: "05",
+    href: "https://finai.hempongroup.co.ke/",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/fintrack-ai",
+  },
+  {
+    name: "DevPilot",
+    caseStudySlug: "devpilot",
+    type: "Personal productivity",
+    summary:
+      "Organise projects and applications, plan daily priorities, manage tasks and review workload in a cloud-backed workspace.",
+    image: "/assets/devpilot_landscape.png",
+    href: "https://devpilot.hempongroup.co.ke/",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/building-devpilot-personal-productivity-app",
+  },
+  {
+    name: "Kanyi J. & Company Advocates",
+    caseStudySlug: "kanyi-advocates",
+    type: "Professional services website",
+    summary:
+      "A responsive law-firm website redesign focused on presenting legal services and the firm's professional identity clearly.",
+    image: "/assets/portfolio/kanyi-j-app.png",
+    href: "https://www.kanyij-advocates.co.ke/",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/kanyi-j-advocates-website",
+  },
+  {
+    name: "Logistics Website System",
+    caseStudySlug: undefined,
+    type: "Industry website solution",
+    summary:
+      "A configurable logistics website starter with shipment tracking, fleet management, service coverage and reusable site structure.",
+    image: "/assets/portfolio/logistics-homepage.png",
+    href: "https://portfolio.hempongroup.co.ke/projects/config-driven-logistics-website-starter-kit",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/config-driven-logistics-website-starter-kit",
+  },
+  {
+    name: "Google Sheets Automation",
+    caseStudySlug: "google-sheets-automation",
+    type: "Workflow automation",
+    summary:
+      "Use Google Apps Script to process Google Form responses into structured summaries and dynamic charts, reducing repetitive spreadsheet work.",
+    image: "/assets/portfolio/google-sheets-automation.png",
+    href: "https://portfolio.hempongroup.co.ke/projects/google-apps-script-automation",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/google-apps-script-automation",
   },
   {
     name: "Website Creation",
+    caseStudySlug: undefined,
     type: "Business websites & digital presence",
+    summary:
+      "Business, professional-services, portfolio, campaign, product and e-commerce websites, with responsive layouts and clear enquiry paths.",
     image: "/assets/digital_exp.png",
     href: "https://downloads.hempongroup.co.ke/website-creation/",
-    number: "06",
-  },
-  {
-    name: "Digital Experiences",
-    type: "Web & product design",
-    image: "/assets/digital_exp.png",
-    href: "https://portfolio.hempongroup.co.ke/projects",
-    number: "07",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects",
   },
 ];
 const process = [
@@ -228,169 +268,47 @@ function SocialIcon({ label }: { label: string }) {
 }
 
 function Nav() {
-  const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-
   useEffect(() => {
-    const sectionIds = [
-      "work",
-      "capabilities",
-      "process",
-      "about",
-      "support",
-      "faq",
-      "contact",
-    ];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section));
+    const sectionIds = ["work", "capabilities", "process", "about", "support", "contact"];
+    const sections = sectionIds.map((id) => document.getElementById(id)).filter((section): section is HTMLElement => Boolean(section));
     if (!sections.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35, 0.6] },
-    );
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveSection(visible.target.id);
+    }, { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35, 0.6] });
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
-  const links = [
-    ["Work", "#work"],
-    ["Capabilities", "#capabilities"],
-    ["Process", "#process"],
-    ["About", "#about"],
-    ["Support", "#support"],
-    ["FAQs", "#faq"],
-    ["Contact", "#contact"],
-  ];
+  const sectionLink = (label: string, href: string) => <a key={label} href={href} aria-current={activeSection === href.slice(1) ? "location" : undefined} className={`nav-link rounded-full px-3 py-2 text-[11px] font-medium transition hover:bg-white/[.055] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.07] text-[var(--accent)]" : "text-white/58"}`}>{label}</a>;
+  const serviceLinks = [["All services", "/services"], ["Websites", "/services/websites"], ["Business Systems", "/services/business-systems"], ["Mobile Apps", "/services/mobile-apps"], ["Automation", "/services/automation"], ["AI Experiences", "/services/ai-experiences"], ["Digital Products", "/services/digital-products"]];
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4 lg:px-8">
-      <div className="nav-shell mx-auto max-w-[1440px] rounded-[24px] border border-white/[.1] bg-[#080b10]/82 px-3 py-2 shadow-2xl shadow-black/25 backdrop-blur-2xl sm:rounded-full sm:px-4">
+      <div className="nav-shell mx-auto max-w-[1440px] rounded-[24px] border border-white/[.1] bg-[#080b10]/90 px-3 py-2 shadow-2xl shadow-black/25 backdrop-blur-2xl sm:rounded-full sm:px-4">
         <div className="flex items-center justify-between gap-3">
-          <a
-            href="#top"
-            className="group flex min-w-0 items-center gap-2.5"
-            onClick={() => setOpen(false)}
-          >
-            <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/[.12] bg-white/[.035] p-0 transition duration-500 group-hover:rotate-6 group-hover:border-white/30">
-              <Image
-                src="/assets/logo/logo_round.png"
-                alt="HempOn Group logo"
-                width={36}
-                height={36}
-                className="h-full w-full object-cover"
-              />
-            </span>
-            <span className="truncate text-[10px] font-bold tracking-[.12em] sm:text-xs sm:tracking-[.18em]">
-              HEMPON GROUP
-            </span>
+          <a href="#top" className="group flex min-w-0 items-center gap-2.5">
+            <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/[.12] bg-white/[.035]"><Image src="/assets/logo/logo_round.png" alt="Hempon Group logo" width={36} height={36} className="h-full w-full object-cover" /></span>
+            <span className="truncate text-[10px] font-bold tracking-[.12em] sm:text-xs sm:tracking-[.18em]">HEMPON GROUP</span>
           </a>
-          <nav className="hidden items-center gap-0.5 lg:flex">
-            {links.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                aria-current={
-                  activeSection === href.slice(1) ? "location" : undefined
-                }
-                className={`nav-link rounded-full px-3.5 py-2 text-[11px] font-medium transition hover:bg-white/[.055] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.07] text-[var(--accent)]" : "text-white/52"}`}
-              >
-                {label}
-              </a>
-            ))}
+          <nav aria-label="Main navigation" className="hidden items-center gap-0.5 xl:flex">
+            {sectionLink("Work", "#work")}
+            <details className="nav-dropdown group relative"><summary className="nav-link flex cursor-pointer list-none items-center gap-1 rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Services <span className="text-[9px] transition group-open:rotate-180">⌄</span></summary><div className="absolute left-0 top-full z-[80] mt-3 w-60 rounded-2xl border border-white/[.12] bg-[#0a0e14]/[.98] p-2 shadow-2xl">{serviceLinks.map(([label, href]) => <a key={href} href={href} className="block rounded-xl px-3 py-2.5 text-xs text-white/65 transition hover:bg-white/[.06] hover:text-white">{label}</a>)}</div></details>
+            <Link href="/products" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Products</Link>
+            <Link href="/case-studies" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Case studies</Link>
+            <Link href="/industries" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Industries</Link>
+            <a href="#process" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Process</a>
+            <a href="/insights" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Insights</a>
+            {sectionLink("About", "#about")}
           </nav>
-          <div className="flex items-center gap-2">
-            <div
-              className="hidden items-center gap-1 sm:flex"
-              role="group"
-              aria-label="Social media"
-            >
-              {socials.map(([label, url]) => (
-                <a
-                  key={label}
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  title={label}
-                  className="grid h-9 w-9 place-items-center rounded-full text-white/55 transition hover:bg-white/[.07] hover:text-[var(--accent)]"
-                >
-                  <SocialIcon label={label} />
-                </a>
-              ))}
-            </div>
-            <a
-              href="#contact"
-              className="quiet-cta inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/[.14] bg-white/[.92] text-[11px] font-bold text-[#000000] transition hover:bg-white sm:h-auto sm:w-auto sm:px-4 sm:py-2.5"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                className="h-4 w-4 sm:hidden"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <path d="M3 6.5 12 13l9-6.5" />
-                <rect x="3" y="5" width="18" height="14" rx="2" />
-              </svg>
-              <span className="sr-only sm:hidden">Contact</span>
-              <span className="hidden sm:inline">Start a project</span>
-              <span className="ml-1.5 hidden sm:inline">↗</span>
-            </a>
-            <button
-              aria-label="Toggle navigation"
-              aria-expanded={open}
-              onClick={() => setOpen(!open)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/[.1] bg-white/[.035] lg:hidden"
-            >
-              <span className="relative h-3.5 w-4">
-                <span
-                  className={`absolute left-0 top-0 h-px w-full bg-white transition ${open ? "translate-y-[6px] rotate-45" : ""}`}
-                />
-                <span
-                  className={`absolute left-0 top-[6px] h-px w-full bg-white transition ${open ? "opacity-0" : ""}`}
-                />
-                <span
-                  className={`absolute left-0 top-3 h-px w-full bg-white transition ${open ? "-translate-y-[6px] -rotate-45" : ""}`}
-                />
-              </span>
-            </button>
+          <div className="flex shrink-0 items-center gap-2">
+            <a href="#contact" className="quiet-cta rounded-full px-3 py-2.5 text-[10px] font-bold sm:px-4 sm:text-[11px]">Let’s talk <span aria-hidden="true">↗</span></a>
+            <details className="nav-mobile group relative xl:hidden"><summary aria-label="Open navigation menu" className="grid size-10 cursor-pointer list-none place-items-center rounded-full border border-white/[.12] bg-white/[.04] text-white/75 [&::-webkit-details-marker]:hidden"><span className="text-lg">☰</span></summary><nav aria-label="Mobile navigation" className="absolute right-0 top-[calc(100%+12px)] max-h-[min(76dvh,560px)] w-[min(88vw,360px)] overflow-y-auto overscroll-contain rounded-2xl border border-white/[.12] bg-[#090d13]/[.98] p-3 shadow-2xl">
+              <a href="#work" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">Selected work</a>
+              <details className="mobile-nav-group group"><summary className="mobile-nav-link flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">Services <span className="text-white/35 transition group-open:rotate-180">⌄</span></summary><div className="mb-2 ml-3 grid gap-1 border-l border-white/[.1] pl-3">{serviceLinks.map(([label, href]) => <a key={href} href={href} className="mobile-nav-sub">{label}</a>)}</div></details>
+              <Link href="/products" className="mobile-nav-link">Products</Link><Link href="/case-studies" className="mobile-nav-link">Case studies</Link><Link href="/industries" className="mobile-nav-link">Industries</Link><a href="/insights" className="mobile-nav-link">Insights</a><a href="#process" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">How we work</a><a href="#about" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">About Hempon</a><a href="#support" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">Maintenance & support</a><a href="#contact" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">Contact details</a>
+            </nav></details>
           </div>
         </div>
-        <motion.div
-          initial={false}
-          animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-          className="overflow-hidden lg:hidden"
-        >
-          <nav className="grid gap-1 border-t border-white/[.08] pt-3 mt-3 pb-1">
-            {links.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                onClick={() => setOpen(false)}
-                aria-current={
-                  activeSection === href.slice(1) ? "location" : undefined
-                }
-                className={`rounded-2xl px-4 py-3 text-sm transition hover:bg-white/[.05] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.06] text-[var(--accent)]" : "text-white/65"}`}
-              >
-                {label}
-                <span className="float-right text-white/25">↗</span>
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="mt-1 rounded-2xl bg-[var(--accent)] px-4 py-3 text-sm font-bold text-[#080b10]"
-            >
-              Start a project <span className="float-right">↗</span>
-            </a>
-          </nav>
-        </motion.div>
       </div>
     </header>
   );
@@ -727,15 +645,18 @@ function Services() {
             <div className="mt-10 mono text-[10px] uppercase tracking-[.24em] text-white/25">
               Design × Engineering × Operations
             </div>
+            <Link href="/services" className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white">
+              Explore all services <span aria-hidden="true">↗</span>
+            </Link>
           </div>
           <div>
             <div className="grid gap-px overflow-hidden rounded-[28px] border border-white/[.08] bg-white/[.08] sm:grid-cols-2">
-              {services.map(([num, title, desc, tech], i) => {
+              {services.map(([title, desc, tech], i) => {
                 const isActive = activeService === title;
                 return (
                   <motion.button
                     type="button"
-                    key={num}
+                    key={title}
                     aria-pressed={isActive}
                     onClick={() => {
                       setActiveService(title);
@@ -747,13 +668,8 @@ function Services() {
                     transition={{ duration: 0.6, delay: i * 0.07 }}
                     className={`magnetic-card group relative min-h-[210px] text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--accent)] ${isActive ? "bg-[#131b23]" : "bg-[#0b0f15] hover:bg-[#10161e]"} p-6 sm:p-8`}
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="mono text-[10px] text-white/22">
-                        {num}
-                      </span>
-                      <span className="mono text-[9px] uppercase tracking-[.18em] text-[var(--accent)] opacity-75">
-                        {tech}
-                      </span>
+                    <div className="flex items-center justify-end">
+                      <span className="mono text-[9px] uppercase tracking-[.18em] text-[var(--accent)] opacity-75">{tech}</span>
                     </div>
                     <div className="mt-10">
                       <h3 className="display text-2xl tracking-[-.045em]">
@@ -791,18 +707,23 @@ function Services() {
                     {selectedDetails.fit}
                   </p>
                   <a
-                    href="#contact"
-                    onClick={() => {
-                      window.dispatchEvent(
-                        new CustomEvent("hempon:select-enquiry-service", {
-                          detail: activeService,
-                        }),
-                      );
-                      trackService(activeService, "service_detail_cta");
-                    }}
+                    href={`https://wa.me/254738219953?text=${encodeURIComponent(
+                      `Hi Hempon Group! I'm interested in your ${activeService} service. ${selectedDetails.fit} I'd like to explore how this could work for my business.`,
+                    )}`}
+                    onClick={() =>
+                      trackService(activeService, "service_detail_whatsapp")
+                    }
+                    target="_blank"
+                    rel="noreferrer"
                     className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-xs font-bold text-[#10140d] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
                   >
-                    Discuss this direction <span aria-hidden="true">↗</span>
+                    Explore this idea together <span aria-hidden="true">↗</span>
+                  </a>
+                  <a
+                    href={`/services/${activeService.toLowerCase().replaceAll(" ", "-")}`}
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-white/55 transition hover:text-[var(--accent)]"
+                  >
+                    View full service details <span aria-hidden="true">↗</span>
                   </a>
                 </div>
                 <div className="grid gap-6 sm:grid-cols-2">
@@ -908,23 +829,12 @@ function Services() {
                     >
                       Explore recommendation
                     </button>
-                    <a
-                      href="#contact"
-                      onClick={() => {
-                        window.dispatchEvent(
-                          new CustomEvent("hempon:select-enquiry-service", {
-                            detail: recommendedService,
-                          }),
-                        );
-                        trackService(
-                          recommendedService,
-                          "service_finder_contact",
-                        );
-                      }}
-                      className="rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold text-[#10140d] transition hover:brightness-110"
+                    <ProjectEnquiryCTA
+                      service={recommendedService}
+                      className="rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold text-[#071006] transition hover:brightness-110"
                     >
-                      Talk to Hempon ↗
-                    </a>
+                      Let’s talk about this direction
+                    </ProjectEnquiryCTA>
                   </div>
                 </div>
               </div>
@@ -949,74 +859,205 @@ function Work() {
             <h2 className="display mt-6 max-w-4xl text-5xl leading-[.92] sm:text-6xl md:text-8xl">
               Real products.
               <br />
-              <span className="text-white/25">Real problems.</span>
+              <span className="text-white/25">Practical solutions.</span>
             </h2>
           </div>
-          <p className="max-w-xs text-sm leading-6 text-white/42">
-            A selection of platforms and experiences engineered for real
-            operational use.
-          </p>
+          <div className="max-w-sm">
+            <p className="text-sm leading-6 text-white/42">
+              A selection of business platforms, live products, client websites
+              and workflow solutions. Explore the working experience or read
+              how each project was shaped.
+            </p>
+            <Link
+              href="/products"
+              className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
+            >
+              Explore the Hempon product centre ↗
+            </Link>
+            <a
+              href="https://portfolio.hempongroup.co.ke/projects"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[var(--accent)] transition hover:text-white"
+            >
+              Browse the complete project archive ↗
+            </a>
+          </div>
         </div>
         <div className="mt-14 grid gap-5 md:mt-16 md:grid-cols-2">
           {projects.map((p, i) => (
-            <motion.a
-              href={p.href}
+            <motion.article
               key={p.name}
-              onClick={() => {
-                if (!posthog.__loaded) return;
-
-                posthog.capture("portfolio_viewed", {
-                  project: p.name,
-                  destination: p.href,
-                });
-
-                posthog.logger.info("portfolio case study opened", {
-                  interaction: "portfolio_card",
-                  project: p.name,
-                  destination: p.href,
-                });
-              }}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, delay: i * 0.06 }}
-              className="magnetic-card group relative overflow-hidden rounded-[28px] border border-white/[.08] bg-[#0b0f15]"
+              transition={{ duration: 0.7, delay: (i % 4) * 0.06 }}
+              className="magnetic-card group overflow-hidden rounded-[28px] border border-white/[.08] bg-[#0b0f15]"
             >
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={p.image}
-                  alt={p.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  loading={
-                    p.image === "/assets/LL_landscape.jpg" ? "eager" : "lazy"
-                  }
-                  className="object-cover transition duration-1000 group-hover:scale-[1.045]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-black/5" />
-                <div className="absolute left-5 top-5 mono text-[10px] text-white/55">
-                  {p.number} / {String(projects.length).padStart(2, "0")}
+              <a href={p.href} target="_blank" rel="noreferrer" className="block">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Image
+                    src={p.image}
+                    alt={`${p.name} project preview`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    loading={i < 2 ? "eager" : "lazy"}
+                    className="object-cover transition duration-1000 group-hover:scale-[1.045]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-black/5" />
+                  <div className="absolute right-5 top-5 rounded-full border border-white/15 bg-black/25 px-3 py-1 text-[10px] text-white/70 backdrop-blur">
+                    Explore ↗
+                  </div>
                 </div>
-                <div className="absolute right-5 top-5 rounded-full border border-white/15 bg-black/25 px-3 py-1 text-[10px] text-white/60 backdrop-blur">
-                  View case ↗
+              </a>
+              <div className="p-6 sm:p-7">
+                <p className="mono text-[9px] uppercase tracking-[.22em] text-[var(--accent)]">
+                  {p.type}
+                </p>
+                <h3 className="display mt-2 text-2xl sm:text-3xl">{p.name}</h3>
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-white/48">
+                  {p.summary}
+                </p>
+                <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-white/[.08] pt-5">
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      if (posthog.__loaded) {
+                        posthog.capture("portfolio_viewed", {
+                          project: p.name,
+                          destination: p.href,
+                          interaction: "project_experience",
+                        });
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/60 bg-[var(--accent)] px-4 py-2.5 text-[11px] font-bold text-[#071006] transition hover:-translate-y-0.5 hover:bg-[#b8d789]"
+                  >
+                    {["Farmora", "Landlord Ledger", "FinAI", "DevPilot"].includes(p.name)
+                      ? "Open product"
+                      : p.name === "Website Creation"
+                        ? "Explore service"
+                        : "View project"} ↗
+                  </a>
+                  <a
+                    href={p.caseStudySlug ? `/case-studies/${p.caseStudySlug}` : p.caseStudyHref}
+                    target={p.caseStudySlug ? undefined : "_blank"}
+                    rel={p.caseStudySlug ? undefined : "noreferrer"}
+                    onClick={() => {
+                      if (posthog.__loaded) {
+                        posthog.capture("portfolio_viewed", {
+                          project: p.name,
+                          destination: p.caseStudySlug ? `/case-studies/${p.caseStudySlug}` : p.caseStudyHref,
+                          interaction: "case_study",
+                        });
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 text-[11px] font-semibold text-white/55 transition hover:text-[var(--accent)]"
+                  >
+                    Read project story ↗
+                  </a>
                 </div>
               </div>
-              <div className="flex items-end justify-between gap-6 p-6 sm:p-7">
-                <div>
-                  <p className="mono text-[9px] uppercase tracking-[.22em] text-[var(--accent)]">
-                    {p.type}
-                  </p>
-                  <h3 className="display mt-2 text-3xl sm:text-4xl">
-                    {p.name}
-                  </h3>
-                </div>
-                <span className="hidden text-sm text-white/25 md:block">
-                  Digital product
-                </span>
-              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const featuredInsights = [
+  {
+    category: "Business systems",
+    title: "One Payment Backbone, Multiple SaaS Products",
+    summary:
+      "The thinking behind a reusable payment layer for payment initiation, verification, webhooks, idempotency and billing integrations.",
+    href: "https://portfolio.hempongroup.co.ke/posts/building-a-reusable-payment-engine-for-multiple-saas-products",
+  },
+  {
+    category: "Professional services",
+    title: "Beyond a Website: Adoyo J. & Company Advocates",
+    summary:
+      "A digital-presence project combining website development, professional email setup and essential digital-branding materials.",
+    href: "https://portfolio.hempongroup.co.ke/posts/building-adoyo-j-company-advocates-digital-presence",
+  },
+  {
+    category: "Web platforms",
+    title: "One Foundation, Many Industries",
+    summary:
+      "How a configurable website system can support business, legal, clinic, school, hospitality, construction, property and e-commerce experiences.",
+    href: "https://portfolio.hempongroup.co.ke/posts/building-a-config-driven-multi-industry-website-starter-kit",
+  },
+  {
+    category: "Product development",
+    title: "InvoiceEasy: A Smarter Way to Create and Manage Invoices",
+    summary:
+      "The evolution from a lightweight invoice generator into an offline-first, cloud-enabled business invoicing platform.",
+    href: "https://portfolio.hempongroup.co.ke/posts/building-a-cross-platform-invoice-app-with-flutter",
+  },
+];
+
+function Insights() {
+  return (
+    <section className="border-y border-white/[.07] py-20 sm:py-24 md:py-32 section-grid-bg">
+      <div className="section-shell">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <SectionLabel>From the workbench</SectionLabel>
+            <h2 className="display mt-6 max-w-3xl text-4xl leading-[.94] sm:text-5xl md:text-7xl">
+              The thinking behind
+              <br />
+              <span className="text-white/25">the things we build.</span>
+            </h2>
+          </div>
+          <a
+            href="https://portfolio.hempongroup.co.ke/posts"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] transition hover:text-white"
+          >
+            Read all insights and build notes ↗
+          </a>
+        </div>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {featuredInsights.map((item, index) => (
+            <motion.a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => {
+                if (posthog.__loaded) {
+                  posthog.capture("insight_opened", {
+                    title: item.title,
+                    category: item.category,
+                    source: "homepage",
+                  });
+                }
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: index * 0.06 }}
+              className="group flex min-h-[250px] flex-col rounded-[24px] border border-white/[.08] bg-[#0b0f15] p-6 transition hover:-translate-y-1 hover:border-[var(--accent)]/35"
+            >
+              <p className="mono text-[9px] uppercase tracking-[.2em] text-[var(--accent)]">
+                {item.category}
+              </p>
+              <h3 className="display mt-7 text-2xl leading-tight transition group-hover:text-[var(--accent)]">
+                {item.title}
+              </h3>
+              <p className="mt-4 text-sm leading-6 text-white/45">
+                {item.summary}
+              </p>
+              <span className="mt-auto inline-flex items-center gap-2 pt-7 text-[11px] font-semibold text-white/65">
+                Read the story <span className="transition group-hover:translate-x-1">↗</span>
+              </span>
             </motion.a>
           ))}
         </div>
+        <div className="mt-8"><a href="/insights" className="inline-flex text-xs font-semibold text-[var(--accent)] hover:text-white">Explore all insights ↗</a></div>
       </div>
     </section>
   );
@@ -1220,13 +1261,8 @@ function Testimonials() {
                 transition={{ duration: 0.65, delay: i * 0.045 }}
                 className="magnetic-card group flex min-h-[300px] flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition-colors hover:border-white/[.16] hover:bg-white/[.04] sm:p-7"
               >
-                <div className="flex items-center justify-between gap-4">
-                  <span className="mono text-[10px] text-[var(--accent)]">
-                    0{i + 1}
-                  </span>
-                  <span className="text-2xl leading-none text-white/15 transition group-hover:text-white/25">
-                    “
-                  </span>
+                <div className="flex items-center justify-end">
+                  <span className="text-2xl leading-none text-white/15 transition group-hover:text-white/25">“</span>
                 </div>
                 <blockquote className="mt-7 text-[15px] leading-7 text-white/62">
                   “{testimonial.quote}”
@@ -1296,15 +1332,12 @@ function Pricing() {
             </a>
           </div>
           <div className="grid gap-3">
-            {plans.map((p, i) => (
+            {plans.map((p) => (
               <motion.div
                 key={p.name}
                 className="magnetic-card group grid gap-6 rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition hover:border-white/20 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7"
               >
                 <div>
-                  <div className="mono text-[9px] uppercase tracking-[.2em] text-[var(--accent)]">
-                    0{i + 1}
-                  </div>
                   <h3 className="display mt-3 text-2xl sm:text-3xl">
                     {p.name}
                   </h3>
@@ -1440,7 +1473,7 @@ function Support() {
               href="#contact"
               className="mt-8 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
             >
-              Discuss a support arrangement ↗
+              Talk through support options ↗
             </a>
           </div>
           <div className="grid gap-3 md:grid-cols-3">
@@ -1453,10 +1486,7 @@ function Support() {
                 transition={{ duration: 0.55, delay: index * 0.07 }}
                 className="magnetic-card flex flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-5 sm:p-6"
               >
-                <span className="mono text-[10px] text-[var(--accent)]">
-                  0{index + 1} / SUPPORT
-                </span>
-                <h3 className="display mt-6 text-3xl">{tier.name}</h3>
+                <h3 className="display text-3xl">{tier.name}</h3>
                 <p className="mt-3 min-h-[68px] text-sm leading-6 text-white/42">
                   {tier.fit}
                 </p>
@@ -1504,13 +1534,14 @@ function Support() {
             href="#contact"
             className="mt-4 inline-flex shrink-0 items-center gap-2 text-xs font-semibold text-[var(--accent)] sm:mt-0"
           >
-            Discuss a custom arrangement <span aria-hidden="true">↗</span>
+            Talk through a custom plan <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
     </section>
   );
 }
+
 
 const faqItems = [
   {
@@ -1629,6 +1660,7 @@ function FAQ() {
   );
 }
 
+
 function Contact() {
   return (
     <section
@@ -1733,7 +1765,7 @@ function Footer() {
     {
       title: "Connect",
       links: [
-        ["Start a project", "#contact"],
+        ["Tell us what you’re planning", "#contact"],
         ["Email us", "mailto:hempongroup@gmail.com"],
         [
           "WhatsApp",
@@ -1744,6 +1776,11 @@ function Footer() {
     {
       title: "Quick links",
       links: [
+        ["Services", "/services"],
+        ["Products", "/products"],
+        ["Case studies", "/case-studies"],
+        ["Industries", "/industries"],
+        ["Insights", "/insights"],
         ["Hempon Portfolio", "https://portfolio.hempongroup.co.ke/"],
         ["Landlord Ledger", "https://ledger.hempongroup.co.ke/"],
         ["Farmora", "https://farmora.hempongroup.co.ke/"],
@@ -1800,7 +1837,7 @@ function Footer() {
                 onClick={() => setEnquiryModalOpen(true)}
                 className="magnetic-control quiet-cta mt-6 inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-sm font-bold transition-all"
               >
-                Start a project <span aria-hidden="true">↗</span>
+                Tell us what you’re planning <span aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
@@ -1867,11 +1904,14 @@ function Footer() {
               </h3>
               <div className="mt-6 grid gap-3.5 text-sm font-medium text-white/58">
                 {group.links.map(([label, href]) =>
-                  label === "Start a project" ? (
+                  label === "Tell us what you’re planning" ? (
                     <button
                       key={label}
                       type="button"
-                      onClick={() => setEnquiryModalOpen(true)}
+                      onClick={() => {
+                        if (posthog.__loaded) posthog.capture("project_enquiry_modal_opened", { service: "Not sure yet", source_page: "/", source: "homepage_footer" });
+                        setEnquiryModalOpen(true);
+                      }}
                       className="w-fit text-left transition-colors hover:text-[var(--accent)]"
                     >
                       {label} ↗
@@ -1926,12 +1966,13 @@ function Footer() {
                 <br />
                 Working beyond borders.
               </p>
-              <a
-                href="#contact"
+              <button
+                type="button"
+                onClick={() => setEnquiryModalOpen(true)}
                 className="mt-4 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
               >
-                Let’s talk ↗
-              </a>
+                Have a project in mind? ↗
+              </button>
             </div>
           </motion.div>
         </div>
@@ -1956,120 +1997,12 @@ function Footer() {
       <ProjectEnquiryModal
         open={enquiryModalOpen}
         onClose={() => setEnquiryModalOpen(false)}
+        source="homepage_footer"
       />
     </footer>
   );
 }
 
-function ProjectEnquiryModal({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    previouslyFocusedRef.current =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const focusTimer = window.setTimeout(
-      () => closeButtonRef.current?.focus(),
-      30,
-    );
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-      if (event.key === "Tab") {
-        const dialog = document.getElementById("project-enquiry-modal");
-        const focusable = dialog?.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        );
-        if (!focusable?.length) return;
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
-      }
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      window.clearTimeout(focusTimer);
-      document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
-      previouslyFocusedRef.current?.focus();
-    };
-  }, [open, onClose]);
-
-  if (!open) return null;
-  return (
-    <div
-      className="fixed inset-0 z-[120] flex items-end justify-center bg-black/75 p-0 backdrop-blur-md sm:items-center sm:p-5"
-      onMouseDown={(event) => {
-        if (event.target === event.currentTarget) onClose();
-      }}
-    >
-      <section
-        id="project-enquiry-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="project-enquiry-modal-title"
-        className="relative max-h-[94dvh] w-full max-w-3xl overflow-y-auto rounded-t-[26px] border border-white/[.12] bg-[#080c12] p-4 shadow-[0_24px_100px_rgba(0,0,0,.65)] sm:rounded-[28px] sm:p-7"
-      >
-        <div className="mb-5 flex items-start justify-between gap-4">
-          <div>
-            <div className="mono text-[9px] uppercase tracking-[.22em] text-[var(--accent)]">
-              A good place to begin
-            </div>
-            <h2
-              id="project-enquiry-modal-title"
-              className="display mt-2 text-2xl sm:text-3xl"
-            >
-              Let’s talk about your project.
-            </h2>
-            <p className="mt-2 max-w-xl text-sm leading-6 text-white/55">
-              Share a few details and we’ll help you work out the next step.
-            </p>
-          </div>
-          <button
-            ref={closeButtonRef}
-            type="button"
-            onClick={onClose}
-            aria-label="Close project enquiry"
-            className="magnetic-control inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-xl text-white/70 transition hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
-          >
-            ×
-          </button>
-        </div>
-        <ProjectEnquiryForm />
-      </section>
-    </div>
-  );
-}
-
-function BackToTop() {
-  return (
-    <motion.a
-      href="#top"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="back-top fixed bottom-5 right-4 z-40 inline-flex items-center gap-2 rounded-full border border-white/[.12] bg-[#0a0e14]/85 px-3.5 py-2.5 text-[10px] font-bold uppercase tracking-[.16em] text-white/55 shadow-2xl backdrop-blur-xl transition hover:border-white/25 hover:text-white sm:bottom-7 sm:right-7"
-    >
-      <span>Top</span>
-      <span>↑</span>
-    </motion.a>
-  );
-}
 
 function MobileWhatsAppButton() {
   return (
@@ -2105,13 +2038,14 @@ function MobileWhatsAppButton() {
           fill="currentColor"
         />
       </svg>
-      <span className="truncate">WhatsApp</span>
+      <span className="truncate">Ask us on WhatsApp</span>
     </a>
   );
 }
 
 export default function Home() {
   const workRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const onPointerMove = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
@@ -2163,6 +2097,7 @@ export default function Home() {
   const { scrollYProgress: pageProgress } = useScroll();
   return (
     <div id="top" className="noise relative min-h-screen bg-[var(--bg)]">
+      <MarketingPageAnalytics />
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-[2px] origin-left bg-[var(--accent)]"
@@ -2178,6 +2113,9 @@ export default function Home() {
           <Work />
         </motion.div>
       </div>
+      <Reveal>
+        <Insights />
+      </Reveal>
       <Reveal>
         <Process />
       </Reveal>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import posthog from "posthog-js";
 
@@ -29,14 +29,43 @@ const initialState: EnquiryState = {
 const fieldClass = "mt-2 w-full rounded-xl border border-white/[.12] bg-black/25 px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/25 focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/15";
 const labelClass = "block text-xs font-medium text-white/65";
 
-export default function ProjectEnquiryForm() {
-  const [form, setForm] = useState<EnquiryState>(initialState);
+function getCampaignAttribution() {
+  const params = new URLSearchParams(window.location.search);
+  const current = {
+    utmSource: params.get("utm_source") ?? "",
+    utmMedium: params.get("utm_medium") ?? "",
+    utmCampaign: params.get("utm_campaign") ?? "",
+  };
+  const storageKey = "hempon:first-touch-attribution";
+  try {
+    const stored = sessionStorage.getItem(storageKey);
+    if (stored) return JSON.parse(stored) as Record<string, string>;
+    if (Object.values(current).some(Boolean)) sessionStorage.setItem(storageKey, JSON.stringify(current));
+  } catch {
+    // Attribution is optional; a blocked storage context must not interrupt an enquiry.
+  }
+  return current;
+}
+
+export default function ProjectEnquiryForm({ defaultService, source }: { defaultService?: string; source?: string }) {
+  const [form, setForm] = useState<EnquiryState>(() => ({ ...initialState, service: defaultService && serviceOptions.includes(defaultService) ? defaultService : initialState.service }));
   const [step, setStep] = useState(1);
   const [startedAt] = useState(() => Date.now());
   const [website, setWebsite] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const startedEventSent = useRef(false);
+
+  const trackFormStarted = () => {
+    if (startedEventSent.current) return;
+    startedEventSent.current = true;
+    if (posthog.__loaded) posthog.capture("project_enquiry_form_started", {
+      service: defaultService && serviceOptions.includes(defaultService) ? defaultService : "Not sure yet",
+      source_page: window.location.pathname,
+      source: source ?? "inline_form",
+    });
+  };
 
   useEffect(() => {
     const handleServiceSelection = (event: Event) => {
@@ -56,6 +85,7 @@ export default function ProjectEnquiryForm() {
     event.preventDefault();
     setError("");
     if (step < 3) {
+      if (posthog.__loaded) posthog.capture("project_enquiry_step_completed", { step, service: form.service, source_page: window.location.pathname });
       setStep((current) => current + 1);
       return;
     }
@@ -68,15 +98,31 @@ export default function ProjectEnquiryForm() {
       const response = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, website, startedAt }),
+        body: JSON.stringify({
+          ...form,
+          website,
+          startedAt,
+          sourcePage: window.location.pathname,
+          sourceContext: source ?? "inline_form",
+          sourceReferrer: document.referrer ? new URL(document.referrer).origin : "direct",
+          ...getCampaignAttribution(),
+        }),
       });
       const result = await response.json() as { ok?: boolean; message?: string; error?: string };
       if (!response.ok || !result.ok) throw new Error(result.error || "We couldn't send your enquiry. Please try again.");
-      setSuccess(result.message || "Your enquiry has been sent. Hempon Group will be in touch.");
-      if (posthog.__loaded) posthog.capture("project_enquiry_submitted", { service: form.service, budget_provided: Boolean(form.budget), timeline_provided: Boolean(form.timeline) });
-      setForm(initialState);
+      setSuccess(result.message || "Thanks for reaching out. We’ll review your details and get back to you with a useful next step.");
+      if (posthog.__loaded) posthog.capture("project_enquiry_submitted", {
+        service: form.service,
+        budget_provided: Boolean(form.budget),
+        timeline_provided: Boolean(form.timeline),
+        source_page: window.location.pathname,
+        source: source ?? "inline_form",
+        ...getCampaignAttribution(),
+      });
+      setForm({ ...initialState, service: defaultService && serviceOptions.includes(defaultService) ? defaultService : initialState.service });
       setStep(1);
     } catch (submitError) {
+      if (posthog.__loaded) posthog.capture("project_enquiry_failed", { service: form.service, source_page: window.location.pathname });
       setError(submitError instanceof Error ? submitError.message : "Something went wrong. Please try again.");
     } finally {
       setSending(false);
@@ -88,7 +134,7 @@ export default function ProjectEnquiryForm() {
       <div className="flex items-center justify-between gap-3">
         <div>
           <div className="mono text-[9px] uppercase tracking-[.22em] text-[var(--accent)]">Project enquiry</div>
-          <h3 className="display mt-2 text-2xl sm:text-3xl">Tell us what you have in mind.</h3>
+          <h3 className="display mt-2 text-2xl sm:text-3xl">A few details will help us guide you.</h3>
         </div>
         <span className="mono shrink-0 text-[10px] text-white/35">0{step} / 03</span>
       </div>
@@ -98,12 +144,15 @@ export default function ProjectEnquiryForm() {
 
       {success ? (
         <div className="mt-7 rounded-2xl border border-[var(--accent)]/25 bg-[var(--accent)]/[.07] p-5" role="status" aria-live="polite">
-          <div className="text-sm font-semibold text-white">Enquiry received</div>
+          <div className="text-sm font-semibold text-white">Thanks — we’ve got your enquiry.</div>
           <p className="mt-2 text-sm leading-6 text-white/65">{success}</p>
-          <button type="button" onClick={() => setSuccess("")} className="mt-5 rounded-full border border-white/15 px-4 py-2 text-xs font-semibold text-white/75 hover:border-white/35">Send another enquiry</button>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <a href={`https://wa.me/254738219953?text=${encodeURIComponent(`Hi Hempon Group, I’ve just sent an enquiry about ${form.service}. I’d like to follow up on the next step.`)}`} target="_blank" rel="noreferrer" className="inline-flex items-center rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold text-[#071006] transition hover:brightness-110">Continue on WhatsApp ↗</a>
+            <button type="button" onClick={() => setSuccess("")} className="rounded-full border border-white/15 px-4 py-2 text-xs font-semibold text-white/75 hover:border-white/35">Send another enquiry</button>
+          </div>
         </div>
       ) : (
-        <form className="mt-6" onSubmit={submit}>
+        <form className="mt-6" onSubmit={submit} onFocusCapture={trackFormStarted}>
           {step === 1 && (
             <div className="grid gap-4 sm:grid-cols-2">
               <label className={labelClass}>Your name *<input className={fieldClass} autoComplete="name" required minLength={2} maxLength={100} value={form.name} onChange={(event) => update("name", event.target.value)} placeholder="Name" /></label>
@@ -149,7 +198,7 @@ export default function ProjectEnquiryForm() {
           {error && <p className="mt-4 rounded-xl border border-red-400/20 bg-red-400/[.06] px-4 py-3 text-sm text-red-200" role="alert">{error}</p>}
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/[.08] pt-5">
             {step > 1 ? <button type="button" onClick={() => { setError(""); setStep((current) => current - 1); }} className="rounded-full border border-white/15 px-5 py-3 text-xs font-semibold text-white/65 transition hover:border-white/30 hover:text-white">← Back</button> : <span className="text-[10px] text-white/30">* Required fields</span>}
-            <button type="submit" disabled={sending} className="rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-bold text-[#10140d] transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">{sending ? "Sending enquiry…" : step === 3 ? "Send project enquiry ↗" : "Continue →"}</button>
+            <button type="submit" disabled={sending} className="rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-bold text-[#10140d] transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">{sending ? "Sending enquiry…" : step === 3 ? "Send my enquiry ↗" : "Continue →"}</button>
           </div>
         </form>
       )}

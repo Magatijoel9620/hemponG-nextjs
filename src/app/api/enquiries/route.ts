@@ -111,6 +111,12 @@ export async function POST(request: NextRequest) {
   const budget = clean(payload.budget, 40);
   const timeline = clean(payload.timeline, 40);
   const startedAt = Number(payload.startedAt);
+  const sourcePage = clean(payload.sourcePage, 180);
+  const sourceContext = clean(payload.sourceContext, 100);
+  const sourceReferrer = clean(payload.sourceReferrer, 180);
+  const utmSource = clean(payload.utmSource, 120);
+  const utmMedium = clean(payload.utmMedium, 120);
+  const utmCampaign = clean(payload.utmCampaign, 160);
 
   if (Date.now() - startedAt < 2500) {
     return NextResponse.json({ error: "Please take a moment to review your enquiry before sending." }, { status: 400 });
@@ -138,6 +144,12 @@ export async function POST(request: NextRequest) {
     ["Business", business || "Not provided"], ["Service", service],
     ["Specific requirement", specificNeed || "Not provided"], ["Budget", budget || "Not specified"],
     ["Timeline", timeline || "Not specified"], ["Project details", description],
+    ["Enquiry source page", sourcePage || "Not recorded"],
+    ["Enquiry entry point", sourceContext || "Not recorded"],
+    ["Referrer", sourceReferrer || "Direct / not recorded"],
+    ["Campaign source", utmSource || "Not tagged"],
+    ["Campaign medium", utmMedium || "Not tagged"],
+    ["Campaign", utmCampaign || "Not tagged"],
   ];
   const html = `<h2>New project enquiry</h2><table cellpadding="8" cellspacing="0" border="0">${rows.map(([label, value]) => `<tr><th align="left" valign="top">${escapeHtml(label)}</th><td>${escapeHtml(value).replace(/\n/g, "<br>")}</td></tr>`).join("")}</table>`;
 
