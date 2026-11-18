@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import MarketingShell from "@/components/MarketingShell";
 import ProjectEnquiryCTA from "@/components/ProjectEnquiryCTA";
+import WhatsAppEnquiryLink from "@/components/WhatsAppEnquiryLink";
 import { getService, services } from "@/lib/services";
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -46,8 +47,11 @@ export default async function ServiceDetail({ params }: Props) {
                 service={s.name}
                 className="route-link route-link-primary"
               >
-                Discuss a project
+                Let’s talk about your needs
               </ProjectEnquiryCTA>
+              <WhatsAppEnquiryLink service={s.name} source="service_page">
+                Ask us on WhatsApp
+              </WhatsAppEnquiryLink>
               <Link
                 href="/products"
                 className="route-link route-link-secondary"
@@ -96,7 +100,7 @@ export default async function ServiceDetail({ params }: Props) {
         <div className="mt-4 rounded-[26px] border border-white/[.08] p-6 sm:p-8">
           <p className="route-kicker">How we approach it</p>
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {s.approach.map((x, i) => (
+            {s.approach.map((x) => (
               <div key={x} className="border-t border-white/[.12] pt-4">
                 <p className="mt-3 text-sm leading-6 text-white/65">{x}</p>
               </div>
@@ -169,7 +173,7 @@ export default async function ServiceDetail({ params }: Props) {
             service={s.name}
             className="route-link route-link-primary shrink-0"
           >
-            Start an enquiry
+            Let’s talk through your needs
           </ProjectEnquiryCTA>
         </div>
       </section>

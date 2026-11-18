@@ -3,46 +3,43 @@
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import posthog from "posthog-js";
 import Reveal from "@/components/Reveal";
 import MagneticButton from "@/components/MagneticButton";
 import ProjectEnquiryForm from "@/components/ProjectEnquiryForm";
+import ProjectEnquiryCTA from "@/components/ProjectEnquiryCTA";
 import ProjectEnquiryModal from "@/components/ProjectEnquiryModal";
-import Link from "next/link";
+import BackToTop from "@/components/BackToTop";
+import MarketingPageAnalytics from "@/components/MarketingPageAnalytics";
 
 const services = [
   [
-    "01",
     "Websites",
     "High-performance websites that make complex businesses feel simple.",
     "Next.js / React",
   ],
   [
-    "02",
     "Business Systems",
     "Dashboards, portals and internal tools built around the way your team actually works.",
     "Flutter / Supabase",
   ],
   [
-    "03",
     "Mobile Apps",
     "Focused mobile experiences for customers, teams and field operations.",
     "Flutter / API",
   ],
   [
-    "04",
     "Automation",
     "Remove repetitive work with connected workflows, reporting and intelligent processes.",
     "Automation / AI",
   ],
   [
-    "05",
     "AI Experiences",
     "Useful AI integrated where it creates leverage — not added just for the headline.",
     "AI / Data",
   ],
   [
-    "06",
     "Digital Products",
     "From first interaction to production system, we turn ideas into usable products.",
     "Design / Engineering",
@@ -59,7 +56,6 @@ const projects = [
     image: "/assets/famora_landscape.jpg",
     href: "https://farmora.hempongroup.co.ke/",
     caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/farmora",
-    number: "01",
   },
   {
     name: "Landlord Ledger",
@@ -70,7 +66,6 @@ const projects = [
     image: "/assets/LL_landscape.jpg",
     href: "https://ledger.hempongroup.co.ke/",
     caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/landlord-ledger",
-    number: "02",
   },
   {
     name: "InvoiceEasy",
@@ -81,7 +76,6 @@ const projects = [
     image: "/assets/ie_landscape.jpg",
     href: "https://downloads.hempongroup.co.ke/invoice-easy/",
     caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/flutter-invoice-app",
-    number: "03",
   },
   {
     name: "FinAI",
@@ -92,7 +86,6 @@ const projects = [
     image: "/assets/finai_landscape.png",
     href: "https://finai.hempongroup.co.ke/",
     caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/fintrack-ai",
-    number: "04",
   },
   {
     name: "DevPilot",
@@ -103,7 +96,6 @@ const projects = [
     image: "/assets/devpilot_landscape.png",
     href: "https://devpilot.hempongroup.co.ke/",
     caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/building-devpilot-personal-productivity-app",
-    number: "05",
   },
   {
     name: "Kanyi J. & Company Advocates",
@@ -114,7 +106,6 @@ const projects = [
     image: "/assets/portfolio/kanyi-j-app.png",
     href: "https://www.kanyij-advocates.co.ke/",
     caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/kanyi-j-advocates-website",
-    number: "06",
   },
   {
     name: "Logistics Website System",
@@ -125,7 +116,6 @@ const projects = [
     image: "/assets/portfolio/logistics-homepage.png",
     href: "https://portfolio.hempongroup.co.ke/projects/config-driven-logistics-website-starter-kit",
     caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/config-driven-logistics-website-starter-kit",
-    number: "07",
   },
   {
     name: "Google Sheets Automation",
@@ -136,7 +126,6 @@ const projects = [
     image: "/assets/portfolio/google-sheets-automation.png",
     href: "https://portfolio.hempongroup.co.ke/projects/google-apps-script-automation",
     caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/google-apps-script-automation",
-    number: "08",
   },
   {
     name: "Website Creation",
@@ -147,7 +136,6 @@ const projects = [
     image: "/assets/digital_exp.png",
     href: "https://downloads.hempongroup.co.ke/website-creation/",
     caseStudyHref: "https://portfolio.hempongroup.co.ke/projects",
-    number: "09",
   },
 ];
 const process = [
@@ -280,170 +268,47 @@ function SocialIcon({ label }: { label: string }) {
 }
 
 function Nav() {
-  const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-
   useEffect(() => {
-    const sectionIds = [
-      "work",
-      "capabilities",
-      "process",
-      "about",
-      "support",
-      "faq",
-      "contact",
-    ];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section));
+    const sectionIds = ["work", "capabilities", "process", "about", "support", "contact"];
+    const sections = sectionIds.map((id) => document.getElementById(id)).filter((section): section is HTMLElement => Boolean(section));
     if (!sections.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35, 0.6] },
-    );
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveSection(visible.target.id);
+    }, { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35, 0.6] });
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
-  const links = [
-    ["Work", "#work"],
-    ["Products", "/products"],
-    ["Capabilities", "#capabilities"],
-    ["Process", "#process"],
-    ["About", "#about"],
-    ["Support", "#support"],
-    ["FAQs", "#faq"],
-    ["Contact", "#contact"],
-  ];
+  const sectionLink = (label: string, href: string) => <a key={label} href={href} aria-current={activeSection === href.slice(1) ? "location" : undefined} className={`nav-link rounded-full px-3 py-2 text-[11px] font-medium transition hover:bg-white/[.055] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.07] text-[var(--accent)]" : "text-white/58"}`}>{label}</a>;
+  const serviceLinks = [["All services", "/services"], ["Websites", "/services/websites"], ["Business Systems", "/services/business-systems"], ["Mobile Apps", "/services/mobile-apps"], ["Automation", "/services/automation"], ["AI Experiences", "/services/ai-experiences"], ["Digital Products", "/services/digital-products"]];
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4 lg:px-8">
-      <div className="nav-shell mx-auto max-w-[1440px] rounded-[24px] border border-white/[.1] bg-[#080b10]/82 px-3 py-2 shadow-2xl shadow-black/25 backdrop-blur-2xl sm:rounded-full sm:px-4">
+      <div className="nav-shell mx-auto max-w-[1440px] rounded-[24px] border border-white/[.1] bg-[#080b10]/90 px-3 py-2 shadow-2xl shadow-black/25 backdrop-blur-2xl sm:rounded-full sm:px-4">
         <div className="flex items-center justify-between gap-3">
-          <a
-            href="#top"
-            className="group flex min-w-0 items-center gap-2.5"
-            onClick={() => setOpen(false)}
-          >
-            <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/[.12] bg-white/[.035] p-0 transition duration-500 group-hover:rotate-6 group-hover:border-white/30">
-              <Image
-                src="/assets/logo/logo_round.png"
-                alt="HempOn Group logo"
-                width={36}
-                height={36}
-                className="h-full w-full object-cover"
-              />
-            </span>
-            <span className="truncate text-[10px] font-bold tracking-[.12em] sm:text-xs sm:tracking-[.18em]">
-              HEMPON GROUP
-            </span>
+          <a href="#top" className="group flex min-w-0 items-center gap-2.5">
+            <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/[.12] bg-white/[.035]"><Image src="/assets/logo/logo_round.png" alt="Hempon Group logo" width={36} height={36} className="h-full w-full object-cover" /></span>
+            <span className="truncate text-[10px] font-bold tracking-[.12em] sm:text-xs sm:tracking-[.18em]">HEMPON GROUP</span>
           </a>
-          <nav className="hidden items-center gap-0.5 lg:flex">
-            {links.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                aria-current={
-                  activeSection === href.slice(1) ? "location" : undefined
-                }
-                className={`nav-link rounded-full px-3.5 py-2 text-[11px] font-medium transition hover:bg-white/[.055] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.07] text-[var(--accent)]" : "text-white/52"}`}
-              >
-                {label}
-              </a>
-            ))}
+          <nav aria-label="Main navigation" className="hidden items-center gap-0.5 xl:flex">
+            {sectionLink("Work", "#work")}
+            <details className="nav-dropdown group relative"><summary className="nav-link flex cursor-pointer list-none items-center gap-1 rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Services <span className="text-[9px] transition group-open:rotate-180">⌄</span></summary><div className="absolute left-0 top-full z-[80] mt-3 w-60 rounded-2xl border border-white/[.12] bg-[#0a0e14]/[.98] p-2 shadow-2xl">{serviceLinks.map(([label, href]) => <a key={href} href={href} className="block rounded-xl px-3 py-2.5 text-xs text-white/65 transition hover:bg-white/[.06] hover:text-white">{label}</a>)}</div></details>
+            <Link href="/products" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Products</Link>
+            <Link href="/case-studies" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Case studies</Link>
+            <Link href="/industries" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Industries</Link>
+            <a href="#process" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Process</a>
+            <a href="/insights" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Insights</a>
+            {sectionLink("About", "#about")}
           </nav>
-          <div className="flex items-center gap-2">
-            <div
-              className="hidden items-center gap-1 sm:flex"
-              role="group"
-              aria-label="Social media"
-            >
-              {socials.map(([label, url]) => (
-                <a
-                  key={label}
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  title={label}
-                  className="grid h-9 w-9 place-items-center rounded-full text-white/55 transition hover:bg-white/[.07] hover:text-[var(--accent)]"
-                >
-                  <SocialIcon label={label} />
-                </a>
-              ))}
-            </div>
-            <a
-              href="#contact"
-              className="quiet-cta inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/[.14] bg-white/[.92] text-[11px] font-bold text-[#000000] transition hover:bg-white sm:h-auto sm:w-auto sm:px-4 sm:py-2.5"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                className="h-4 w-4 sm:hidden"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <path d="M3 6.5 12 13l9-6.5" />
-                <rect x="3" y="5" width="18" height="14" rx="2" />
-              </svg>
-              <span className="sr-only sm:hidden">Contact</span>
-              <span className="hidden sm:inline">Start a project</span>
-              <span className="ml-1.5 hidden sm:inline">↗</span>
-            </a>
-            <button
-              aria-label="Toggle navigation"
-              aria-expanded={open}
-              onClick={() => setOpen(!open)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/[.1] bg-white/[.035] lg:hidden"
-            >
-              <span className="relative h-3.5 w-4">
-                <span
-                  className={`absolute left-0 top-0 h-px w-full bg-white transition ${open ? "translate-y-[6px] rotate-45" : ""}`}
-                />
-                <span
-                  className={`absolute left-0 top-[6px] h-px w-full bg-white transition ${open ? "opacity-0" : ""}`}
-                />
-                <span
-                  className={`absolute left-0 top-3 h-px w-full bg-white transition ${open ? "-translate-y-[6px] -rotate-45" : ""}`}
-                />
-              </span>
-            </button>
+          <div className="flex shrink-0 items-center gap-2">
+            <a href="#contact" className="quiet-cta rounded-full px-3 py-2.5 text-[10px] font-bold sm:px-4 sm:text-[11px]">Let’s talk <span aria-hidden="true">↗</span></a>
+            <details className="nav-mobile group relative xl:hidden"><summary aria-label="Open navigation menu" className="grid size-10 cursor-pointer list-none place-items-center rounded-full border border-white/[.12] bg-white/[.04] text-white/75 [&::-webkit-details-marker]:hidden"><span className="text-lg">☰</span></summary><nav aria-label="Mobile navigation" className="absolute right-0 top-[calc(100%+12px)] max-h-[min(76dvh,560px)] w-[min(88vw,360px)] overflow-y-auto overscroll-contain rounded-2xl border border-white/[.12] bg-[#090d13]/[.98] p-3 shadow-2xl">
+              <a href="#work" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">Selected work</a>
+              <details className="mobile-nav-group group"><summary className="mobile-nav-link flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">Services <span className="text-white/35 transition group-open:rotate-180">⌄</span></summary><div className="mb-2 ml-3 grid gap-1 border-l border-white/[.1] pl-3">{serviceLinks.map(([label, href]) => <a key={href} href={href} className="mobile-nav-sub">{label}</a>)}</div></details>
+              <Link href="/products" className="mobile-nav-link">Products</Link><Link href="/case-studies" className="mobile-nav-link">Case studies</Link><Link href="/industries" className="mobile-nav-link">Industries</Link><a href="/insights" className="mobile-nav-link">Insights</a><a href="#process" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">How we work</a><a href="#about" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">About Hempon</a><a href="#support" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">Maintenance & support</a><a href="#contact" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">Contact details</a>
+            </nav></details>
           </div>
         </div>
-        <motion.div
-          initial={false}
-          animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-          className="overflow-hidden lg:hidden"
-        >
-          <nav className="grid gap-1 border-t border-white/[.08] pt-3 mt-3 pb-1">
-            {links.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                onClick={() => setOpen(false)}
-                aria-current={
-                  activeSection === href.slice(1) ? "location" : undefined
-                }
-                className={`rounded-2xl px-4 py-3 text-sm transition hover:bg-white/[.05] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.06] text-[var(--accent)]" : "text-white/65"}`}
-              >
-                {label}
-                <span className="float-right text-white/25">↗</span>
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="mt-1 rounded-2xl bg-[var(--accent)] px-4 py-3 text-sm font-bold text-[#080b10]"
-            >
-              Start a project <span className="float-right">↗</span>
-            </a>
-          </nav>
-        </motion.div>
       </div>
     </header>
   );
@@ -780,19 +645,13 @@ function Services() {
             <div className="mt-10 mono text-[10px] uppercase tracking-[.24em] text-white/25">
               Design × Engineering × Operations
             </div>
- <button
-              type="button"
-              onClick={() => {
-                window.location.href = "/services";
-              }}
-              className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
-            >
+            <Link href="/services" className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white">
               Explore all services <span aria-hidden="true">↗</span>
-            </button>
+            </Link>
           </div>
           <div>
             <div className="grid gap-px overflow-hidden rounded-[28px] border border-white/[.08] bg-white/[.08] sm:grid-cols-2">
-              {services.map(([num, title, desc, tech], i) => {
+              {services.map(([title, desc, tech], i) => {
                 const isActive = activeService === title;
                 return (
                   <motion.button
@@ -848,18 +707,17 @@ function Services() {
                     {selectedDetails.fit}
                   </p>
                   <a
-                    href="#contact"
-                    onClick={() => {
-                      window.dispatchEvent(
-                        new CustomEvent("hempon:select-enquiry-service", {
-                          detail: activeService,
-                        }),
-                      );
-                      trackService(activeService, "service_detail_cta");
-                    }}
+                    href={`https://wa.me/254738219953?text=${encodeURIComponent(
+                      `Hi Hempon Group! I'm interested in your ${activeService} service. ${selectedDetails.fit} I'd like to explore how this could work for my business.`,
+                    )}`}
+                    onClick={() =>
+                      trackService(activeService, "service_detail_whatsapp")
+                    }
+                    target="_blank"
+                    rel="noreferrer"
                     className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-xs font-bold text-[#10140d] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
                   >
-                    Discuss this direction <span aria-hidden="true">↗</span>
+                    Explore this idea together <span aria-hidden="true">↗</span>
                   </a>
                   <a
                     href={`/services/${activeService.toLowerCase().replaceAll(" ", "-")}`}
@@ -971,23 +829,12 @@ function Services() {
                     >
                       Explore recommendation
                     </button>
-                    <a
-                      href="#contact"
-                      onClick={() => {
-                        window.dispatchEvent(
-                          new CustomEvent("hempon:select-enquiry-service", {
-                            detail: recommendedService,
-                          }),
-                        );
-                        trackService(
-                          recommendedService,
-                          "service_finder_contact",
-                        );
-                      }}
-                      className="rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold text-[#10140d] transition hover:brightness-110"
+                    <ProjectEnquiryCTA
+                      service={recommendedService}
+                      className="rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold text-[#071006] transition hover:brightness-110"
                     >
-                      Talk to Hempon ↗
-                    </a>
+                      Let’s talk about this direction
+                    </ProjectEnquiryCTA>
                   </div>
                 </div>
               </div>
@@ -1021,7 +868,7 @@ function Work() {
               and workflow solutions. Explore the working experience or read
               how each project was shaped.
             </p>
-             <Link
+            <Link
               href="/products"
               className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
             >
@@ -1054,7 +901,7 @@ function Work() {
                     alt={`${p.name} project preview`}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    loading={i < 3 ? "eager" : "lazy"}
+                    loading={i < 2 ? "eager" : "lazy"}
                     className="object-cover transition duration-1000 group-hover:scale-[1.045]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-black/5" />
@@ -1085,7 +932,7 @@ function Work() {
                         });
                       }
                     }}
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[11px] font-bold text-[#080b10] transition hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/60 bg-[var(--accent)] px-4 py-2.5 text-[11px] font-bold text-[#071006] transition hover:-translate-y-0.5 hover:bg-[#b8d789]"
                   >
                     {["Farmora", "Landlord Ledger", "FinAI", "DevPilot"].includes(p.name)
                       ? "Open product"
@@ -1626,7 +1473,7 @@ function Support() {
               href="#contact"
               className="mt-8 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
             >
-              Discuss a support arrangement ↗
+              Talk through support options ↗
             </a>
           </div>
           <div className="grid gap-3 md:grid-cols-3">
@@ -1687,13 +1534,14 @@ function Support() {
             href="#contact"
             className="mt-4 inline-flex shrink-0 items-center gap-2 text-xs font-semibold text-[var(--accent)] sm:mt-0"
           >
-            Discuss a custom arrangement <span aria-hidden="true">↗</span>
+            Talk through a custom plan <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
     </section>
   );
 }
+
 
 const faqItems = [
   {
@@ -1812,6 +1660,7 @@ function FAQ() {
   );
 }
 
+
 function Contact() {
   return (
     <section
@@ -1916,7 +1765,7 @@ function Footer() {
     {
       title: "Connect",
       links: [
-        ["Start a project", "#contact"],
+        ["Tell us what you’re planning", "#contact"],
         ["Email us", "mailto:hempongroup@gmail.com"],
         [
           "WhatsApp",
@@ -1988,7 +1837,7 @@ function Footer() {
                 onClick={() => setEnquiryModalOpen(true)}
                 className="magnetic-control quiet-cta mt-6 inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-sm font-bold transition-all"
               >
-                Start a project <span aria-hidden="true">↗</span>
+                Tell us what you’re planning <span aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
@@ -2055,11 +1904,14 @@ function Footer() {
               </h3>
               <div className="mt-6 grid gap-3.5 text-sm font-medium text-white/58">
                 {group.links.map(([label, href]) =>
-                  label === "Start a project" ? (
+                  label === "Tell us what you’re planning" ? (
                     <button
                       key={label}
                       type="button"
-                      onClick={() => setEnquiryModalOpen(true)}
+                      onClick={() => {
+                        if (posthog.__loaded) posthog.capture("project_enquiry_modal_opened", { service: "Not sure yet", source_page: "/", source: "homepage_footer" });
+                        setEnquiryModalOpen(true);
+                      }}
                       className="w-fit text-left transition-colors hover:text-[var(--accent)]"
                     >
                       {label} ↗
@@ -2119,7 +1971,7 @@ function Footer() {
                 onClick={() => setEnquiryModalOpen(true)}
                 className="mt-4 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
               >
-                Let’s talk ↗
+                Have a project in mind? ↗
               </button>
             </div>
           </motion.div>
@@ -2145,25 +1997,12 @@ function Footer() {
       <ProjectEnquiryModal
         open={enquiryModalOpen}
         onClose={() => setEnquiryModalOpen(false)}
+        source="homepage_footer"
       />
     </footer>
   );
 }
 
-
-function BackToTop() {
-  return (
-    <motion.a
-      href="#top"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="back-top fixed bottom-5 right-4 z-40 inline-flex items-center gap-2 rounded-full border border-white/[.12] bg-[#0a0e14]/85 px-3.5 py-2.5 text-[10px] font-bold uppercase tracking-[.16em] text-white/55 shadow-2xl backdrop-blur-xl transition hover:border-white/25 hover:text-white sm:bottom-7 sm:right-7"
-    >
-      <span>Top</span>
-      <span>↑</span>
-    </motion.a>
-  );
-}
 
 function MobileWhatsAppButton() {
   return (
@@ -2199,13 +2038,14 @@ function MobileWhatsAppButton() {
           fill="currentColor"
         />
       </svg>
-      <span className="truncate">WhatsApp</span>
+      <span className="truncate">Ask us a question</span>
     </a>
   );
 }
 
 export default function Home() {
   const workRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const onPointerMove = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
@@ -2257,6 +2097,7 @@ export default function Home() {
   const { scrollYProgress: pageProgress } = useScroll();
   return (
     <div id="top" className="noise relative min-h-screen bg-[var(--bg)]">
+      <MarketingPageAnalytics />
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-[2px] origin-left bg-[var(--accent)]"

@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
 import MarketingShell from "@/components/MarketingShell";
 import ProjectEnquiryCTA from "@/components/ProjectEnquiryCTA";
 import { services } from "@/lib/services";
-
 export const metadata: Metadata = {
-  title: "Digital Services | Hempon Group",
+  title: "Website, Software & Digital Services in Kenya",
   description:
-    "Explore Hempon Group services across websites, business systems, mobile apps, automation, applied AI and digital products.",
+    "Explore Hempon Group services: website development, business systems, mobile apps, workflow automation, applied AI and digital product development.",
   alternates: { canonical: "/services" },
 };
+
 export default function ServicesPage() {
   return (
     <MarketingShell>
@@ -25,7 +26,7 @@ export default function ServicesPage() {
           explains where it fits and what a project can involve.
         </p>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {services.map((s, i) => (
+          {services.map((s) => (
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}

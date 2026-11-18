@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+
 import Link from "next/link";
 import MarketingShell from "@/components/MarketingShell";
 import { products } from "@/lib/products";
@@ -36,7 +37,7 @@ export default function ProductsPage() {
           </span>
         </div>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {products.map((p, i) => (
+          {products.map((p) => (
             <article key={p.slug} className="route-card">
               <Link href={`/products/${p.slug}`} className="group block">
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#111722]">

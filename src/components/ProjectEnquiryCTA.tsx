@@ -1,10 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { ReactNode } from "react";
+import posthog from "posthog-js";
 import ProjectEnquiryModal from "@/components/ProjectEnquiryModal";
 
-export default function ProjectEnquiryCTA({ service, children = "Discuss a project", className = "route-link route-link-primary" }: { service: string; children?: ReactNode; className?: string }) {
+export default function ProjectEnquiryCTA({ service, children = "Let’s talk through your project", className = "route-link route-link-primary", source }: { service: string; children?: ReactNode; className?: string; source?: string }) {
   const [open, setOpen] = useState(false);
-  return <><button type="button" className={className} onClick={() => setOpen(true)}>{children} <span aria-hidden="true">↗</span></button><ProjectEnquiryModal open={open} onClose={() => setOpen(false)} defaultService={service} /></>;
+  const close = useCallback(() => setOpen(false), []);
+  const show = useCallback(() => {
+    if (posthog.__loaded) posthog.capture("project_enquiry_modal_opened", {
+      service,
+      source_page: typeof window !== "undefined" ? window.location.pathname : "unknown",
+      source: source ?? "contextual_cta",
+    });
+    setOpen(true);
+  }, [service, source]);
+  return <><button type="button" className={className} onClick={show}>{children} <span aria-hidden="true">↗</span></button><ProjectEnquiryModal open={open} onClose={close} defaultService={service} source={source ?? "contextual_cta"} /></>;
 }

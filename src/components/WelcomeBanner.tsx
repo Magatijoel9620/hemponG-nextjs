@@ -8,7 +8,6 @@ const STORAGE_KEY = "hempon:first-visit-welcome-dismissed:v2";
 
 const destinations = [
   {
-    number: "01",
     eyebrow: "Design · Engineering · Operations",
     title: "Digital Solutions",
     description:
@@ -18,7 +17,6 @@ const destinations = [
     action: "Explore what we do",
   },
   {
-    number: "02",
     eyebrow: "Platforms · Products · Selected work",
     title: "Our Products",
     description:
@@ -28,7 +26,6 @@ const destinations = [
     action: "See what we've built",
   },
   {
-    number: "03",
     eyebrow: "Your idea · Our next build",
     title: "Start a Project",
     description:
@@ -267,7 +264,7 @@ export default function WelcomeBanner() {
             <p className="mono text-[9px] font-semibold uppercase tracking-[.19em] text-white/40 sm:text-[10px]">
               What would you like to explore?
             </p>
-            <span className="mono text-[9px] text-white/30">01 — 03</span>
+            <span className="mono text-[9px] text-white/30">Choose a direction</span>
           </div>
 
           <nav
@@ -276,7 +273,7 @@ export default function WelcomeBanner() {
           >
             {destinations.map((destination, index) => (
               <a
-                key={destination.number}
+                key={destination.title}
                 href={destination.href}
                 onClick={dismiss}
                 className={`
@@ -324,10 +321,6 @@ export default function WelcomeBanner() {
                 />
 
                 <span className="relative flex items-center justify-between">
-                  <span className="mono text-[10px] tracking-[.16em] text-white/40">
-                    / {destination.number}
-                  </span>
-
                   <span
                     className="
                       grid size-9 place-items-center rounded-xl
