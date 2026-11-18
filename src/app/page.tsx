@@ -1,8 +1,10 @@
 "use client";
+// cspell:ignore Hempon
 
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import posthog from "posthog-js";
 import Reveal from "@/components/Reveal";
 import MagneticButton from "@/components/MagneticButton";
@@ -50,52 +52,99 @@ const services = [
 const projects = [
   {
     name: "Farmora",
-    type: "Operations platform",
+    type: "Farm operations platform",
+    summary:
+      "Bring livestock, inventory, sales, expenses and farm records into one practical workspace, with reporting for everyday farm decisions.",
     image: "/assets/famora_landscape.jpg",
-    href: "https://downloads.hempongroup.co.ke/farmora/",
+    href: "https://farmora.hempongroup.co.ke/",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/farmora",
     number: "01",
   },
   {
-    name: "InvoiceEasy",
-    type: "Business software",
-    image: "/assets/ie_landscape.jpg",
-    href: "https://downloads.hempongroup.co.ke/invoice-easy/",
+    name: "Landlord Ledger",
+    type: "Property operations",
+    summary:
+      "Manage properties, rental units, tenants, rent, payments, arrears, maintenance and reporting, with a connected property marketplace.",
+    image: "/assets/LL_landscape.jpg",
+    href: "https://ledger.hempongroup.co.ke/",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/landlord-ledger",
     number: "02",
   },
   {
-    name: "Landlord Ledger",
-    type: "Property platform",
-    image: "/assets/LL_landscape.jpg",
-    href: "https://downloads.hempongroup.co.ke/landlord-ledger/",
+    name: "InvoiceEasy",
+    type: "Business invoicing",
+    summary:
+      "Create professional invoices, organise customer and product records, track full and partial payments, and share PDF receipts and reports.",
+    image: "/assets/ie_landscape.jpg",
+    href: "https://downloads.hempongroup.co.ke/invoice-easy/",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/flutter-invoice-app",
     number: "03",
   },
   {
-    name: "DevPilot",
-    type: "AI-powered development assistant",
-    image: "/assets/devpilot_landscape.png",
-    href: "https://downloads.hempongroup.co.ke/devpilot/",
+    name: "FinAI",
+    type: "Business finance & inventory",
+    summary:
+      "Follow income, expenses, sales, stock, invoices, customer balances and business performance with AI-powered financial insights.",
+    image: "/assets/finai_landscape.png",
+    href: "https://finai.hempongroup.co.ke/",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/fintrack-ai",
     number: "04",
   },
   {
-    name: "FinAI",
-    type: "Financial intelligence platform",
-    image: "/assets/finai_landscape.png",
-    href: "https://downloads.hempongroup.co.ke/finai/",
+    name: "DevPilot",
+    type: "Personal productivity",
+    summary:
+      "Organise projects and applications, plan daily priorities, manage tasks and review workload in a cloud-backed workspace.",
+    image: "/assets/devpilot_landscape.png",
+    href: "https://devpilot.hempongroup.co.ke/",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/building-devpilot-personal-productivity-app",
     number: "05",
+  },
+  {
+    name: "Kanyi J. & Company Advocates",
+    type: "Professional services website",
+    summary:
+      "A responsive law-firm website redesign focused on presenting legal services and the firm's professional identity clearly.",
+    image: "/assets/portfolio/kanyi-j-app.png",
+    href: "https://www.kanyij-advocates.co.ke/",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/kanyi-j-advocates-website",
+    number: "06",
+  },
+  {
+    name: "Logistics Website System",
+    type: "Industry website solution",
+    summary:
+      "A configurable logistics website starter with shipment tracking, fleet management, service coverage and reusable site structure.",
+    image: "/assets/portfolio/logistics-homepage.png",
+    href: "https://portfolio.hempongroup.co.ke/projects/config-driven-logistics-website-starter-kit",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/config-driven-logistics-website-starter-kit",
+    number: "07",
+  },
+  {
+    name: "Google Sheets Automation",
+    type: "Workflow automation",
+    summary:
+      "Use Google Apps Script to process Google Form responses into structured summaries and dynamic charts, reducing repetitive spreadsheet work.",
+    image: "/assets/portfolio/google-sheets-automation.png",
+    href: "https://portfolio.hempongroup.co.ke/projects/google-apps-script-automation",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/google-apps-script-automation",
+    number: "08",
   },
   {
     name: "Website Creation",
     type: "Business websites & digital presence",
+    summary:
+      "Business, professional-services, portfolio, campaign, product and e-commerce websites, with responsive layouts and clear enquiry paths.",
     image: "/assets/digital_exp.png",
     href: "https://downloads.hempongroup.co.ke/website-creation/",
-    number: "06",
-  },
-  {
-    name: "Digital Experiences",
-    type: "Web & product design",
-    image: "/assets/digital_exp.png",
-    href: "https://portfolio.hempongroup.co.ke/projects",
-    number: "07",
+    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects",
+    number: "09",
   },
 ];
 const process = [
@@ -260,6 +309,7 @@ function Nav() {
   }, []);
   const links = [
     ["Work", "#work"],
+    ["Products", "/products"],
     ["Capabilities", "#capabilities"],
     ["Process", "#process"],
     ["About", "#about"],
@@ -727,6 +777,15 @@ function Services() {
             <div className="mt-10 mono text-[10px] uppercase tracking-[.24em] text-white/25">
               Design × Engineering × Operations
             </div>
+            <button
+              type="button"
+              onClick={() => {
+                window.location.href = "/services";
+              }}
+              className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
+            >
+              Explore all services <span aria-hidden="true">↗</span>
+            </button>
           </div>
           <div>
             <div className="grid gap-px overflow-hidden rounded-[28px] border border-white/[.08] bg-white/[.08] sm:grid-cols-2">
@@ -803,6 +862,12 @@ function Services() {
                     className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-xs font-bold text-[#10140d] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
                   >
                     Discuss this direction <span aria-hidden="true">↗</span>
+                  </a>
+                  <a
+                    href={`/services/${activeService.toLowerCase().replaceAll(" ", "-")}`}
+                    className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-white/55 transition hover:text-[var(--accent)]"
+                  >
+                    View full service details <span aria-hidden="true">↗</span>
                   </a>
                 </div>
                 <div className="grid gap-6 sm:grid-cols-2">
@@ -949,71 +1014,216 @@ function Work() {
             <h2 className="display mt-6 max-w-4xl text-5xl leading-[.92] sm:text-6xl md:text-8xl">
               Real products.
               <br />
-              <span className="text-white/25">Real problems.</span>
+              <span className="text-white/25">Practical solutions.</span>
             </h2>
           </div>
-          <p className="max-w-xs text-sm leading-6 text-white/42">
-            A selection of platforms and experiences engineered for real
-            operational use.
-          </p>
+          <div className="max-w-sm">
+            <p className="text-sm leading-6 text-white/42">
+              A selection of business platforms, live products, client websites
+              and workflow solutions. Explore the working experience or read how
+              each project was shaped.
+            </p>
+            <Link
+              href="/products"
+              className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
+            >
+              Explore the Hempon product centre ↗
+            </Link>
+            <a
+              href="https://portfolio.hempongroup.co.ke/projects"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
+            >
+              Browse the complete project archive ↗
+            </a>
+          </div>
         </div>
         <div className="mt-14 grid gap-5 md:mt-16 md:grid-cols-2">
           {projects.map((p, i) => (
-            <motion.a
-              href={p.href}
+            <motion.article
               key={p.name}
-              onClick={() => {
-                if (!posthog.__loaded) return;
-
-                posthog.capture("portfolio_viewed", {
-                  project: p.name,
-                  destination: p.href,
-                });
-
-                posthog.logger.info("portfolio case study opened", {
-                  interaction: "portfolio_card",
-                  project: p.name,
-                  destination: p.href,
-                });
-              }}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, delay: i * 0.06 }}
-              className="magnetic-card group relative overflow-hidden rounded-[28px] border border-white/[.08] bg-[#0b0f15]"
+              transition={{ duration: 0.7, delay: (i % 4) * 0.06 }}
+              className="magnetic-card group overflow-hidden rounded-[28px] border border-white/[.08] bg-[#0b0f15]"
             >
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={p.image}
-                  alt={p.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  loading={
-                    p.image === "/assets/LL_landscape.jpg" ? "eager" : "lazy"
-                  }
-                  className="object-cover transition duration-1000 group-hover:scale-[1.045]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-black/5" />
-                <div className="absolute left-5 top-5 mono text-[10px] text-white/55">
-                  {p.number} / {String(projects.length).padStart(2, "0")}
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                className="block"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Image
+                    src={p.image}
+                    alt={`${p.name} project preview`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    loading={i < 3 ? "eager" : "lazy"}
+                    className="object-cover transition duration-1000 group-hover:scale-[1.045]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-black/5" />
+                  <div className="absolute left-5 top-5 mono text-[10px] text-white/55">
+                    {p.number} / {String(projects.length).padStart(2, "0")}
+                  </div>
+                  <div className="absolute right-5 top-5 rounded-full border border-white/15 bg-black/25 px-3 py-1 text-[10px] text-white/70 backdrop-blur">
+                    Explore ↗
+                  </div>
                 </div>
-                <div className="absolute right-5 top-5 rounded-full border border-white/15 bg-black/25 px-3 py-1 text-[10px] text-white/60 backdrop-blur">
-                  View case ↗
+              </a>
+              <div className="p-6 sm:p-7">
+                <p className="mono text-[9px] uppercase tracking-[.22em] text-[var(--accent)]">
+                  {p.type}
+                </p>
+                <h3 className="display mt-2 text-2xl sm:text-3xl">{p.name}</h3>
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-white/48">
+                  {p.summary}
+                </p>
+                <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-white/[.08] pt-5">
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      if (posthog.__loaded) {
+                        posthog.capture("portfolio_viewed", {
+                          project: p.name,
+                          destination: p.href,
+                          interaction: "project_experience",
+                        });
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[11px] font-bold text-[#080b10] transition hover:-translate-y-0.5"
+                  >
+                    {[
+                      "Farmora",
+                      "Landlord Ledger",
+                      "FinAI",
+                      "DevPilot",
+                    ].includes(p.name)
+                      ? "Open product"
+                      : p.name === "Website Creation"
+                        ? "Explore service"
+                        : "View project"}{" "}
+                    ↗
+                  </a>
+                  <a
+                    href={p.caseStudyHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      if (posthog.__loaded) {
+                        posthog.capture("portfolio_viewed", {
+                          project: p.name,
+                          destination: p.caseStudyHref,
+                          interaction: "case_study",
+                        });
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 text-[11px] font-semibold text-white/55 transition hover:text-[var(--accent)]"
+                  >
+                    Read project story ↗
+                  </a>
                 </div>
               </div>
-              <div className="flex items-end justify-between gap-6 p-6 sm:p-7">
-                <div>
-                  <p className="mono text-[9px] uppercase tracking-[.22em] text-[var(--accent)]">
-                    {p.type}
-                  </p>
-                  <h3 className="display mt-2 text-3xl sm:text-4xl">
-                    {p.name}
-                  </h3>
-                </div>
-                <span className="hidden text-sm text-white/25 md:block">
-                  Digital product
-                </span>
-              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const featuredInsights = [
+  {
+    category: "Business systems",
+    title: "One Payment Backbone, Multiple SaaS Products",
+    summary:
+      "The thinking behind a reusable payment layer for payment initiation, verification, webhooks, idempotency and billing integrations.",
+    href: "https://portfolio.hempongroup.co.ke/posts/building-a-reusable-payment-engine-for-multiple-saas-products",
+  },
+  {
+    category: "Professional services",
+    title: "Beyond a Website: Adoyo J. & Company Advocates",
+    summary:
+      "A digital-presence project combining website development, professional email setup and essential digital-branding materials.",
+    href: "https://portfolio.hempongroup.co.ke/posts/building-adoyo-j-company-advocates-digital-presence",
+  },
+  {
+    category: "Web platforms",
+    title: "One Foundation, Many Industries",
+    summary:
+      "How a configurable website system can support business, legal, clinic, school, hospitality, construction, property and e-commerce experiences.",
+    href: "https://portfolio.hempongroup.co.ke/posts/building-a-config-driven-multi-industry-website-starter-kit",
+  },
+  {
+    category: "Product development",
+    title: "InvoiceEasy: A Smarter Way to Create and Manage Invoices",
+    summary:
+      "The evolution from a lightweight invoice generator into an offline-first, cloud-enabled business invoicing platform.",
+    href: "https://portfolio.hempongroup.co.ke/posts/building-a-cross-platform-invoice-app-with-flutter",
+  },
+];
+
+function Insights() {
+  return (
+    <section className="border-y border-white/[.07] py-20 sm:py-24 md:py-32 section-grid-bg">
+      <div className="section-shell">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <SectionLabel>From the workbench</SectionLabel>
+            <h2 className="display mt-6 max-w-3xl text-4xl leading-[.94] sm:text-5xl md:text-7xl">
+              The thinking behind
+              <br />
+              <span className="text-white/25">the things we build.</span>
+            </h2>
+          </div>
+          <a
+            href="https://portfolio.hempongroup.co.ke/posts"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] transition hover:text-white"
+          >
+            Read all insights and build notes ↗
+          </a>
+        </div>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {featuredInsights.map((item, index) => (
+            <motion.a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => {
+                if (posthog.__loaded) {
+                  posthog.capture("insight_opened", {
+                    title: item.title,
+                    category: item.category,
+                    source: "homepage",
+                  });
+                }
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: index * 0.06 }}
+              className="group flex min-h-[250px] flex-col rounded-[24px] border border-white/[.08] bg-[#0b0f15] p-6 transition hover:-translate-y-1 hover:border-[var(--accent)]/35"
+            >
+              <p className="mono text-[9px] uppercase tracking-[.2em] text-[var(--accent)]">
+                {item.category}
+              </p>
+              <h3 className="display mt-7 text-2xl leading-tight transition group-hover:text-[var(--accent)]">
+                {item.title}
+              </h3>
+              <p className="mt-4 text-sm leading-6 text-white/45">
+                {item.summary}
+              </p>
+              <span className="mt-auto inline-flex items-center gap-2 pt-7 text-[11px] font-semibold text-white/65">
+                Read the story{" "}
+                <span className="transition group-hover:translate-x-1">↗</span>
+              </span>
             </motion.a>
           ))}
         </div>
@@ -1808,51 +2018,51 @@ function Footer() {
 
         <div className="grid gap-12 pb-14 sm:grid-cols-2 lg:grid-cols-[1.2fr_.75fr_.8fr_1fr_1fr] lg:gap-10">
           <motion.div
-  initial={{ opacity: 0, y: 18 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.6, delay: 0.06 }}
-  className="flex flex-col items-start"
->
-  <a href="#top" className="inline-flex items-center gap-3">
-    <Image
-      src="/assets/logo.svg"
-      alt="Hempon Group"
-      width={170}
-      height={56}
-      className="h-auto w-[145px] invert sm:w-[170px]"
-    />
-  </a>
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.06 }}
+            className="flex flex-col items-start"
+          >
+            <a href="#top" className="inline-flex items-center gap-3">
+              <Image
+                src="/assets/logo.svg"
+                alt="Hempon Group"
+                width={170}
+                height={56}
+                className="h-auto w-[145px] invert sm:w-[170px]"
+              />
+            </a>
 
-  <p className="mt-6 max-w-sm text-sm leading-7 text-white/55">
-    Digital engineering for businesses that want their technology to
-    do more.
-  </p>
+            <p className="mt-6 max-w-sm text-sm leading-7 text-white/55">
+              Digital engineering for businesses that want their technology to
+              do more.
+            </p>
 
-  <a
-    href="mailto:hempongroup@gmail.com"
-    className="mt-5 block w-fit text-sm font-semibold text-white/85 transition hover:text-[var(--accent)]"
-  >
-    hempongroup@gmail.com
-  </a>
+            <a
+              href="mailto:hempongroup@gmail.com"
+              className="mt-5 block w-fit text-sm font-semibold text-white/85 transition hover:text-[var(--accent)]"
+            >
+              hempongroup@gmail.com
+            </a>
 
-  <a
-    href="https://github.com/Magatijoel9620"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="magnetic-control mt-4 flex w-fit items-center gap-2 rounded-full border border-white/[.12] bg-white/[.025] px-4 py-2.5 text-xs font-semibold text-white/75 transition hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
-  >
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="size-4"
-      fill="currentColor"
-    >
-      <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.68-3.75-1.32-3.75-1.32-.5-1.3-1.24-1.65-1.24-1.65-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.04 3.23 1.55.1-.72.39-1.2.7-1.48-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.62 5.24-5.11 5.51.4.35.75 1.02.75 2.06V22c0 .29.2.64.76.53A11.1 11.1 0 0 0 12 .9Z" />
-    </svg>
-    GitHub <span aria-hidden="true">↗</span>
-  </a>
-</motion.div>
+            <a
+              href="https://github.com/Magatijoel9620"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="magnetic-control mt-4 flex w-fit items-center gap-2 rounded-full border border-white/[.12] bg-white/[.025] px-4 py-2.5 text-xs font-semibold text-white/75 transition hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="size-4"
+                fill="currentColor"
+              >
+                <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.68-3.75-1.32-3.75-1.32-.5-1.3-1.24-1.65-1.24-1.65-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.04 3.23 1.55.1-.72.39-1.2.7-1.48-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.62 5.24-5.11 5.51.4.35.75 1.02.75 2.06V22c0 .29.2.64.76.53A11.1 11.1 0 0 0 12 .9Z" />
+              </svg>
+              GitHub <span aria-hidden="true">↗</span>
+            </a>
+          </motion.div>
 
           {footerGroups.map((group, index) => (
             <motion.div
@@ -2178,6 +2388,9 @@ export default function Home() {
           <Work />
         </motion.div>
       </div>
+      <Reveal>
+        <Insights />
+      </Reveal>
       <Reveal>
         <Process />
       </Reveal>
