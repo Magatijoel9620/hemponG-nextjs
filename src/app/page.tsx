@@ -2038,7 +2038,7 @@ function MobileWhatsAppButton() {
           fill="currentColor"
         />
       </svg>
-      <span className="truncate">Ask us a question</span>
+      <span className="truncate">Ask us on WhatsApp</span>
     </a>
   );
 }
