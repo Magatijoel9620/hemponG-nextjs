@@ -29,8 +29,8 @@ const initialState: EnquiryState = {
 const fieldClass = "mt-2 w-full rounded-xl border border-white/[.12] bg-black/25 px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/25 focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/15";
 const labelClass = "block text-xs font-medium text-white/65";
 
-export default function ProjectEnquiryForm() {
-  const [form, setForm] = useState<EnquiryState>(initialState);
+export default function ProjectEnquiryForm({ defaultService }: { defaultService?: string }) {
+  const [form, setForm] = useState<EnquiryState>(() => ({ ...initialState, service: defaultService && serviceOptions.includes(defaultService) ? defaultService : initialState.service }));
   const [step, setStep] = useState(1);
   const [startedAt] = useState(() => Date.now());
   const [website, setWebsite] = useState("");
@@ -74,7 +74,7 @@ export default function ProjectEnquiryForm() {
       if (!response.ok || !result.ok) throw new Error(result.error || "We couldn't send your enquiry. Please try again.");
       setSuccess(result.message || "Your enquiry has been sent. Hempon Group will be in touch.");
       if (posthog.__loaded) posthog.capture("project_enquiry_submitted", { service: form.service, budget_provided: Boolean(form.budget), timeline_provided: Boolean(form.timeline) });
-      setForm(initialState);
+      setForm({ ...initialState, service: defaultService && serviceOptions.includes(defaultService) ? defaultService : initialState.service });
       setStep(1);
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Something went wrong. Please try again.");
