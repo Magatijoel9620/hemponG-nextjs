@@ -68,10 +68,6 @@ export default function ProjectEnquiryForm({ defaultService, source }: { default
   };
 
   useEffect(() => {
-    if (defaultService && serviceOptions.includes(defaultService)) setForm((current) => ({ ...current, service: defaultService }));
-  }, [defaultService]);
-
-  useEffect(() => {
     const handleServiceSelection = (event: Event) => {
       const selected = (event as CustomEvent<string>).detail;
       if (typeof selected === "string" && serviceOptions.includes(selected)) {

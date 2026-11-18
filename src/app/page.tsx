@@ -1332,7 +1332,7 @@ function Pricing() {
             </a>
           </div>
           <div className="grid gap-3">
-            {plans.map((p, i) => (
+            {plans.map((p) => (
               <motion.div
                 key={p.name}
                 className="magnetic-card group grid gap-6 rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition hover:border-white/20 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7"
