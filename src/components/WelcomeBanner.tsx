@@ -26,6 +26,26 @@ const destinations = [
     action: "See what we've built",
   },
   {
+    eyebrow: "Projects · Case studies · Our work",
+    title: "Portfolio",
+    description:
+      "Explore our projects, completed solutions and the work we've delivered for businesses.",
+    href: "https://portfolio.hempongroup.co.ke",
+    icon: "▧",
+    action: "Explore our portfolio",
+    external: true,
+  },
+  {
+    eyebrow: "Apps · Releases · Downloads",
+    title: "Downloads",
+    description:
+      "Access our available applications, product releases and installation packages.",
+    href: "https://downloads.hempongroup.co.ke",
+    icon: "↓",
+    action: "Browse downloads",
+    external: true,
+  },
+  {
     eyebrow: "Your idea · Our next build",
     title: "Start a Project",
     description:
@@ -39,6 +59,7 @@ const destinations = [
 export default function WelcomeBanner() {
   const [visible, setVisible] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -73,8 +94,21 @@ export default function WelcomeBanner() {
 
     previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const html = document.documentElement;
+    const body = document.body;
+
+    const previousHtmlOverflow = html.style.overflow;
+    const previousHtmlOverscroll = html.style.overscrollBehavior;
+    const previousBodyOverflow = body.style.overflow;
+    const previousBodyOverscroll = body.style.overscrollBehavior;
+
+    // Lock both scrolling roots. Locking only body can leave the document
+    // element scrollable in some browsers, allowing wheel input to reach the page.
+    html.style.overflow = "hidden";
+    html.style.overscrollBehavior = "none";
+    body.style.overflow = "hidden";
+    body.style.overscrollBehavior = "none";
+
     closeButtonRef.current?.focus();
 
     function onKeyDown(event: KeyboardEvent) {
@@ -117,7 +151,10 @@ export default function WelcomeBanner() {
     document.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      html.style.overflow = previousHtmlOverflow;
+      html.style.overscrollBehavior = previousHtmlOverscroll;
+      body.style.overflow = previousBodyOverflow;
+      body.style.overscrollBehavior = previousBodyOverscroll;
       document.removeEventListener("keydown", onKeyDown);
       previouslyFocusedRef.current?.focus?.();
     };
@@ -151,12 +188,14 @@ export default function WelcomeBanner() {
         className="
           welcome-dialog relative my-auto
           flex w-full max-w-5xl flex-col
+          h-[calc(100dvh-1.5rem)]
           max-h-[calc(100dvh-1.5rem)]
           overflow-hidden
           rounded-[20px]
           border border-white/[.13]
           bg-[#0b1017]
           shadow-[0_30px_120px_rgba(0,0,0,.68)]
+          sm:h-[calc(100dvh-3rem)]
           sm:max-h-[calc(100dvh-3rem)]
           sm:rounded-[30px]
         "
@@ -250,11 +289,16 @@ export default function WelcomeBanner() {
           </div>
         </div>
 
-        {/* Scrollable destination area */}
+        {/* Scrollable destination area: independently scrolls on all screen sizes. */}
         <div
+          ref={scrollAreaRef}
+          onWheel={(event) => event.stopPropagation()}
+          onTouchMove={(event) => event.stopPropagation()}
           className="
             min-h-0 flex-1
-            overflow-y-auto overscroll-contain
+            overflow-x-hidden overflow-y-auto overscroll-y-contain
+            [scrollbar-gutter:stable]
+            [touch-action:pan-y]
             px-4 py-4
             sm:px-6 sm:py-6
             lg:px-8 lg:py-7
@@ -275,8 +319,10 @@ export default function WelcomeBanner() {
               <a
                 key={destination.title}
                 href={destination.href}
+                target={destination.external ? "_blank" : undefined}
+                rel={destination.external ? "noopener noreferrer" : undefined}
                 onClick={dismiss}
-                className={`
+                className="
                   group relative flex min-h-[145px] flex-col
                   overflow-hidden rounded-[18px]
                   border border-white/[.10]
@@ -292,9 +338,7 @@ export default function WelcomeBanner() {
                   motion-reduce:transform-none
                   motion-reduce:transition-none
                   sm:min-h-[205px] sm:rounded-[20px] sm:p-6
-                  md:[&:last-child]:col-span-2
-                  xl:[&:last-child]:col-span-1
-                `}
+                "
                 style={{ animationDelay: `${index * 75}ms` }}
               >
                 <span
