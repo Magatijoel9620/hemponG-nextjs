@@ -65,7 +65,8 @@ const projects = [
       "Manage properties, rental units, tenants, rent, payments, arrears, maintenance and reporting, with a connected property marketplace.",
     image: "/assets/LL_landscape.jpg",
     href: "https://ledger.hempongroup.co.ke/",
-    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/landlord-ledger",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/landlord-ledger",
   },
   {
     name: "InvoiceEasy",
@@ -75,7 +76,8 @@ const projects = [
       "Create professional invoices, organise customer and product records, track full and partial payments, and share PDF receipts and reports.",
     image: "/assets/ie_landscape.jpg",
     href: "https://downloads.hempongroup.co.ke/invoice-easy/",
-    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/flutter-invoice-app",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/flutter-invoice-app",
   },
   {
     name: "FinAI",
@@ -95,7 +97,8 @@ const projects = [
       "Organise projects and applications, plan daily priorities, manage tasks and review workload in a cloud-backed workspace.",
     image: "/assets/devpilot_landscape.png",
     href: "https://devpilot.hempongroup.co.ke/",
-    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/building-devpilot-personal-productivity-app",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/building-devpilot-personal-productivity-app",
   },
   {
     name: "Kanyi J. & Company Advocates",
@@ -105,7 +108,8 @@ const projects = [
       "A responsive law-firm website redesign focused on presenting legal services and the firm's professional identity clearly.",
     image: "/assets/portfolio/kanyi-j-app.png",
     href: "https://www.kanyij-advocates.co.ke/",
-    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/kanyi-j-advocates-website",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/kanyi-j-advocates-website",
   },
   {
     name: "Logistics Website System",
@@ -115,7 +119,8 @@ const projects = [
       "A configurable logistics website starter with shipment tracking, fleet management, service coverage and reusable site structure.",
     image: "/assets/portfolio/logistics-homepage.png",
     href: "https://portfolio.hempongroup.co.ke/projects/config-driven-logistics-website-starter-kit",
-    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/config-driven-logistics-website-starter-kit",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/config-driven-logistics-website-starter-kit",
   },
   {
     name: "Google Sheets Automation",
@@ -125,7 +130,8 @@ const projects = [
       "Use Google Apps Script to process Google Form responses into structured summaries and dynamic charts, reducing repetitive spreadsheet work.",
     image: "/assets/portfolio/google-sheets-automation.png",
     href: "https://portfolio.hempongroup.co.ke/projects/google-apps-script-automation",
-    caseStudyHref: "https://portfolio.hempongroup.co.ke/projects/google-apps-script-automation",
+    caseStudyHref:
+      "https://portfolio.hempongroup.co.ke/projects/google-apps-script-automation",
   },
   {
     name: "Website Creation",
@@ -270,43 +276,225 @@ function SocialIcon({ label }: { label: string }) {
 function Nav() {
   const [activeSection, setActiveSection] = useState("home");
   useEffect(() => {
-    const sectionIds = ["work", "capabilities", "process", "about", "support", "contact"];
-    const sections = sectionIds.map((id) => document.getElementById(id)).filter((section): section is HTMLElement => Boolean(section));
+    const sectionIds = [
+      "work",
+      "capabilities",
+      "process",
+      "about",
+      "support",
+      "contact",
+    ];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
     if (!sections.length) return;
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) setActiveSection(visible.target.id);
-    }, { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35, 0.6] });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35, 0.6] },
+    );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
-  const sectionLink = (label: string, href: string) => <a key={label} href={href} aria-current={activeSection === href.slice(1) ? "location" : undefined} className={`nav-link rounded-full px-3 py-2 text-[11px] font-medium transition hover:bg-white/[.055] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.07] text-[var(--accent)]" : "text-white/58"}`}>{label}</a>;
-  const serviceLinks = [["All services", "/services"], ["Websites", "/services/websites"], ["Business Systems", "/services/business-systems"], ["Mobile Apps", "/services/mobile-apps"], ["Automation", "/services/automation"], ["AI Experiences", "/services/ai-experiences"], ["Digital Products", "/services/digital-products"]];
+  const sectionLink = (label: string, href: string) => (
+    <a
+      key={label}
+      href={href}
+      aria-current={activeSection === href.slice(1) ? "location" : undefined}
+      className={`nav-link rounded-full px-3 py-2 text-[11px] font-medium transition hover:bg-white/[.055] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.07] text-[var(--accent)]" : "text-white/58"}`}
+    >
+      {label}
+    </a>
+  );
+  const serviceLinks = [
+    ["All services", "/services"],
+    ["Websites", "/services/websites"],
+    ["Business Systems", "/services/business-systems"],
+    ["Mobile Apps", "/services/mobile-apps"],
+    ["Automation", "/services/automation"],
+    ["AI Experiences", "/services/ai-experiences"],
+    ["Digital Products", "/services/digital-products"],
+  ];
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4 lg:px-8">
       <div className="nav-shell mx-auto max-w-[1440px] rounded-[24px] border border-white/[.1] bg-[#080b10]/90 px-3 py-2 shadow-2xl shadow-black/25 backdrop-blur-2xl sm:rounded-full sm:px-4">
         <div className="flex items-center justify-between gap-3">
           <a href="#top" className="group flex min-w-0 items-center gap-2.5">
-            <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/[.12] bg-white/[.035]"><Image src="/assets/logo/logo_round.png" alt="Hempon Group logo" width={36} height={36} className="h-full w-full object-cover" /></span>
-            <span className="truncate text-[10px] font-bold tracking-[.12em] sm:text-xs sm:tracking-[.18em]">HEMPON GROUP</span>
+            <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/[.12] bg-white/[.035]">
+              <Image
+                src="/assets/logo/logo_round.png"
+                alt="Hempon Group logo"
+                width={36}
+                height={36}
+                className="h-full w-full object-cover"
+              />
+            </span>
+            <span className="truncate text-[10px] font-bold tracking-[.12em] sm:text-xs sm:tracking-[.18em]">
+              HEMPON GROUP
+            </span>
           </a>
-          <nav aria-label="Main navigation" className="hidden items-center gap-0.5 xl:flex">
+          <nav
+            aria-label="Main navigation"
+            className="hidden items-center gap-0.5 xl:flex"
+          >
             {sectionLink("Work", "#work")}
-            <details className="nav-dropdown group relative"><summary className="nav-link flex cursor-pointer list-none items-center gap-1 rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Services <span className="text-[9px] transition group-open:rotate-180">⌄</span></summary><div className="absolute left-0 top-full z-[80] mt-3 w-60 rounded-2xl border border-white/[.12] bg-[#0a0e14]/[.98] p-2 shadow-2xl">{serviceLinks.map(([label, href]) => <a key={href} href={href} className="block rounded-xl px-3 py-2.5 text-xs text-white/65 transition hover:bg-white/[.06] hover:text-white">{label}</a>)}</div></details>
-            <Link href="/products" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Products</Link>
-            <Link href="/case-studies" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Case studies</Link>
-            <Link href="/industries" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Industries</Link>
-            <a href="#process" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Process</a>
-            <a href="/insights" className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">Insights</a>
+            <details className="nav-dropdown group relative">
+              <summary className="nav-link flex cursor-pointer list-none items-center gap-1 rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">
+                Services{" "}
+                <span className="text-[9px] transition group-open:rotate-180">
+                  ⌄
+                </span>
+              </summary>
+              <div className="absolute left-0 top-full z-[80] mt-3 w-60 rounded-2xl border border-white/[.12] bg-[#0a0e14]/[.98] p-2 shadow-2xl">
+                {serviceLinks.map(([label, href]) => (
+                  <a
+                    key={href}
+                    href={href}
+                    className="block rounded-xl px-3 py-2.5 text-xs text-white/65 transition hover:bg-white/[.06] hover:text-white"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </div>
+            </details>
+            <Link
+              href="/products"
+              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+            >
+              Products
+            </Link>
+            <Link
+              href="/case-studies"
+              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+            >
+              Case studies
+            </Link>
+            <Link
+              href="/industries"
+              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+            >
+              Industries
+            </Link>
+            <a
+              href="#process"
+              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+            >
+              Process
+            </a>
+            <a
+              href="/insights"
+              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+            >
+              Insights
+            </a>
             {sectionLink("About", "#about")}
           </nav>
           <div className="flex shrink-0 items-center gap-2">
-            <a href="#contact" className="quiet-cta rounded-full px-3 py-2.5 text-[10px] font-bold sm:px-4 sm:text-[11px]">Let’s talk <span aria-hidden="true">↗</span></a>
-            <details className="nav-mobile group relative xl:hidden"><summary aria-label="Open navigation menu" className="grid size-10 cursor-pointer list-none place-items-center rounded-full border border-white/[.12] bg-white/[.04] text-white/75 [&::-webkit-details-marker]:hidden"><span className="text-lg">☰</span></summary><nav aria-label="Mobile navigation" className="absolute right-0 top-[calc(100%+12px)] max-h-[min(76dvh,560px)] w-[min(88vw,360px)] overflow-y-auto overscroll-contain rounded-2xl border border-white/[.12] bg-[#090d13]/[.98] p-3 shadow-2xl">
-              <a href="#work" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">Selected work</a>
-              <details className="mobile-nav-group group"><summary className="mobile-nav-link flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">Services <span className="text-white/35 transition group-open:rotate-180">⌄</span></summary><div className="mb-2 ml-3 grid gap-1 border-l border-white/[.1] pl-3">{serviceLinks.map(([label, href]) => <a key={href} href={href} className="mobile-nav-sub">{label}</a>)}</div></details>
-              <Link href="/products" className="mobile-nav-link">Products</Link><Link href="/case-studies" className="mobile-nav-link">Case studies</Link><Link href="/industries" className="mobile-nav-link">Industries</Link><a href="/insights" className="mobile-nav-link">Insights</a><a href="#process" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">How we work</a><a href="#about" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">About Hempon</a><a href="#support" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">Maintenance & support</a><a href="#contact" onClick={(event) => event.currentTarget.closest("details.nav-mobile")?.removeAttribute("open")} className="mobile-nav-link">Contact details</a>
-            </nav></details>
+            <a
+              href="#contact"
+              className="quiet-cta rounded-full px-3 py-2.5 text-[10px] font-bold sm:px-4 sm:text-[11px]"
+            >
+              Let’s talk <span aria-hidden="true">↗</span>
+            </a>
+            <details className="nav-mobile group relative xl:hidden">
+              <summary
+                aria-label="Open navigation menu"
+                className="grid size-10 cursor-pointer list-none place-items-center rounded-full border border-white/[.12] bg-white/[.04] text-white/75 [&::-webkit-details-marker]:hidden"
+              >
+                <span className="text-lg">☰</span>
+              </summary>
+              <nav
+                aria-label="Mobile navigation"
+                className="absolute right-0 top-[calc(100%+12px)] max-h-[min(76dvh,560px)] w-[min(88vw,360px)] overflow-y-auto overscroll-contain rounded-2xl border border-white/[.12] bg-[#090d13]/[.98] p-3 shadow-2xl"
+              >
+                <a
+                  href="#work"
+                  onClick={(event) =>
+                    event.currentTarget
+                      .closest("details.nav-mobile")
+                      ?.removeAttribute("open")
+                  }
+                  className="mobile-nav-link"
+                >
+                  Selected work
+                </a>
+                <details className="mobile-nav-group group">
+                  <summary className="mobile-nav-link flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
+                    Services{" "}
+                    <span className="text-white/35 transition group-open:rotate-180">
+                      ⌄
+                    </span>
+                  </summary>
+                  <div className="mb-2 ml-3 grid gap-1 border-l border-white/[.1] pl-3">
+                    {serviceLinks.map(([label, href]) => (
+                      <a key={href} href={href} className="mobile-nav-sub">
+                        {label}
+                      </a>
+                    ))}
+                  </div>
+                </details>
+                <Link href="/products" className="mobile-nav-link">
+                  Products
+                </Link>
+                <Link href="/case-studies" className="mobile-nav-link">
+                  Case studies
+                </Link>
+                <Link href="/industries" className="mobile-nav-link">
+                  Industries
+                </Link>
+                <a href="/insights" className="mobile-nav-link">
+                  Insights
+                </a>
+                <a
+                  href="#process"
+                  onClick={(event) =>
+                    event.currentTarget
+                      .closest("details.nav-mobile")
+                      ?.removeAttribute("open")
+                  }
+                  className="mobile-nav-link"
+                >
+                  How we work
+                </a>
+                <a
+                  href="#about"
+                  onClick={(event) =>
+                    event.currentTarget
+                      .closest("details.nav-mobile")
+                      ?.removeAttribute("open")
+                  }
+                  className="mobile-nav-link"
+                >
+                  About Hempon
+                </a>
+                <a
+                  href="#support"
+                  onClick={(event) =>
+                    event.currentTarget
+                      .closest("details.nav-mobile")
+                      ?.removeAttribute("open")
+                  }
+                  className="mobile-nav-link"
+                >
+                  Maintenance & support
+                </a>
+                <a
+                  href="#contact"
+                  onClick={(event) =>
+                    event.currentTarget
+                      .closest("details.nav-mobile")
+                      ?.removeAttribute("open")
+                  }
+                  className="mobile-nav-link"
+                >
+                  Contact details
+                </a>
+              </nav>
+            </details>
           </div>
         </div>
       </div>
@@ -646,7 +834,10 @@ function Services() {
             <div className="mt-10 mono text-[10px] uppercase tracking-[.24em] text-white/25">
               Design × Engineering × Operations
             </div>
-            <Link href="/services" className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white">
+            <Link
+              href="/services"
+              className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
+            >
               Explore all services <span aria-hidden="true">↗</span>
             </Link>
           </div>
@@ -670,7 +861,9 @@ function Services() {
                     className={`magnetic-card group relative min-h-[210px] text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--accent)] ${isActive ? "bg-[#131b23]" : "bg-[#0b0f15] hover:bg-[#10161e]"} p-6 sm:p-8`}
                   >
                     <div className="flex items-center justify-end">
-                      <span className="mono text-[9px] uppercase tracking-[.18em] text-[var(--accent)] opacity-75">{tech}</span>
+                      <span className="mono text-[9px] uppercase tracking-[.18em] text-[var(--accent)] opacity-75">
+                        {tech}
+                      </span>
                     </div>
                     <div className="mt-10">
                       <h3 className="display text-2xl tracking-[-.045em]">
@@ -866,8 +1059,8 @@ function Work() {
           <div className="max-w-sm">
             <p className="text-sm leading-6 text-white/42">
               A selection of business platforms, live products, client websites
-              and workflow solutions. Explore the working experience or read
-              how each project was shaped.
+              and workflow solutions. Explore the working experience or read how
+              each project was shaped.
             </p>
             <Link
               href="/products"
@@ -895,7 +1088,12 @@ function Work() {
               transition={{ duration: 0.7, delay: (i % 4) * 0.06 }}
               className="magnetic-card group overflow-hidden rounded-[28px] border border-white/[.08] bg-[#0b0f15]"
             >
-              <a href={p.href} target="_blank" rel="noreferrer" className="block">
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                className="block"
+              >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
                     src={p.image}
@@ -935,21 +1133,33 @@ function Work() {
                     }}
                     className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/60 bg-[var(--accent)] px-4 py-2.5 text-[11px] font-bold text-[#071006] transition hover:-translate-y-0.5 hover:bg-[#b8d789]"
                   >
-                    {["Farmora", "Landlord Ledger", "FinAI", "DevPilot"].includes(p.name)
+                    {[
+                      "Farmora",
+                      "Landlord Ledger",
+                      "FinAI",
+                      "DevPilot",
+                    ].includes(p.name)
                       ? "Open product"
                       : p.name === "Website Creation"
                         ? "Explore service"
-                        : "View project"} ↗
+                        : "View project"}{" "}
+                    ↗
                   </a>
                   <a
-                    href={p.caseStudySlug ? `/case-studies/${p.caseStudySlug}` : p.caseStudyHref}
+                    href={
+                      p.caseStudySlug
+                        ? `/case-studies/${p.caseStudySlug}`
+                        : p.caseStudyHref
+                    }
                     target={p.caseStudySlug ? undefined : "_blank"}
                     rel={p.caseStudySlug ? undefined : "noreferrer"}
                     onClick={() => {
                       if (posthog.__loaded) {
                         posthog.capture("portfolio_viewed", {
                           project: p.name,
-                          destination: p.caseStudySlug ? `/case-studies/${p.caseStudySlug}` : p.caseStudyHref,
+                          destination: p.caseStudySlug
+                            ? `/case-studies/${p.caseStudySlug}`
+                            : p.caseStudyHref,
                           interaction: "case_study",
                         });
                       }
@@ -1053,12 +1263,20 @@ function Insights() {
                 {item.summary}
               </p>
               <span className="mt-auto inline-flex items-center gap-2 pt-7 text-[11px] font-semibold text-white/65">
-                Read the story <span className="transition group-hover:translate-x-1">↗</span>
+                Read the story{" "}
+                <span className="transition group-hover:translate-x-1">↗</span>
               </span>
             </motion.a>
           ))}
         </div>
-        <div className="mt-8"><a href="/insights" className="inline-flex text-xs font-semibold text-[var(--accent)] hover:text-white">Explore all insights ↗</a></div>
+        <div className="mt-8">
+          <a
+            href="/insights"
+            className="inline-flex text-xs font-semibold text-[var(--accent)] hover:text-white"
+          >
+            Explore all insights ↗
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -1263,7 +1481,9 @@ function Testimonials() {
                 className="magnetic-card group flex min-h-[300px] flex-col rounded-[26px] border border-white/[.08] bg-white/[.025] p-6 transition-colors hover:border-white/[.16] hover:bg-white/[.04] sm:p-7"
               >
                 <div className="flex items-center justify-end">
-                  <span className="text-2xl leading-none text-white/15 transition group-hover:text-white/25">“</span>
+                  <span className="text-2xl leading-none text-white/15 transition group-hover:text-white/25">
+                    “
+                  </span>
                 </div>
                 <blockquote className="mt-7 text-[15px] leading-7 text-white/62">
                   “{testimonial.quote}”
@@ -1543,7 +1763,6 @@ function Support() {
   );
 }
 
-
 const faqItems = [
   {
     question: "What digital services does Hempon Group offer?",
@@ -1660,7 +1879,6 @@ function FAQ() {
     </section>
   );
 }
-
 
 function Contact() {
   return (
@@ -1844,55 +2062,55 @@ function Footer() {
           </div>
         </motion.div>
 
-        <div className="grid gap-12 pb-14 sm:grid-cols-2 lg:grid-cols-[1.2fr_.75fr_.8fr_1fr_1fr] lg:gap-10">
+        <div className="grid justify-items-center gap-12 pb-14 text-center sm:grid-cols-2 sm:justify-items-center lg:grid-cols-[1.2fr_.75fr_.8fr_1fr_1fr] lg:items-start lg:justify-items-stretch lg:gap-10 lg:text-left">
           <motion.div
-  initial={{ opacity: 0, y: 18 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.6, delay: 0.06 }}
-  className="flex flex-col items-start"
->
-  <a href="#top" className="inline-flex items-center gap-3">
-    <Image
-      src="/assets/logo.svg"
-      alt="Hempon Group"
-      width={170}
-      height={56}
-      className="h-auto w-[145px] invert sm:w-[170px]"
-      style={{ height: "auto" }}
-      loading="eager"
-    />
-  </a>
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.06 }}
+            className="flex flex-col items-center text-center lg:items-start lg:text-left"
+          >
+            <a href="#top" className="inline-flex items-center gap-3">
+              <Image
+                src="/assets/logo.svg"
+                alt="Hempon Group"
+                width={170}
+                height={56}
+                className="h-auto w-[145px] invert sm:w-[170px]"
+                style={{ height: "auto" }}
+                loading="eager"
+              />
+            </a>
 
-  <p className="mt-6 max-w-sm text-sm leading-7 text-white/55">
-    Digital engineering for businesses that want their technology to
-    do more.
-  </p>
+            <p className="mt-6 max-w-sm text-sm leading-7 text-white/55">
+              Digital engineering for businesses that want their technology to
+              do more.
+            </p>
 
-  <a
-    href="mailto:hempongroup@gmail.com"
-    className="mt-5 block w-fit text-sm font-semibold text-white/85 transition hover:text-[var(--accent)]"
-  >
-    hempongroup@gmail.com
-  </a>
+            <a
+              href="mailto:hempongroup@gmail.com"
+              className="mt-5 block w-fit text-sm font-semibold text-white/85 transition hover:text-[var(--accent)]"
+            >
+              hempongroup@gmail.com
+            </a>
 
-  <a
-    href="https://github.com/Magatijoel9620"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="magnetic-control mt-4 flex w-fit items-center gap-2 rounded-full border border-white/[.12] bg-white/[.025] px-4 py-2.5 text-xs font-semibold text-white/75 transition hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
-  >
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="size-4"
-      fill="currentColor"
-    >
-      <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.68-3.75-1.32-3.75-1.32-.5-1.3-1.24-1.65-1.24-1.65-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.04 3.23 1.55.1-.72.39-1.2.7-1.48-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.62 5.24-5.11 5.51.4.35.75 1.02.75 2.06V22c0 .29.2.64.76.53A11.1 11.1 0 0 0 12 .9Z" />
-    </svg>
-    GitHub <span aria-hidden="true">↗</span>
-  </a>
-</motion.div>
+            <a
+              href="https://github.com/Magatijoel9620"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="magnetic-control mt-4 flex w-fit items-center gap-2 rounded-full border border-white/[.12] bg-white/[.025] px-4 py-2.5 text-xs font-semibold text-white/75 transition hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="size-4"
+                fill="currentColor"
+              >
+                <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.68-3.75-1.32-3.75-1.32-.5-1.3-1.24-1.65-1.24-1.65-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.04 3.23 1.55.1-.72.39-1.2.7-1.48-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.62 5.24-5.11 5.51.4.35.75 1.02.75 2.06V22c0 .29.2.64.76.53A11.1 11.1 0 0 0 12 .9Z" />
+              </svg>
+              GitHub <span aria-hidden="true">↗</span>
+            </a>
+          </motion.div>
 
           {footerGroups.map((group, index) => (
             <motion.div
@@ -1901,18 +2119,24 @@ function Footer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.12 + index * 0.1 }}
+              className="flex flex-col items-center text-center lg:items-start lg:text-left"
             >
               <h3 className="text-sm font-bold tracking-wide text-white">
                 {group.title}
               </h3>
-              <div className="mt-6 grid gap-3.5 text-sm font-medium text-white/58">
+              <div className="mt-6 grid justify-items-center gap-3.5 text-sm font-medium text-white/58 lg:justify-items-start">
                 {group.links.map(([label, href]) =>
                   label === "Tell us what you’re planning" ? (
                     <button
                       key={label}
                       type="button"
                       onClick={() => {
-                        if (posthog.__loaded) posthog.capture("project_enquiry_modal_opened", { service: "Not sure yet", source_page: "/", source: "homepage_footer" });
+                        if (posthog.__loaded)
+                          posthog.capture("project_enquiry_modal_opened", {
+                            service: "Not sure yet",
+                            source_page: "/",
+                            source: "homepage_footer",
+                          });
                         setEnquiryModalOpen(true);
                       }}
                       className="w-fit text-left transition-colors hover:text-[var(--accent)]"
@@ -1941,11 +2165,12 @@ function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.42 }}
+            className="flex flex-col items-center text-center lg:items-start lg:text-left"
           >
             <h3 className="text-sm font-bold tracking-wide text-white">
               Follow Hempon
             </h3>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
               {socialLinks.map(([label, url]) => (
                 <a
                   key={label}
@@ -1960,7 +2185,7 @@ function Footer() {
                 </a>
               ))}
             </div>
-            <div className="mt-8 border-t border-white/[.09] pt-5">
+            <div className="mt-8 w-full border-t border-white/[.09] pt-5 text-center lg:text-left">
               <div className="text-xs font-bold uppercase tracking-[.18em] text-white/85">
                 Based in
               </div>
@@ -1981,11 +2206,11 @@ function Footer() {
         </div>
 
         <div className="border-t border-white/[.1] py-6">
-          <div className="flex flex-col justify-between gap-4 text-[10px] font-semibold uppercase tracking-[.16em] text-white/42 sm:flex-row sm:items-center">
+          <div className="flex flex-col items-center justify-between gap-4 text-center text-[10px] font-semibold uppercase tracking-[.16em] text-white/42 lg:flex-row lg:items-center lg:text-left">
             <span>
               © {new Date().getFullYear()} Hempon Group. All rights reserved.
             </span>
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 lg:justify-start">
               <a href="/privacy-policy" className="transition hover:text-white">
                 Privacy
               </a>
@@ -2005,7 +2230,6 @@ function Footer() {
     </footer>
   );
 }
-
 
 function MobileWhatsAppButton() {
   return (
