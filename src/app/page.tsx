@@ -2205,7 +2205,7 @@ function Footer() {
           </motion.div>
         </div>
 
-        <div className="border-t border-white/[.1] py-6">
+        <div id="footer-legal" className="border-t border-white/[.1] py-6">
           <div className="flex flex-col items-center justify-between gap-4 text-center text-[10px] font-semibold uppercase tracking-[.16em] text-white/42 lg:flex-row lg:items-center lg:text-left">
             <span>
               © {new Date().getFullYear()} Hempon Group. All rights reserved.
@@ -2231,7 +2231,7 @@ function Footer() {
   );
 }
 
-function MobileWhatsAppButton() {
+function MobileWhatsAppButton({ hidden }: { hidden: boolean }) {
   return (
     <a
       href="https://wa.me/254738219953?text=Hello%20Hempon%20Group%2C%20I%27d%20like%20to%20discuss%20a%20project."
@@ -2245,7 +2245,7 @@ function MobileWhatsAppButton() {
       target="_blank"
       rel="noreferrer"
       aria-label="Chat with Hempon Group on WhatsApp"
-      className="fixed bottom-4 left-3.5 z-40 inline-flex max-w-[calc(100vw-110px)] items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-xl transition hover:bg-[#20bd5a] sm:hidden"
+      className={`fixed bottom-4 left-3.5 z-40 inline-flex max-w-[calc(100vw-110px)] items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-xl transition hover:bg-[#20bd5a] sm:hidden ${hidden ? "max-sm:hidden" : ""}`}
     >
       <svg
         aria-hidden="true"
@@ -2272,6 +2272,18 @@ function MobileWhatsAppButton() {
 
 export default function Home() {
   const workRef = useRef<HTMLDivElement>(null);
+  const [footerLegalVisible, setFooterLegalVisible] = useState(false);
+
+  useEffect(() => {
+    const legalFooter = document.getElementById("footer-legal");
+    if (!legalFooter) return;
+
+    const observer = new IntersectionObserver(([entry]) =>
+      setFooterLegalVisible(entry.isIntersecting),
+    );
+    observer.observe(legalFooter);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const onPointerMove = (event: PointerEvent) => {
@@ -2365,8 +2377,8 @@ export default function Home() {
         <Contact />
       </Reveal>
       <Footer />
-      <MobileWhatsAppButton />
-      <BackToTop />
+      <MobileWhatsAppButton hidden={footerLegalVisible} />
+      <BackToTop hideOnMobile={footerLegalVisible} />
     </div>
   );
 }
