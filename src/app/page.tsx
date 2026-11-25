@@ -354,6 +354,7 @@ function HeroBrand() {
           alt="InvoiceEasy invoicing product interface"
           fill
           sizes="150px"
+          loading="eager"
           className="object-cover"
         />
       </div>
@@ -1858,6 +1859,8 @@ function Footer() {
       width={170}
       height={56}
       className="h-auto w-[145px] invert sm:w-[170px]"
+      style={{ height: "auto" }}
+      loading="eager"
     />
   </a>
 

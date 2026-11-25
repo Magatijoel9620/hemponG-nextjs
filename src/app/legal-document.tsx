@@ -119,6 +119,7 @@ export default function LegalDocument({
               width={170}
               height={56}
               className="h-auto w-[135px] invert sm:w-[155px]"
+              style={{ height: "auto" }}
               priority
             />
           </Link>
