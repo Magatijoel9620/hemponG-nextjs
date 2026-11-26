@@ -62,7 +62,7 @@ export default function InteractiveHero() {
         </div>
         <div className="mt-6 flex items-center justify-between border-t border-white/[.07] pt-5">
           <span className="mono text-[9px] uppercase tracking-[.25em] text-white/25">
-            Scroll to enter
+            Scroll to explore
           </span>
           {/* <span className="mono text-[9px] uppercase tracking-[.25em] text-white/25">
             01 — 07
