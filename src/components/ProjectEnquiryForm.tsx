@@ -147,7 +147,7 @@ export default function ProjectEnquiryForm({ defaultService, source }: { default
           <div className="text-sm font-semibold text-white">Thanks — we’ve got your enquiry.</div>
           <p className="mt-2 text-sm leading-6 text-white/65">{success}</p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <a href={`https://wa.me/254738219953?text=${encodeURIComponent(`Hi Hempon Group, I’ve just sent an enquiry about ${form.service}. I’d like to follow up on the next step.`)}`} target="_blank" rel="noreferrer" className="inline-flex items-center rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold text-[#071006] transition hover:brightness-110">Continue on WhatsApp ↗</a>
+            <a href={`https://wa.me/254738219953?text=${encodeURIComponent(`Hi Hempon Group, I’ve just sent an enquiry about ${form.service}. I’d like to follow up on the next step.`)}`} target="_blank" rel="noreferrer" className="arrow-push inline-flex items-center rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold text-[#071006] transition hover:brightness-110">Continue on WhatsApp <span aria-hidden="true">↗</span></a>
             <button type="button" onClick={() => setSuccess("")} className="rounded-full border border-white/15 px-4 py-2 text-xs font-semibold text-white/75 hover:border-white/35">Send another enquiry</button>
           </div>
         </div>
@@ -198,7 +198,7 @@ export default function ProjectEnquiryForm({ defaultService, source }: { default
           {error && <p className="mt-4 rounded-xl border border-red-400/20 bg-red-400/[.06] px-4 py-3 text-sm text-red-200" role="alert">{error}</p>}
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/[.08] pt-5">
             {step > 1 ? <button type="button" onClick={() => { setError(""); setStep((current) => current - 1); }} className="rounded-full border border-white/15 px-5 py-3 text-xs font-semibold text-white/65 transition hover:border-white/30 hover:text-white">← Back</button> : <span className="text-[10px] text-white/30">* Required fields</span>}
-            <button type="submit" disabled={sending} className="rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-bold text-[#10140d] transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">{sending ? "Sending enquiry…" : step === 3 ? "Send my enquiry ↗" : "Continue →"}</button>
+            <button type="submit" disabled={sending} className="rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-bold text-[#10140d] transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">{sending ? "Sending enquiry…" : step === 3 ? <>Send my enquiry <span aria-hidden="true">↗</span></> : "Continue →"}</button>
           </div>
         </form>
       )}

@@ -12,7 +12,7 @@ export default function WhatsAppEnquiryLink({ service, children = "Chat with us 
       href={href}
       target="_blank"
       rel="noreferrer"
-      className={className}
+      className={`${className} arrow-push`}
       onClick={() => {
         if (posthog.__loaded) posthog.capture("contextual_whatsapp_opened", {
           service,

@@ -32,7 +32,7 @@ export default function MarketingShell({ children }: { children: ReactNode }) {
                 Services <span className="text-[9px] transition group-open:rotate-180">⌄</span>
               </summary>
               <div className="absolute left-0 top-full z-[80] mt-3 w-64 rounded-2xl border border-white/[.12] bg-[#0a0e14]/[.98] p-2 shadow-2xl shadow-black/40 backdrop-blur-2xl">
-                <Link href="/services" className="block rounded-xl px-3 py-2.5 text-xs font-semibold text-[var(--accent)] transition hover:bg-white/[.05]">Explore all services ↗</Link>
+                <Link href="/services" className="arrow-push block rounded-xl px-3 py-2.5 text-xs font-semibold text-[var(--accent)] transition hover:bg-white/[.05]">Explore all services <span aria-hidden="true">↗</span></Link>
                 <div className="my-1 border-t border-white/[.08]" />
                 {serviceLinks.map(([label, href]) => <Link key={href} href={href} className="block rounded-xl px-3 py-2.5 text-xs text-white/65 transition hover:bg-white/[.06] hover:text-white">{label}</Link>)}
               </div>
@@ -44,7 +44,7 @@ export default function MarketingShell({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="flex shrink-0 items-center gap-2">
-            <Link href="/#contact" className="quiet-cta rounded-full px-3.5 py-2.5 text-[11px] font-bold sm:px-4">Let’s talk <span aria-hidden="true">↗</span></Link>
+            <Link href="/#contact" className="quiet-cta arrow-push rounded-full px-3.5 py-2.5 text-[11px] font-bold sm:px-4">Let’s talk <span aria-hidden="true">↗</span></Link>
             <details className="nav-mobile group relative lg:hidden">
               <summary aria-label="Open navigation menu" className="grid size-10 cursor-pointer list-none place-items-center rounded-full border border-white/[.12] bg-white/[.04] text-white/75 [&::-webkit-details-marker]:hidden">
                 <span className="text-lg leading-none">☰</span>
@@ -54,7 +54,7 @@ export default function MarketingShell({ children }: { children: ReactNode }) {
                 <details className="mobile-nav-group group">
                   <summary className="mobile-nav-link flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">Services <span className="text-white/35 transition group-open:rotate-180">⌄</span></summary>
                   <div className="mb-2 ml-3 grid gap-1 border-l border-white/[.1] pl-3">
-                    <Link href="/services" className="mobile-nav-sub font-semibold text-[var(--accent)]">All services ↗</Link>
+                    <Link href="/services" className="arrow-push mobile-nav-sub font-semibold text-[var(--accent)]">All services <span aria-hidden="true">↗</span></Link>
                     {serviceLinks.map(([label, href]) => <Link key={href} href={href} className="mobile-nav-sub">{label}</Link>)}
                   </div>
                 </details>
@@ -62,7 +62,7 @@ export default function MarketingShell({ children }: { children: ReactNode }) {
                 <Link href="/case-studies" className="mobile-nav-link">Case studies</Link>
                 <Link href="/industries" className="mobile-nav-link">Industries</Link>
                 <Link href="/insights" className="mobile-nav-link">Insights</Link>
-                <a href="https://portfolio.hempongroup.co.ke/projects" target="_blank" rel="noreferrer" className="mobile-nav-link">Portfolio ↗</a>
+                <a href="https://portfolio.hempongroup.co.ke/projects" target="_blank" rel="noreferrer" className="arrow-push mobile-nav-link">Portfolio <span aria-hidden="true">↗</span></a>
               </nav>
             </details>
           </div>
@@ -73,7 +73,7 @@ export default function MarketingShell({ children }: { children: ReactNode }) {
         <div className="section-shell flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div><p className="text-xs font-bold tracking-[.16em]">HEMPON GROUP</p><p className="mt-2 text-xs text-white/38">Digital products, websites and business systems.</p></div>
           <div className="flex flex-wrap gap-x-5 gap-y-3 text-xs text-white/48">
-            <Link href="/" className="hover:text-white">Home</Link><Link href="/services" className="hover:text-white">Services</Link><Link href="/products" className="hover:text-white">Products</Link><Link href="/case-studies" className="hover:text-white">Case studies</Link><Link href="/industries" className="hover:text-white">Industries</Link><Link href="/insights" className="hover:text-white">Insights</Link><a href="https://portfolio.hempongroup.co.ke/projects" target="_blank" rel="noreferrer" className="hover:text-white">Portfolio ↗</a><a href="mailto:hempongroup@gmail.com" className="hover:text-white">Email Hempon</a><Link href="/#contact" className="text-xs text-white/48 transition hover:text-[var(--accent)]">Let’s talk ↗</Link>
+            <Link href="/" className="hover:text-white">Home</Link><Link href="/services" className="hover:text-white">Services</Link><Link href="/products" className="hover:text-white">Products</Link><Link href="/case-studies" className="hover:text-white">Case studies</Link><Link href="/industries" className="hover:text-white">Industries</Link><Link href="/insights" className="hover:text-white">Insights</Link><a href="https://portfolio.hempongroup.co.ke/projects" target="_blank" rel="noreferrer" className="arrow-push hover:text-white">Portfolio <span aria-hidden="true">↗</span></a><a href="mailto:hempongroup@gmail.com" className="hover:text-white">Email Hempon</a><Link href="/#contact" className="arrow-push text-xs text-white/48 transition hover:text-[var(--accent)]">Let’s talk <span aria-hidden="true">↗</span></Link>
           </div>
         </div>
       </footer>

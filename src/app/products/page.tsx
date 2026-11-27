@@ -93,9 +93,9 @@ export default function ProductsPage() {
           </div>
           <Link
             href="/services"
-            className="route-link route-link-primary shrink-0"
+            className="route-link route-link-primary arrow-push shrink-0"
           >
-            Explore services ↗
+            Explore services <span aria-hidden="true">↗</span>
           </Link>
         </div>
       </section>

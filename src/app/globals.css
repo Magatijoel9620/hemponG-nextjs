@@ -809,3 +809,226 @@ a {
     animation: none;
   }
 }
+
+
+/* Button uplift — Hempon's restrained lime interaction language */
+.nav-link {
+  isolation: isolate;
+  transition:
+    color 220ms ease,
+    background-color 220ms ease;
+}
+.nav-link::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 35%;
+  height: 1px;
+  border-radius: 999px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 240ms ease;
+  opacity: 0.58;
+  pointer-events: none;
+}
+.nav-link:hover::before,
+.nav-link:focus-visible::before,
+.nav-dropdown[open] > .nav-link::before {
+  width: calc(100% - 24px);
+  opacity: 1;
+}
+/* Portfolio-style text links: partial underline at rest, full on hover/focus. */
+.text-link-underline {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 240ms ease;
+}
+.text-link-underline::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -0.28rem;
+  left: 0;
+  height: 1px;
+  border-radius: 999px;
+  background: var(--accent);
+  transform: scaleX(0.35);
+  transform-origin: left center;
+  opacity: 0.58;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 240ms ease;
+  pointer-events: none;
+}
+.text-link-underline:hover,
+.text-link-underline:focus-visible {
+  color: var(--accent);
+}
+.text-link-underline:hover::after,
+.text-link-underline:focus-visible::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+.nav-link[aria-current="location"] {
+  color: var(--accent);
+}
+
+.quiet-cta,
+.magnetic-cta,
+.quiet-outline,
+.route-link {
+  position: relative;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+.quiet-cta,
+.magnetic-cta {
+  background-image: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.18) 48%, transparent 72%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  transition:
+    transform 240ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    border-color 240ms ease,
+    background-color 240ms ease,
+    background-position 420ms ease,
+    color 240ms ease,
+    box-shadow 240ms ease;
+}
+.quiet-cta:hover,
+.magnetic-cta:hover {
+  background-position: 0 0;
+  box-shadow: 0 9px 30px rgba(169, 200, 117, 0.16);
+}
+.quiet-outline:hover,
+.route-link-secondary:hover {
+  border-color: rgba(169, 200, 117, 0.48);
+  background-color: rgba(169, 200, 117, 0.055);
+}
+.route-link-primary:hover {
+  background-color: #b8d789;
+  box-shadow: 0 9px 28px rgba(169, 200, 117, 0.14);
+}
+
+/* Arrow Push: directional, not bouncy; only arrows move. */
+.arrow-push > [aria-hidden="true"],
+.quiet-cta > [aria-hidden="true"],
+.magnetic-cta > [aria-hidden="true"],
+.route-link > [aria-hidden="true"],
+.route-link > span:last-child {
+  display: inline-block;
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 240ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    color 240ms ease;
+  transform-origin: center;
+}
+.arrow-push:hover > [aria-hidden="true"],
+.arrow-push:focus-visible > [aria-hidden="true"],
+.quiet-cta:hover > [aria-hidden="true"],
+.quiet-cta:focus-visible > [aria-hidden="true"],
+.magnetic-cta:hover > [aria-hidden="true"],
+.magnetic-cta:focus-visible > [aria-hidden="true"],
+.route-link:hover > [aria-hidden="true"],
+.route-link:focus-visible > [aria-hidden="true"],
+.route-link:hover > span:last-child {
+  transform: translate3d(3px, -3px, 0);
+}
+
+/* Circular icon actions use a contained ring rather than a large glow. */
+.arrow-ring {
+  position: relative;
+  isolation: isolate;
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    transform 220ms ease;
+}
+.arrow-ring::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(169, 200, 117, 0);
+  border-radius: inherit;
+  transform: scale(.86);
+  transition: transform 240ms cubic-bezier(0.2, 0.75, 0.25, 1), border-color 240ms ease;
+  pointer-events: none;
+}
+.arrow-ring:hover::after,
+.arrow-ring:focus-visible::after {
+  border-color: rgba(169, 200, 117, 0.48);
+  transform: scale(1);
+}
+.arrow-ring:hover,
+.arrow-ring:focus-visible {
+  border-color: rgba(169, 200, 117, 0.58);
+  color: var(--accent);
+}
+
+/* Selected service / finder options: clear state, no decorative motion. */
+button[aria-pressed="true"] {
+  border-color: rgba(169, 200, 117, 0.58);
+  box-shadow: inset 2px 0 0 rgba(169, 200, 117, 0.82);
+}
+
+/* Form actions remain predictable; loading and disabled states are untouched. */
+form button,
+[role="dialog"] button {
+  -webkit-tap-highlight-color: transparent;
+}
+form button:not(:disabled) {
+  transition:
+    color 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+form button:disabled {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .route-card:hover {
+    border-color: rgba(169, 200, 117, 0.34);
+  }
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .nav-link::before,
+  .arrow-push > [aria-hidden="true"],
+  .quiet-cta > [aria-hidden="true"],
+  .magnetic-cta > [aria-hidden="true"],
+  .route-link > [aria-hidden="true"],
+  .route-link > span:last-child,
+  .arrow-ring::after {
+    transition: none !important;
+  }
+  .arrow-push:hover > [aria-hidden="true"],
+  .arrow-push:focus-visible > [aria-hidden="true"],
+  .quiet-cta:hover > [aria-hidden="true"],
+  .quiet-cta:focus-visible > [aria-hidden="true"],
+  .magnetic-cta:hover > [aria-hidden="true"],
+  .magnetic-cta:focus-visible > [aria-hidden="true"],
+  .route-link:hover > [aria-hidden="true"],
+  .route-link:focus-visible > [aria-hidden="true"],
+  .route-link:hover > span:last-child {
+    transform: none;
+  }
+}
+
+
+.project-arrow span {
+  display: inline-block;
+  transition: transform 240ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+.group:hover .project-arrow span,
+.group:focus-within .project-arrow span {
+  transform: translate3d(3px, -3px, 0);
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .project-arrow span { transition: none; }
+  .group:hover .project-arrow span,
+  .group:focus-within .project-arrow span { transform: none; }
+}

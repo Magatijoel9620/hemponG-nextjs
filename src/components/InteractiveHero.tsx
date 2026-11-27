@@ -45,9 +45,9 @@ export default function InteractiveHero() {
               <MagneticButton href="#work">Explore the work</MagneticButton>
               <a
                 href="#contact"
-                className="rounded-full border border-white/10 px-6 py-3 text-sm font-medium text-white/55 transition hover:border-white/25 hover:text-white"
+                className="quiet-outline arrow-push rounded-full border border-white/10 px-6 py-3 text-sm font-medium text-white/55 transition hover:border-white/25 hover:text-white"
               >
-                Tell us the problem ↗
+                Tell us the problem <span aria-hidden="true">↗</span>
               </a>
             </div>
           </motion.div>

@@ -140,7 +140,7 @@ export default function LegalDocument({
           <MarkdownContent markdown={markdown} />
           <Link
             href="/"
-            className="mt-12 inline-flex text-sm text-[var(--accent)] transition hover:text-white"
+            className="text-link-underline mt-12 inline-flex text-sm text-[var(--accent)] transition hover:text-white"
           >
             ← Back to Hempon Group
           </Link>

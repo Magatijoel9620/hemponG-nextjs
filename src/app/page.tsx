@@ -273,8 +273,10 @@ function SocialIcon({ label }: { label: string }) {
   );
 }
 
+
 function Nav() {
   const [activeSection, setActiveSection] = useState("home");
+
   useEffect(() => {
     const sectionIds = [
       "work",
@@ -287,29 +289,39 @@ function Nav() {
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section));
+
     if (!sections.length) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
         if (visible) setActiveSection(visible.target.id);
       },
       { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35, 0.6] },
     );
+
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
+
   const sectionLink = (label: string, href: string) => (
     <a
       key={label}
       href={href}
       aria-current={activeSection === href.slice(1) ? "location" : undefined}
-      className={`nav-link rounded-full px-3 py-2 text-[11px] font-medium transition hover:bg-white/[.055] hover:text-white ${activeSection === href.slice(1) ? "bg-white/[.07] text-[var(--accent)]" : "text-white/58"}`}
+      className={`nav-link rounded-full px-3 py-2 text-[16.5px] font-medium transition hover:bg-white/[.055] hover:text-white ${
+        activeSection === href.slice(1)
+          ? "bg-white/[.07] text-[var(--accent)]"
+          : "text-white/85"
+      }`}
     >
       {label}
     </a>
   );
+
   const serviceLinks = [
     ["All services", "/services"],
     ["Websites", "/services/websites"],
@@ -319,6 +331,7 @@ function Nav() {
     ["AI Experiences", "/services/ai-experiences"],
     ["Digital Products", "/services/digital-products"],
   ];
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4 lg:px-8">
       <div className="nav-shell mx-auto max-w-[1440px] rounded-[24px] border border-white/[.1] bg-[#080b10]/90 px-3 py-2 shadow-2xl shadow-black/25 backdrop-blur-2xl sm:rounded-full sm:px-4">
@@ -333,80 +346,92 @@ function Nav() {
                 className="h-full w-full object-cover"
               />
             </span>
-            <span className="truncate text-[10px] font-bold tracking-[.12em] sm:text-xs sm:tracking-[.18em]">
+            <span className="truncate text-[22.5px] font-bold tracking-[.12em] sm:text-[18px] sm:tracking-[.18em]">
               HEMPON GROUP
             </span>
           </a>
+
           <nav
             aria-label="Main navigation"
             className="hidden items-center gap-0.5 xl:flex"
           >
             {sectionLink("Work", "#work")}
+
             <details className="nav-dropdown group relative">
-              <summary className="nav-link flex cursor-pointer list-none items-center gap-1 rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white">
+              <summary className="nav-link flex cursor-pointer list-none items-center gap-1 rounded-full px-3 py-2 text-[16.5px] font-medium text-white/85 hover:bg-white/[.055] hover:text-white">
                 Services{" "}
-                <span className="text-[9px] transition group-open:rotate-180">
+                <span className="text-[13.5px] transition group-open:rotate-180">
                   ⌄
                 </span>
               </summary>
+
               <div className="absolute left-0 top-full z-[80] mt-3 w-60 rounded-2xl border border-white/[.12] bg-[#0a0e14]/[.98] p-2 shadow-2xl">
                 {serviceLinks.map(([label, href]) => (
                   <a
                     key={href}
                     href={href}
-                    className="block rounded-xl px-3 py-2.5 text-xs text-white/65 transition hover:bg-white/[.06] hover:text-white"
+                    className="block rounded-xl px-3 py-2.5 text-[18px] text-white/85 transition hover:bg-white/[.06] hover:text-white"
                   >
                     {label}
                   </a>
                 ))}
               </div>
             </details>
+
             <Link
               href="/products"
-              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+              className="nav-link rounded-full px-3 py-2 text-[16.5px] font-medium text-white/85 hover:bg-white/[.055] hover:text-white"
             >
               Products
             </Link>
+
             <Link
               href="/case-studies"
-              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+              className="nav-link rounded-full px-3 py-2 text-[16.5px] font-medium text-white/85 hover:bg-white/[.055] hover:text-white"
             >
               Case studies
             </Link>
+
             <Link
               href="/industries"
-              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+              className="nav-link rounded-full px-3 py-2 text-[16.5px] font-medium text-white/85 hover:bg-white/[.055] hover:text-white"
             >
               Industries
             </Link>
+
             <a
               href="#process"
-              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+              className="nav-link rounded-full px-3 py-2 text-[16.5px] font-medium text-white/85 hover:bg-white/[.055] hover:text-white"
             >
               Process
             </a>
+
             <a
               href="/insights"
-              className="nav-link rounded-full px-3 py-2 text-[11px] font-medium text-white/58 hover:bg-white/[.055] hover:text-white"
+              className="nav-link rounded-full px-3 py-2 text-[16.5px] font-medium text-white/85 hover:bg-white/[.055] hover:text-white"
             >
               Insights
             </a>
+
             {sectionLink("About", "#about")}
           </nav>
+
           <div className="flex shrink-0 items-center gap-2">
             <a
               href="#contact"
-              className="quiet-cta rounded-full px-3 py-2.5 text-[10px] font-bold sm:px-4 sm:text-[11px]"
+              className="quiet-cta arrow-push rounded-full px-3 py-2.5 text-[15px] font-bold sm:px-4 sm:text-[16.5px]"
             >
               Let’s talk <span aria-hidden="true">↗</span>
             </a>
+
             <details className="nav-mobile group relative xl:hidden">
               <summary
                 aria-label="Open navigation menu"
                 className="grid size-10 cursor-pointer list-none place-items-center rounded-full border border-white/[.12] bg-white/[.04] text-white/75 [&::-webkit-details-marker]:hidden"
               >
-                <span className="text-lg">☰</span>
+                <span className="text-[27px]">☰</span>
               </summary>
+
               <nav
                 aria-label="Mobile navigation"
                 className="absolute right-0 top-[calc(100%+12px)] max-h-[min(76dvh,560px)] w-[min(88vw,360px)] overflow-y-auto overscroll-contain rounded-2xl border border-white/[.12] bg-[#090d13]/[.98] p-3 shadow-2xl"
@@ -422,6 +447,7 @@ function Nav() {
                 >
                   Selected work
                 </a>
+
                 <details className="mobile-nav-group group">
                   <summary className="mobile-nav-link flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
                     Services{" "}
@@ -429,6 +455,7 @@ function Nav() {
                       ⌄
                     </span>
                   </summary>
+
                   <div className="mb-2 ml-3 grid gap-1 border-l border-white/[.1] pl-3">
                     {serviceLinks.map(([label, href]) => (
                       <a key={href} href={href} className="mobile-nav-sub">
@@ -437,6 +464,7 @@ function Nav() {
                     ))}
                   </div>
                 </details>
+
                 <Link href="/products" className="mobile-nav-link">
                   Products
                 </Link>
@@ -449,6 +477,7 @@ function Nav() {
                 <a href="/insights" className="mobile-nav-link">
                   Insights
                 </a>
+
                 <a
                   href="#process"
                   onClick={(event) =>
@@ -460,6 +489,7 @@ function Nav() {
                 >
                   How we work
                 </a>
+
                 <a
                   href="#about"
                   onClick={(event) =>
@@ -471,6 +501,7 @@ function Nav() {
                 >
                   About Hempon
                 </a>
+
                 <a
                   href="#support"
                   onClick={(event) =>
@@ -482,6 +513,7 @@ function Nav() {
                 >
                   Maintenance & support
                 </a>
+
                 <a
                   href="#contact"
                   onClick={(event) =>
@@ -665,9 +697,9 @@ function Hero() {
               <MagneticButton href="#work">Explore the work</MagneticButton>
               <a
                 href="#contact"
-                className="quiet-outline rounded-full border border-white/[.13] px-5 py-3 text-sm font-medium text-white/62 transition hover:border-white/30 hover:bg-white/[.035] hover:text-white"
+                className="quiet-outline arrow-push rounded-full border border-white/[.13] px-5 py-3 text-sm font-medium text-white/62 transition hover:border-white/30 hover:bg-white/[.035] hover:text-white"
               >
-                Tell us the problem ↗
+                Tell us the problem <span aria-hidden="true">↗</span>
               </a>
             </motion.div>
           </motion.div>
@@ -836,7 +868,7 @@ function Services() {
             </div>
             <Link
               href="/services"
-              className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
+              className="text-link-underline mt-5 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
             >
               Explore all services <span aria-hidden="true">↗</span>
             </Link>
@@ -1064,7 +1096,7 @@ function Work() {
             </p>
             <Link
               href="/products"
-              className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
+              className="text-link-underline arrow-push mt-4 inline-flex items-center gap-2 text-xs font-semibold text-(--accent) transition hover:text-white"
             >
               Explore the Hempon product centre ↗
             </Link>
@@ -1072,7 +1104,7 @@ function Work() {
               href="https://portfolio.hempongroup.co.ke/projects"
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[var(--accent)] transition hover:text-white"
+              className="text-link-underline arrow-push mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[var(--accent)] transition hover:text-white"
             >
               Browse the complete project archive ↗
             </a>
@@ -1104,8 +1136,8 @@ function Work() {
                     className="object-cover transition duration-1000 group-hover:scale-[1.045]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#07090d] via-transparent to-black/5" />
-                  <div className="absolute right-5 top-5 rounded-full border border-white/15 bg-black/25 px-3 py-1 text-[10px] text-white/70 backdrop-blur">
-                    Explore ↗
+                  <div className="project-arrow absolute right-5 top-5 rounded-full border border-white/15 bg-black/25 px-3 py-1 text-[10px] text-white/70 backdrop-blur">
+                    Explore <span aria-hidden="true">↗</span>
                   </div>
                 </div>
               </a>
@@ -1131,7 +1163,7 @@ function Work() {
                         });
                       }
                     }}
-                    className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/60 bg-[var(--accent)] px-4 py-2.5 text-[11px] font-bold text-[#071006] transition hover:-translate-y-0.5 hover:bg-[#b8d789]"
+                    className="arrow-push inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/60 bg-[var(--accent)] px-4 py-2.5 text-[11px] font-bold text-[#071006] transition hover:-translate-y-0.5 hover:bg-[#b8d789]"
                   >
                     {[
                       "Farmora",
@@ -1164,7 +1196,7 @@ function Work() {
                         });
                       }
                     }}
-                    className="inline-flex items-center gap-2 text-[11px] font-semibold text-white/55 transition hover:text-[var(--accent)]"
+                    className="arrow-push inline-flex items-center gap-2 text-[11px] font-semibold text-white/55 transition hover:text-[var(--accent)]"
                   >
                     Read project story ↗
                   </a>
@@ -1226,7 +1258,7 @@ function Insights() {
             href="https://portfolio.hempongroup.co.ke/posts"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] transition hover:text-white"
+            className="text-link-underline inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] transition hover:text-white"
           >
             Read all insights and build notes ↗
           </a>
@@ -1272,7 +1304,7 @@ function Insights() {
         <div className="mt-8">
           <a
             href="/insights"
-            className="inline-flex text-xs font-semibold text-[var(--accent)] hover:text-white"
+            className="text-link-underline inline-flex text-xs font-semibold text-[var(--accent)] hover:text-white"
           >
             Explore all insights ↗
           </a>
@@ -1361,7 +1393,7 @@ function About() {
               href="https://portfolio.hempongroup.co.ke/"
               target="_blank"
               rel="noreferrer"
-              className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] transition hover:text-white"
+              className="text-link-underline mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] transition hover:text-white"
             >
               Explore Hempon Portfolio — selected work & digital products{" "}
               <span aria-hidden="true">↗</span>
@@ -1692,7 +1724,7 @@ function Support() {
             </p>
             <a
               href="#contact"
-              className="mt-8 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
+              className="text-link-underline mt-8 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
             >
               Talk through support options ↗
             </a>
@@ -1753,7 +1785,7 @@ function Support() {
           </div>
           <a
             href="#contact"
-            className="mt-4 inline-flex shrink-0 items-center gap-2 text-xs font-semibold text-[var(--accent)] sm:mt-0"
+            className="text-link-underline mt-4 inline-flex shrink-0 items-center gap-2 text-xs font-semibold text-[var(--accent)] sm:mt-0"
           >
             Talk through a custom plan <span aria-hidden="true">↗</span>
           </a>
@@ -1835,7 +1867,7 @@ function FAQ() {
             </p>
             <a
               href="#contact"
-              className="mt-8 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
+              className="text-link-underline mt-8 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
             >
               Still have a question? Talk to us ↗
             </a>
@@ -2054,7 +2086,7 @@ function Footer() {
               <button
                 type="button"
                 onClick={() => setEnquiryModalOpen(true)}
-                className="magnetic-control quiet-cta mt-6 inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-sm font-bold transition-all"
+                className="magnetic-control quiet-cta arrow-push mt-6 inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-sm font-bold transition-all"
               >
                 Tell us what you’re planning <span aria-hidden="true">↗</span>
               </button>
@@ -2089,7 +2121,7 @@ function Footer() {
 
             <a
               href="mailto:hempongroup@gmail.com"
-              className="mt-5 block w-fit text-sm font-semibold text-white/85 transition hover:text-[var(--accent)]"
+              className="text-link-underline mt-5 block w-fit text-sm font-semibold text-white/85"
             >
               hempongroup@gmail.com
             </a>
@@ -2139,9 +2171,9 @@ function Footer() {
                           });
                         setEnquiryModalOpen(true);
                       }}
-                      className="w-fit text-left transition-colors hover:text-[var(--accent)]"
+                      className="text-link-underline arrow-push w-fit text-left"
                     >
-                      {label} ↗
+                      {label} <span aria-hidden="true">↗</span>
                     </button>
                   ) : (
                     <a
@@ -2149,10 +2181,10 @@ function Footer() {
                       href={href}
                       target={href.startsWith("http") ? "_blank" : undefined}
                       rel={href.startsWith("http") ? "noreferrer" : undefined}
-                      className="w-fit transition-colors hover:text-[var(--accent)]"
+                      className={`text-link-underline w-fit ${href.startsWith("http") ? "arrow-push" : ""}`}
                     >
                       {label}
-                      {href.startsWith("http") ? " ↗" : ""}
+                      {href.startsWith("http") ? <span aria-hidden="true">↗</span> : ""}
                     </a>
                   ),
                 )}
@@ -2179,7 +2211,7 @@ function Footer() {
                   rel="noreferrer"
                   aria-label={`Hempon Group on ${label}`}
                   title={label}
-                  className="magnetic-control inline-flex size-11 items-center justify-center rounded-full border border-white/[.13] bg-white/[.035] text-white/75 transition-all hover:border-[var(--accent)]/55 hover:bg-[var(--accent)]/10 hover:text-[var(--accent)]"
+                  className="magnetic-control arrow-ring inline-flex size-11 items-center justify-center rounded-full border border-white/[.13] bg-white/[.035] text-white/75 transition-all hover:border-[var(--accent)]/55 hover:bg-[var(--accent)]/10 hover:text-[var(--accent)]"
                 >
                   <SocialIcon label={label} />
                 </a>
@@ -2197,9 +2229,9 @@ function Footer() {
               <button
                 type="button"
                 onClick={() => setEnquiryModalOpen(true)}
-                className="mt-4 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
+                className="text-link-underline arrow-push mt-4 inline-flex text-sm font-semibold text-[var(--accent)] transition hover:text-white"
               >
-                Have a project in mind? ↗
+                Have a project in mind? <span aria-hidden="true">↗</span>
               </button>
             </div>
           </motion.div>

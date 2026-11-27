@@ -16,5 +16,5 @@ export default function ProjectEnquiryCTA({ service, children = "Let’s talk th
     });
     setOpen(true);
   }, [service, source]);
-  return <><button type="button" className={className} onClick={show}>{children} <span aria-hidden="true">↗</span></button><ProjectEnquiryModal open={open} onClose={close} defaultService={service} source={source ?? "contextual_cta"} /></>;
+  return <><button type="button" className={`${className} arrow-push`} onClick={show}>{children} <span aria-hidden="true">↗</span></button><ProjectEnquiryModal open={open} onClose={close} defaultService={service} source={source ?? "contextual_cta"} /></>;
 }
