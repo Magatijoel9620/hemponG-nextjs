@@ -334,9 +334,9 @@ function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4 lg:px-8">
-      <div className="nav-shell mx-auto max-w-[1440px] rounded-[24px] border border-white/[.1] bg-[#080b10]/90 px-3 py-2 shadow-2xl shadow-black/25 backdrop-blur-2xl sm:rounded-full sm:px-4">
-        <div className="flex items-center justify-between gap-3">
-          <a href="#top" className="group flex min-w-0 items-center gap-2.5">
+      <div className="nav-shell mx-auto max-w-[1440px] rounded-[24px] border border-white/[.1] bg-[#080b10]/90 px-2 py-2 shadow-2xl shadow-black/25 backdrop-blur-2xl sm:rounded-full sm:px-4">
+        <div className="flex items-center justify-between gap-2 sm:gap-3">
+          <a href="#top" className="group flex min-w-0 items-center gap-2 sm:gap-2.5">
             <span className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/[.12] bg-white/[.035]">
               <Image
                 src="/assets/logo/logo_round.png"
@@ -346,7 +346,7 @@ function Nav() {
                 className="h-full w-full object-cover"
               />
             </span>
-            <span className="truncate text-[22.5px] font-bold tracking-[.12em] sm:text-[18px] sm:tracking-[.18em]">
+            <span className="whitespace-nowrap text-[clamp(11px,3.8vw,16px)] font-bold tracking-[.04em] sm:text-[18px] sm:tracking-[.18em]">
               HEMPON GROUP
             </span>
           </a>
